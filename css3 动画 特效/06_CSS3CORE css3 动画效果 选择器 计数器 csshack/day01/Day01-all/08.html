@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	/*1、声明一个计数器 名字：counter1,初始值为0*/
+	body{
+		counter-reset:counter1 0;
+	}
+	/*2、计数器自增*/
+	div{
+		counter-increment:counter1 1;
+	}
+	/*3、使用生成 数字*/
+	div:before{
+		content:"第"counter(counter1)"部";
+		margin-right:5px;
+	}
+  </style>
+ </head>
+
+ <body>
+	<div>碧血剑</div> <!-- 第1部:碧血剑 -->
+	<div>火影忍者</div><!-- 第2部:碧血剑 -->
+	<div>海贼王</div>
+	<div>倚天屠龙记</div>
+	<div>侠客行</div>
+ </body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+    var name, value, data = {};
+
+    //假数据
+    var str = "https://www.baidu.com/s?name=张三&sign=59f8cd55f787a551fe22525ad2e49053acf517c5481741ff2298187e76c09aa215f6c9055d6fa452dc8056512704e1c9ab4d0478981206eb80fba51ceccaef2f&t=140314400&userid=6493a50f711a5ecdf74cb2c5c2045bb";
+
+    //var str=location.href; //取得整个地址栏
+    var num = str.indexOf("?");
+    str = str.substr(num + 1); //截取地址栏 之后的所有参数
+    var arr = str.split("&"); //各个参数切数组里
+    //解析所有数据
+    for (var i = 0; i < arr.length; i++) {
+        num = arr[i].indexOf("=");
+        if (num > 0) {
+            name = arr[i].substring(0, num);
+            value = decodeURIComponent(arr[i].substr(num + 1)); //解码
+            data[name] = value;
+        }
+    }
+    console.log(data)
+
+    //封装
+    function UrltoData(str){
+        var name, value, data = {};
+        var num = str.indexOf("?");
+        str = str.substr(num + 1); //截取地址栏 之后的所有参数
+        var arr = str.split("&"); //各个参数切数组里
+        //解析所有数据
+        for (var i = 0; i < arr.length; i++) {
+            num = arr[i].indexOf("=");
+            if (num > 0) {
+                name = arr[i].substring(0, num);
+                value = decodeURIComponent(arr[i].substr(num + 1)); //解码
+                data[name] = value;
+            }
+        }
+        return data
+    }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function findSolution( target ) {
+        function find( start, history ) {
+            if ( start == target ) {
+                return history
+            } else if ( start > target ) {
+                return null
+            } else {
+                return find(start + 5, "(" + history + "+5)") ||
+                        find(start * 3, "(" + history + "*3)")
+            }
+        }
+
+        return find(1, "1")
+    }
+    console.log(findSolution(24));
+
+    // 判断奇偶
+    function isEven( num ) {
+        if ( num === 1 ) {
+            return "odd"
+        } else if ( num === 0 ) {
+            return "even"
+        } else if ( num < 0 ) {
+            return "not even or odd"
+        }
+        return isEven(num - 2)
+    }
+    console.log(isEven(50));
+    console.log(isEven(75));
+    console.log(isEven(1.1))
+
+    // 数组降维
+    function ReduceDimension( arr ) {
+        var result = []
+
+        function run( arr ) {
+            arr.map(( v, i, a )=> {
+                if ( Array.isArray(v) ) {
+                    return run(v)
+                } else {
+                    return result.push(v)
+                }
+            })
+        }
+
+        run(arr);
+        return result
+
+    }
+
+
+    function* iterTree( tree ) {
+        if ( Array.isArray(tree) ) {
+            for ( let i = 0; i < tree.length; i++ ) {
+                yield * arguments.callee(tree[ i ])
+            }
+        } else {
+            yield tree
+        }
+    }
+    var testArr = [1, [  2, [ 3 ], 4, [ 5, [ 6, [ 8 ] ] ], 9, [ 10 ] ], "11", { a: 1 } ];
+
+    console.time("1");
+    console.log(ReduceDimension(testArr));
+    console.timeEnd("1");
+
+    console.time("2");
+    console.log([ ...iterTree(testArr) ]);
+    console.timeEnd("2")
+
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        #stage {
+            perspective: 0px;
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+
+        #font {
+            width: 500px;
+            height: 500px;
+            transition: all 500ms;
+            /*设置背面*/
+            transform: rotateX(0deg);
+            /*背面不显示*/
+            backface-visibility: hidden;
+        }
+
+        /*#img:hover{*/
+        /*transform:rotatey(180deg);*/
+        /*!*opacity:0;*!*/
+        /*}*/
+
+        #back {
+            width: 500px;
+            height: 500px;
+            transition: all 500ms;
+            /*display: none;*/
+            position: absolute;
+            background-color: #ddd;
+
+            top: 0;
+            left: 0;
+            /*设置背面*/
+            transform: rotateX(-180deg);
+            /*背面不显示*/
+            backface-visibility: hidden;
+        }
+
+        /*第二种*/
+        .container {
+
+            /* How pronounced should the 3D effects be */
+            perspective: 800px;
+            -webkit-perspective: 800px;
+
+            background: radial-gradient(#e0e0e0, #aaa);
+            width: 480px;
+            height: 480px;
+            margin: 0 auto;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .iphone-front,
+        .iphone-back {
+
+            /* Enable 3D transforms */
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+
+            /* We are using two separate divs for the front and back of the
+               phone. This will hide the divs when they are flipped, so that the
+               opposite side can be seen:  */
+
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+
+            width: 200px;
+            height: 333px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -166px 0 0 -100px;
+
+            /*background:url(http://demo.tutorialzine.com/2013/10/css3-features-you-can-finally-use/assets/img/iphone.png) no-repeat left center;*/
+            background-color: red;
+
+            /* Animate the transitions */
+            transition: 0.8s;
+        }
+
+        .iphone-back {
+
+            /* The back side is flipped 180 deg by default */
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+
+            /*background-position:right center;*/
+            background-color: green;
+        }
+
+        .container:hover .iphone-front {
+            /* When the container is hovered, flip the front side and hide it .. */
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+
+        .container:hover .iphone-back {
+            /* .. at the same time flip the back side into visibility */
+            transform: rotateY(360deg);
+            -webkit-transform: rotateY(360deg);
+        }
+    </style>
+</head>
+<body>
+<div id="stage">
+    <img id="font" src="新手包15.jpg" alt="">
+
+    <div id="back">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci asperiores blanditiis, dolorem
+            eaque eum explicabo illum in ipsum labore libero nemo nulla perspiciatis praesentium quaerat, quia, sint sit
+            voluptatem?
+        </div>
+        <div>Expedita illo illum molestias neque officia pariatur! Dolor facilis nostrum officia rerum temporibus! Atque
+            beatae doloribus eveniet, fuga fugit labore minus nam neque ratione sapiente sit sunt tenetur vel
+            voluptatibus!
+        </div>
+        <div>Accusantium asperiores beatae cumque deleniti distinctio, dolore doloribus ducimus facere, iste odio
+            officiis
+            possimus quasi qui repellat rerum? A asperiores commodi deserunt dolores libero obcaecati odit quae, rem
+            repudiandae sint.
+        </div>
+        <div>Ab aut autem ducimus esse eveniet, hic impedit in incidunt ipsum laboriosam odio, optio perspiciatis
+            praesentium provident quaerat quas quis reprehenderit sunt vel vitae? Architecto consequuntur delectus illo
+            quae
+            voluptates.
+        </div>
+        <div>Delectus doloremque dolorum eligendi eum laudantium nostrum odit ratione rem ut vitae! Aspernatur deserunt
+            perspiciatis sed similique velit! Accusantium aliquid consequuntur delectus eum incidunt nulla quam quisquam
+            suscipit ullam veritatis?
+        </div>
+        <div>Fugiat nostrum quisquam repellendus tempore unde! Consectetur consequatur est facilis incidunt iure libero
+            nesciunt optio possimus reprehenderit sit. Accusamus enim eum explicabo nesciunt possimus repellendus sunt
+            voluptate voluptatibus? Fugiat, tenetur!
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="iphone-front"></div>
+    <div class="iphone-back"></div>
+</div>
+<script>
+    var can = true;
+    $("#stage").bind("mouseover mouseout", function ( e ) {
+
+        $(this).find("#font").css("transform", "rotatex(180deg)").attr("id", "back")
+                .siblings().css("transform", "rotatex(0deg)").attr("id", "font");
+//    var time
+//    clearTimeout(time)
+//    time  = setTimeout(function () {
+//      can = true
+//      console.log(can);
+//    }, 500)
+    });
+
+    $(".iphone-front,.iphone-back").click(function () {
+        console.log(this.className)
+
+    })
+
+
+</script>
+
+</body>
+</html>

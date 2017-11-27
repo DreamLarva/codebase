@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	#container{
+		width:200px;
+		height:200px;
+		position:relative;
+		top:200px;
+		left:300px;
+	}
+	#container div{
+		width:100px;
+		height:100px;
+		position:absolute;
+		top:0px;
+		left:50px;
+		transform-origin:0% 0%;
+	}
+	#container div:nth-child(1){
+		background-color:red;
+		transform:rotate(15deg);
+	}
+	#container div:nth-child(2){
+		background-color:blue;
+		transform:rotate(30deg);
+	}
+	#container div:nth-child(3){
+		background-color:yellow;
+		transform:rotate(45deg);
+	}
+	#container div:nth-child(4){
+		background-color:green;
+		transform:rotate(60deg);
+	}
+  </style>
+ </head>
+
+ <body>
+	<div id="container">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+	</div>
+ </body>
+</html>

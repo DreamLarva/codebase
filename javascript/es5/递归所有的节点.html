@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </p>
+</div>
+<ul>
+    <li>7</li>
+    <li>8</li>
+    <li><span>9</span></li>
+</ul>
+<script>
+    function walk(node,func){
+      // 遍历当前节点
+      func(node);
+      // 查找第一个子节点
+      node = node.firstChild;
+      while(node){
+        // 遍历所有子节点
+        walk(node,func);
+        // 遍历兄弟节点
+        node = node.nextSibling
+      }
+    }
+
+    walk(document.body,function(node){
+      console.log(node)
+    })
+
+
+    function
+</script>
+</body>
+</html>

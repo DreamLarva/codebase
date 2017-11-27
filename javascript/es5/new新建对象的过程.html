@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person(name){
+      this.name = name
+    }
+    Person.prototype.getName = function () {
+      return this.name
+    };
+
+
+    // 正常new 一个新的实例
+    const  aaa = new Person('aaa')
+
+
+    // 解析过程
+    const objectFactory = function(){
+      const obj = new Object()
+
+      // 取得以第一个参数 也就是构造函数
+      const Constructor = [].shift.call(arguments);
+      // 指向构造函数的原型
+      obj.__proto__= Constructor.prototype;
+
+      // arguments 已经没有了第一个 构造函数的参数
+      // 借用构造器给obj设置属性 obj.name = 参数
+      // 构造器函数返回的如果是一个 对象就优先使用这个对象作为 新建的实例而不是使用 this
+      const ret = Constructor.apply(obj,arguments);
+      return typeof ret === 'object'?ret:obj
+    };
+
+    const b = objectFactory(Person,'sven')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 跳出 略过 外层循环
+  for1:for(var i=0;i<=9;i++){
+    for2:for(var j = 0;j<=9;j++){
+      console.log(''+i+j)
+      if(j==7){continue for1}
+    }
+  }
+</script>
+</body>
+</html>

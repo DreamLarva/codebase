@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 节流函数
+    function throttle(fn,interval){
+      var _self = fn,
+        timer,
+        firstTime = true;
+
+      return function () {
+        var args = arguments,
+            _me = this;
+
+        if(firstTime){
+          _self.apply(_me,args);
+          return firstTime = false
+        }
+        // 定时器还在 就不执行主要函数
+        if(timer){
+          return false
+        }
+
+
+        timer = setTimeout(function () {
+          // 清除原来的定时器 设定新的起始时间
+          clearTimeout(timer);
+          timer = null;
+
+          // 执行主要函数
+          _self.apply(_me,args);
+        },interval || 500)
+      };
+    }
+
+    window.onresize = throttle(function () {
+      console.log("throttle")
+    },1000)
+
+</script>
+</body>
+</html>

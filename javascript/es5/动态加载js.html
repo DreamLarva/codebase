@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<script>
+  if (/Android/.test(navigator.userAgent)) {
+    $.when($.getScript("https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"),
+      $.getScript("https://cdn.bootcss.com/vue/2.3.0/vue.min.js")
+    ).done(function () {
+      console.log(_);
+      console.log(Vue)
+    })
+
+
+  } else {
+    $.getScript("https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js", function () {  //加载test.js,成功后，并执行回调函数
+      console.log(_)
+    });
+    loadScript("https://cdn.bootcss.com/vue/2.3.0/vue.min.js", function () {  //加载test.js,成功后，并执行回调函数
+      console.log(Vue)
+    });
+  }
+
+
+  // 使用原生js
+  function loadScript(url, callback) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    if (typeof(callback) !== "undefined") {
+      // 获取加载js成功的状态以加载 回调函数
+      if (script.readyState) {
+        script.onreadystatechange = function () {
+          if (script.readyState === "loaded" || script.readyState === "complete") {
+            script.onreadystatechange = null;
+            callback();
+          }
+        };
+      } else {
+        script.onload = function () {
+          callback();
+        };
+      }
+    }
+    script.src = url;
+    document.body.appendChild(script);
+  }
+
+
+</script>
+</body>
+</html>

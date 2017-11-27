@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+     Note: You may not slant the container.*/
+    /*题意：在二维坐标系中，(i, ai) 表示 从 (i, 0) 到 (i, ai) 的一条线段，任意两条这样的线段和 x 轴组成一个木桶，找出能够盛水最多的木桶，返回其容积。
+
+     两层 for 循环的暴力法会超时，所以尽早放弃这种懒惰的想法。
+
+     有没有 O(n) 的解法？
+
+     答案是有，用两个指针从两端开始向中间靠拢，如果左端线段短于右端，那么左端右移，反之右端左移，知道左右两端移到中间重合，记录这个过程中每一次组成木桶的容积，返回其中最大的。（想想这样为何合理？）*/
+
+    /*容积一定是短的一端乘以两个线段之间的距离
+    * 默认从连个线段最远的情况开始考虑
+    * 计算容积之后 短的那一端向长的那一端移动一格
+    * !!若果端相等 该如何判断哪段移动?
+    * 不需要判断 任意一端移动即可 因为如果在x轴上的距离缩短却要容积变大 就必须两端都比现有的线段长 这并不会有因为移动哪一端而改变
+    * 直到两个线段重合 计算结束*/
+    /**
+     * @param {number[]} height
+     * @return {number}
+     */
+    var maxArea = function(height) {
+        var left = 0;
+        var right = height.length-1;
+        var result = 0;
+        var tVolume = 0;
+        while(left !== right){
+            tVolume = Math.min(height[left],height[right])*(right-left);
+            if(tVolume > result){
+                result = tVolume
+            }
+            Math.min(height[left],height[right]);
+            if(height[left] > height[right]){
+                right--
+            }else {
+                left++
+            }
+        }
+        return result
+    };
+
+
+
+</script>
+</body>
+</html>

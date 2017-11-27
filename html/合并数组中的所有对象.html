@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 合并数组中的所有对象
+     * */
+	// merge an array of objects
+	const data = [{a: 1}, {b: 2}, {c: 3}];
+	const merged = data.reduce((res, obj) => ({...res, ...obj}), {});
+	console.log(merged); // => { a: 1, b: 2, c: 3 }
+	// merge an array of objects by property
+	const toMerge = [
+		{id: 1, value: 'a',},
+		{id: 2, value: 'b',},
+		{id: 3, value: 'c'},
+		{id: 1, score: 1},
+		{id: 2, score: '2'},
+	];
+
+	// 将某个属性相同的 数组都合并在一起
+	const mergedByProperty = toMerge.reduce((result, obj) => ({
+		...result,
+		[obj.id]: {
+			...result[obj.id],
+			...obj
+		}
+	}), {});
+	console.log(mergedByProperty) // =>
+	/*
+    *{ '1': { id: 1, value: 'a', score: 1 },
+    * '2': { id: 2, value: 'b', score: '2' },
+    * '3': { id: 3, value: 'c' } }
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    var geo ={}
+    var showMap = function(position) {
+        document.write((new Date()-start) + ":" +position.coords.latitude + " , "+ position.coords.longitude)
+        console.log(position)
+        //经纬度所在的位置对象
+        geo =[position.coords.latitude, position.coords.longitude];
+        //根据pos对象中的经纬度显示Google地图了哈！
+        //...
+    };
+    var start = new Date().getTime()
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMap);
+    }
+    console.log(geo)
+
+</script>
+</body>
+</html>

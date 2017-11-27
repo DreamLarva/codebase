@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function showPreview(source) {
+        var file = source.files[0];
+        if(window.FileReader) {
+            var fr = new FileReader();
+            fr.onloadend = function(e) {
+                // 获取内容
+                console.log(e);
+                console.log(this);
+                var data = btoa(this.result);
+                console.log(data);
+
+                document.getElementById("portrait").src = e.target.result;
+            };
+            fr.readAsDataURL(file);
+        }
+    }
+
+
+
+
+    // 关于base解码 和 加密
+    var str = 'javascript';
+
+    window.btoa(str);
+    //转码结果 "amF2YXNjcmlwdA=="
+
+    window.atob("amF2YXNjcmlwdA==")
+    //解码结果 "javascript"
+</script>
+
+<input type="file" name="file" onchange="showPreview(this)" />
+<img id="portrait" src="" width="70" height="75">
+</body>
+</html>

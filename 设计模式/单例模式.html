@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="loginBtn">loginBtn</button>
+<script>
+  /**
+   * 单例模式
+   * 一般用于只产生一个实例
+   * 之后如果的操作都返回这个实例 加以修改
+   * 例子: 模态框
+   * */
+
+  // 普通的实现1 (使用构造函数 并不推荐)
+  /*
+   var Singleton = function (name) {
+   this.name = name;
+   this.instance = null;
+   };
+   Singleton.prototype.getName = function () {
+   alert(this.name)
+   };
+   Singleton.getInstance = function (name) {
+   if (!this.instance) {
+   this.instance = new Singleton(name)
+   }
+   };
+   var a = Singleton.getInstance("123");
+   var b = Singleton.getInstance("abc");
+   console.log(a === b)
+   */
+
+  // 另一种普通实现 使用自执行函数 闭包保存instance (也不推荐
+  /* var Singleton1 = function (name) {
+   this.name = name
+   };
+   Singleton1.prototype.getName = function () {
+   alert(this.name)
+   };
+   Singleton1.getInstance = (function () {
+   var instance = null;
+   return function (name) {
+   if (!instance) {
+   instance = new Singleton1(name)
+   }
+   return instance
+   }
+   }());
+   var c = Singleton1.getInstance("123");
+   var d = Singleton1.getInstance("abc");
+   console.log(c === d)*/
+
+
+  // 用代理 实现单例模式
+  /* var CreateDiv = function (html) {
+   this.html = html;
+   this.init()
+   };
+   CreateDiv.prototype.init = function () {
+   var div = document.createElement("div");
+   div.innerHTML = this.html;
+   document.body.appendChild(div)
+   }
+   // 下面是代理类proxySingletonCreateDiv
+   var ProxySingletonCreateDiv = (function () {
+   var instance = null;
+   return function (html) {
+   if (!instance) {
+   instance = new CreateDiv(html)
+   }
+   return instance
+   }
+   }())
+   var a = ProxySingletonCreateDiv("123");
+   var b = ProxySingletonCreateDiv("abc");
+   console.log(a === b)*/
+
+  // js中的惰性单例
+  // 通用的单例生成函数
+  {
+    const getSingleton = function (fn) {
+      // 闭包保存唯一的实例
+      let result;
+      return function (...args) {
+        return result || (result = fn.apply(this,args))
+      }
+    };
+
+    const createLoginLayer = function () {
+      const div = document.createElement('div');
+      div.innerHTML = "我是登录框";
+      div.style.display = 'none';
+      document.body.appendChild(div);
+      // 返回的div实例 作为唯一的实例
+      return div
+    };
+
+    var createSingleLoginLayer = getSingleton(createLoginLayer);
+    document.getElementById('loginBtn').addEventListener('click',function(){
+      const loginLayer = createSingleLoginLayer();
+      loginLayer.style.display = "block"
+    });
+
+    var createSingleIframe = getSingleton(function () {
+      var iframe = document.createElement("iframe")
+      document.body.appendChild(iframe)
+      return iframe
+    })
+    document.getElementById('loginBtn').addEventListener('click',function(){
+      const loginLayer = createSingleIframe();
+      loginLayer.style.display = "block";
+      loginLayer.src= 'https://www.baidu.com'
+    });
+
+
+
+  }
+
+
+
+
+</script>
+</body>
+</html>

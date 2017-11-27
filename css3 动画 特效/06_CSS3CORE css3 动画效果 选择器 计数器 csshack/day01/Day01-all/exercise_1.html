@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	/*1、将具备id、属性的p标记 增加边框 1px 实线 红色*/
+	p[id]{
+		border:1px solid #f00;
+	}
+	/*2、将id属性值为summary的p元素背景改为pink色*/
+	p[id="summary"]{
+		background:pink;
+	}
+	/*3、将class属性中包含完成的warning单词的p元素，大小改为20pt*/
+	p[class~="warning"]{
+		font-size:20pt;
+	}
+	/*4、将title属性中以f开始的p元素大小改为15pt*/
+	p[title^=f]{
+		font-size:15pt;
+	}
+	/*5、将title属性中以rd结尾的p元素大小改为30pt*/
+	p[title$=rd]{
+		font-size:30pt;
+	}
+	/*6、将title属性中包含con的p元素大小改为45pt*/
+	p[title*=con]{
+		font-size:45pt;
+	}
+  </style>
+ </head>
+
+ <body>
+	<!--属性选择器-->
+        <p id="intro">带有 id 属性的段落</p>
+        <p id="summary">id 属性的值为 summary 的段落</p>
+        <p class="important warning">class 属性的值为单词列表，且其中有 warning 的段落</p>
+        <p language="en-us">语言为 en-us 的段落</p>
+        <p title="first">title 属性的值为 first 的段落</p>
+        <p title="second">title 属性的值为 second 的段落</p>
+        <p title="third">title 属性的值为 third 的段落</p>
+
+ </body>
+</html>

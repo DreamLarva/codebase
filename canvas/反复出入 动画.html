@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            background: #000;
+            height: 100%;
+            width: 100%;
+            display: block
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var width;
+    var height;
+
+    var resize = function () {
+        width = window.innerWidth * 2;
+        height = window.innerHeight * 2;
+        canvas.width = width;
+        canvas.height = height
+    };
+    window.onresize = resize;
+    resize();
+
+    ctx.fillStyle = 'red';
+
+    var state = {
+        x: (width / 2),
+        y: (height / 2),
+    };
+
+    function update(progress) {
+        state.x += progress;
+        if (state.x > width) {
+            state.x -= width;
+            console.log("条件判断")
+        }
+        _time()
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillRect(state.x - 10, state.y - 10, 20, 20)
+    }
+
+    function loop(timestamp) {
+        var progress = (timestamp - lastRender);
+//        console.log(progress);
+        var i = 0;
+
+
+        update(progress);
+        draw();
+        lastRender = timestamp;
+        window.requestAnimationFrame(loop)
+    }
+    var lastRender = 0;
+    var _time = timeR(5000);
+    window.requestAnimationFrame(loop)
+
+
+    function timeR(num) {
+        var start = new Date().getTime();
+        return function (progress) {
+            if (  new Date()>= start + num) {
+                console.log("时间判断 过了" + num + "ms");
+                return false
+            }
+            return true
+        }
+    }
+</script>
+</body>
+</html>

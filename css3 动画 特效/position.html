@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #father, #child {
+            border: 1px solid black;
+        }
+
+        #father {
+            width: 1000px;
+            height: 500px;
+            padding: 100px 200px 3000px 400px;
+            margin-top: 200px;
+        }
+
+        #child {
+            width: 500px;
+            height: 100px;
+            position: relative;
+            left: 200px;
+            top: 500px;
+        }
+    </style>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+
+<body>
+<span></span>
+<div id="father">
+    <span></span>
+    <div id="child">
+        <span></span>
+    </div>
+</div>
+
+
+<script>
+    // 获取视口的大小
+    function getViewport(){
+        if (document.compatMode == "BackCompat"){
+            return {
+                width: document.body.clientWidth,
+                height: document.body.clientHeight
+            }
+        } else {
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        }
+    }
+
+    $(function () {
+         var ViewPort = getViewport();
+        $('body>span').text(`当前视口的 clientWidth:${ViewPort.width} clientHeight:${ViewPort.height}`);
+        $(window).scroll(function () {
+            var father = $("#father")[0].getBoundingClientRect();
+            var child = $("#child")[0].getBoundingClientRect();
+
+
+            $("#father>span").text(` width:${father.width} height:${father.height} left:${father.left} right:${father.right} top:${father.top} bottom:${father.bottom} scrollTop:${document.body.scrollTop}`);
+            $("#child>span").text(` width:${child.width} height:${child.height} left:${child.left} right:${child.right} top:${child.top} bottom:${child.bottom} scrollTop:${document.body.scrollTop}`);
+        });
+
+    })
+
+</script>
+</body>
+</html>

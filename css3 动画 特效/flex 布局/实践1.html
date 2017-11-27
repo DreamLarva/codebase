@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            min-height: 100%;
+            /*也可以使用 min-height:100vh*/
+        }
+
+        header {
+            height: 100px;
+            background-color: yellow;
+        }
+
+        .main {
+            display: flex;
+            flex-grow: 1
+        }
+
+        /*要设置min-width 否则mainContent 过大时会挤压 两边的边栏 */
+        .main > nav {
+            /*width:200px;*/
+            min-width: 200px;
+            /*flex-basis会优先于width*/
+            flex-basis: 200px;
+            background-color: darkseagreen;
+        }
+
+        .main > .mainContent {
+            flex-grow: 1;
+            background-color: #ddd;
+
+        }
+
+        .main > aside {
+            /*width:200px;*/
+            min-width: 100px;
+            flex-basis: 100px;
+            background-color: cornflowerblue;
+        }
+
+        footer {
+            height: 100px;
+            background-color: palevioletred;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>header</header>
+    <div class="main">
+        <nav>nav</nav>
+        <div class="mainContent">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, culpa distinctio doloremque error
+            facilis harum labore molestiae odit pariatur quia quibusdam, quis recusandae sed soluta tempore totam ullam
+            voluptas voluptatum!
+        </div>
+        <aside>aside</aside>
+    </div>
+    <footer>footer</footer>
+</div>
+</body>
+</html>

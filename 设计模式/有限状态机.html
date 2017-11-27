@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script src="//cdn.bootcss.com/javascript-state-machine/2.0.0/state-machine.min.js"></script>
+    <style>
+        #test{
+            width:200px;
+            height:200px;
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<script>
+  /**
+   * 有限状态机（Finite-state machine）是一个非常有用的模型，可以模拟世界上大部分事物。
+   * 简单说，它有三个特征：
+   *    1.状态总数（state）是有限的。
+   *    2.任一时刻，只处在一种状态之中。
+   *    3.某种条件下，会从一种状态转变（transition）到另一种状态。
+   */
+
+  var generator = {
+    target:$('#test'),
+    // 当前状态
+    currentState: 'hide',
+    // 绑定事件
+    initialize: function () {
+      var self = this;
+      self.target.bind("click", self.transition.bind(this));
+    },
+    // 状态转换
+    transition: function (event) {
+      switch (this.currentState) {
+        case "hide":
+          this.currentState = 'show';
+          doSomething.call(this);
+          break;
+        case "show":
+          this.currentState = 'hide';
+          doSomething.call(this);
+          break;
+        default:
+          console.log('Invalid State!');
+          break;
+      }
+    }
+  };
+
+  function doSomething(){
+    console.log(this.currentState);
+    let opacity;
+    if(this.currentState === "show"){
+      opacity = 0
+    }else if(this.currentState === "hide"){
+      opacity =1
+    }
+    this.target.css("opacity",opacity);
+  }
+
+  generator.initialize()
+
+
+
+
+
+
+  var fsm = StateMachine.create({
+    initial: 'green',
+    // 进入某个状态执行的函数
+    // 从 a 状态进入 b ; 分成 离开a状态的函数 和进入b状态的函数
+
+    events: [
+      { name: 'warn',  from: 'green',  to: 'yellow' },
+      { name: 'stop', from: 'yellow', to: 'red' },
+      { name: 'ready',  from: 'red',    to: 'yellow' },
+      { name: 'go', from: 'yellow', to: 'green' }
+    ]
+
+  });
+
+
+
+</script>
+</body>
+</html>

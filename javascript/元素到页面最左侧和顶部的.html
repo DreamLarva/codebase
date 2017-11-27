@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    #d1{
+        background-color:yellow;
+        width:1233px;
+        height:1223px;
+        position: relative;
+        left:102px;
+        top:12%;
+    }
+    #d2{
+        background-color:red;
+        width:543px;
+        height:500px;
+        position: absolute;
+        left:34%;
+        top:120%;
+    }
+    #d3{
+        width:50%;
+        height:89%;
+        padding:10px 12px;
+        margin:12px auto;
+        background-color: blue;
+    }
+</style>
+
+<body>
+<div id="d1">
+    <div id="d2">
+        <div id="d3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid asperiores at autem delectus doloribus explicabo iure ratione! Adipisci est maiores officiis! Adipisci autem ea explicabo incidunt libero maxime officiis praesentium!
+
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<script>
+    //    获取元素到最顶部的px
+    function getElementTop(element){
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+        while (current !== null){
+            actualTop += current. offsetTop;
+            current = current.offsetParent;
+        }
+        return actualTop;
+    }
+    //    获取元素到最左侧的px
+    function getElementLeft(element){
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+        while (current !== null){
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return actualLeft;
+    }
+
+
+</script>
+</body>
+</html>

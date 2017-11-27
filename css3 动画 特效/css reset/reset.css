@@ -1,0 +1,20 @@
+/*css reset*/
+html{-webkit-text-size-adjust:none; /*解决chrome浏览器下字体不能小于12px*/}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,iframe,button,textarea,p,blockquote,th,td,img,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,span,a,input,textarea,p,blockquote,th,td,header,nav,footer,article,section,aside,time,figure{margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+h1,h2,h3,h4,h5,h6{font-weight:200;font-size:100%;}
+legend{display:none;}
+fieldset,img{border:none;vertical-align:middle;}
+em,cite,i{font-style:normal;}
+ol,ul{list-style:none;}
+input,select{vertical-align:middle;}
+input,button,textarea{outline:none;border:0;vertical-align:middle;border:0;font-family:Arial;}
+input[type="submit"],input[type="reset"],input[type="button"],button {-webkit-appearance:none;border-radius:0;}
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+textarea{resize:none;}
+strong,em,b{ font-weight:normal; font-style:normal;}
+.clear{clear:both;width:0;height:0;margin:0;padding:0;border:none;overflow:hidden;font-size:0;}
+.clearfix{zoom:1;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;line-height:0;}
+body{position:relative;margin:auto;color:#000;background:#fff;}
+body a{color:#000;text-decoration:none;cursor:pointer;}
+body a:hover,body a:active,body a:focus{text-decoration:none;outline:none;}

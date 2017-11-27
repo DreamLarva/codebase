@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .first-letter::first-letter {
+      font-size: 50px;
+      font-weight: bolder;
+    }
+
+    .first-line::first-line {
+      color: red;
+    }
+
+    .wtf {
+      /*text-indent:2em;*/
+      display: inline-block;
+      position: relative;
+      padding: 0 20px;;
+    }
+
+    .wtf:hover::before {
+      content: '**';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .wtf:hover::after {
+      content: '**';
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .column {
+      column-width: 1em;
+      column-count: 10;
+      -webkit-column-gap: 10px;
+      -moz-column-gap: 10px;
+      column-gap: 10px;
+    }
+
+    .wtf {
+      transform: rotate(45deg) scale(2) skew(20deg, 20deg) translate(100px, 0);
+    }
+
+    .stage {
+      margin: 100px;
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      -webkit-perspective: 500px;
+      -moz-perspective: 500px;
+      -ms-perspective: 500px;
+      perspective: 500px;
+
+    }
+
+    .node {
+      -webkit-transition: all 2s linear;
+      -moz-transition: all 2s linear;
+      -ms-transition: all 2s linear;
+      -o-transition: all 2s linear;
+      transition: all 2s linear;
+    }
+
+    .node:hover {
+      background-color: yellow;
+      transform: translate(100px) rotatex(30deg) rotatez(30deg);
+
+    }
+
+    .animiate {
+      animation: wtf 2s linear 1 2s  normal ;
+    }
+
+    @keyframes wtf {
+      0% {
+        background-color: #00b4da;
+      }
+      20% {
+        background-color: #fff3f3;
+        transform: scale(2) translate(100px, 100px);
+      }
+      50% {
+        transform: scale(2) translate(100px, 100px) rotate(450deg);
+      }
+      100% {
+        background-color: black;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+<P class="first-letter">啊Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, asperiores consectetur
+  deserunt, doloremque eligendi exercitationem fugit id ipsa magni molestiae natus obcaecati omnis pariatur qui
+  recusandae sit ullam ut voluptatum?</P>
+
+<a class="first-line">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aspernatur cumque dolore dolorem eius eligendi est
+  eveniet expedita facilis illum impedit iusto, non numquam qui quis rem, sit veritatis vitae! Lorem ipsum dolor sit
+  amet, consectetur adipisicing elit. Architecto iste placeat quod. Adipisci doloribus hic iste laborum nemo nulla omnis
+  tenetur voluptatem? Accusamus dolore, magni quaerat quo quos sed vero?
+</a>
+
+<p class="wtf">我头发</p>
+
+<div class="column">啊啊士大夫轻微而现在才</div>
+
+<div class="stage">
+  <div class="node">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi consectetur eos, excepturi harum hic
+    inventore molestiae nemo nulla odio officia optio possimus, qui temporibus voluptate. Ab dolore odit vel.
+  </div>
+</div>
+
+<div class="animiate">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, dicta dolore et, fuga fugit iste magni minima, nisi nulla
+  perferendis quod vel voluptatem voluptates! Cumque deleniti distinctio explicabo laudantium suscipit!
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+  function MailSender() {
+    this.to = '';
+    this.title = '';
+    this.content = '';
+  }
+  MailSender.prototype.send = function() {
+    //send body
+    console.log("MailSender")
+  };
+
+  function SmsSender() {
+    this.to = '';
+    this.title = '';
+    this.content = '';
+  }
+  SmsSender.prototype.send = function() {
+    //send body
+    console.log("SmsSender")
+  };
+  function MailFactory() {
+
+  }
+  MailFactory.prototype.produce = function() {
+    return new MailSender();
+  };
+  function SmsFactory() {
+
+  }
+  SmsFactory.prototype.produce = function() {
+    return new SmsSender();
+  }
+  */
+
+  var  VehicleFactory = function(subType,superType){
+    if(typeof  VehicleFactory[superType] === "function"){
+      function F(){}
+      F.prototype = new VehicleFactory[superType]();
+      subType.constructor = subType;
+      subType.prototype = new F();
+    }
+  };
+
+  VehicleFactory.Car = function(){
+    this.Type  = "car"
+  };
+  VehicleFactory.Car.prototype = {
+    getPrice:function(){
+      return new Error("抽象方法不能调用")
+    },
+    getSpeed:function(){
+      return new Error("抽象方法不能调用")
+    }
+  };
+
+  var BMW = function(price,speed){
+    this.price = price;
+    this.speed = speed;
+  };
+
+  VehicleFactory(BMW,"Car");
+  BMW.prototype.getPrice = function () {
+    return this.price
+  }
+
+
+
+
+</script>
+</body>
+</html>

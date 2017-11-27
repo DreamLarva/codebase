@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    {
+//        // 鸭式辨型 (默认只有数组对象才包含sort方法)
+//        let isArray = function (value){
+//            return typeof value.sort === "function"
+//        }
+//        Array.prototype.isArray = isArray
+//
+//        console.log(isArray([1]))
+//    }
+    {
+        //鸭式辩型 更佳
+        let isArray = function (value){
+            return Object.prototype.toString.call(value) === "[object Array]"
+        }
+
+        if(Array.isArray !== "function"){
+            Array.prototype.isArray = isArray
+        }
+
+        Array.prototype.isArray = isArray
+        console.log(Array.isArray([]),Array.isArray({}))
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="data-spm" content="181">
+  <style>body{ background-color: #eef; }div{ padding: 20px; }</style>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<div style="width:1000px;height:1000px;margin: 123px;border:1px solid black" id="d1"></div>
+<div id="log1" style="position: fixed;z-index: 10086;left:0;top:0"></div>
+<div id="log2" style="position: fixed;z-index: 10086;left:0;top:20px"></div>
+<div id="log3" style="position: fixed;z-index: 10086;left:0;top:40px"></div>
+<script>
+  $("#d1").bind('mousemove',function(e){
+    $("#log1").text("在div中 ; e.pageX: " + e.pageX + ", e.pageY: " + e.pageY+"\n");
+  });
+  $(document).bind('mousemove',function(e){
+
+    $("#log2").text("在document中 ; e.pageX: " + e.pageX + ", e.pageY: " + e.pageY+"\n");
+  });
+  $(document.body).bind('mousemove',function(e){
+      $("#log3").text("在document.body中 ; e.pageX: " + e.pageX + ", e.pageY: " + e.pageY+"\n");
+  });
+
+</script>
+</body>
+</html>

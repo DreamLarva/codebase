@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="d1"></div>
+<script>
+    var cart = {
+        _wheels: 4, // 闭包的变量
+        get wheels() {
+            return this._wheels;
+        },
+        set wheels(values) {
+            console.log(this._wheels)
+            document.getElementById("d1").innerHTML = values
+            this._wheels = values;
+        }
+    };
+    cart.wheels = 123
+</script>
+</body>
+</html>

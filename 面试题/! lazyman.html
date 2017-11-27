@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function _LazyMan(name) {
+        this.tasks = [];
+        var self = this;
+        var fn = (name => function () {
+            console.log(`Hi!This is ${name}`);
+            self.next()
+        })(name);
+        this.tasks.push(fn);
+        // 运行的是eat sleep等内容
+        // 在执行栈的最后开始执行
+        setTimeout(function () {
+            self.next()
+        }, 0)
+    }
+
+    _LazyMan.prototype.next = function () {
+        var fn = this.tasks.shift();
+        fn && fn()
+    };
+    _LazyMan.prototype.eat = function (name) {
+        var self = this;
+        var fn = (name => function () {
+            console.log(`Eat ${name} ~`);
+            self.next()
+        })(name);
+        this.tasks.push(fn);
+        return this;
+    };
+    _LazyMan.prototype.sleep = function (time) {
+        var self = this;
+        var fn = (time => function () {
+            setTimeout(function () {
+                console.log(`Wake up after ${time}!`);
+                self.next()
+            }, time)
+        })(time);
+        this.tasks.push(fn);
+        return this;
+    };
+    _LazyMan.prototype.sleepFirst = function (time) {
+        var self = this;
+        var fn = (time => function () {
+            setTimeout(function () {
+                console.log(`Wake up after ${time}!`);
+                self.next()
+            }, time)
+        })(time);
+        this.tasks.splice(1, 0, fn);
+        return this;
+    };
+
+    function lazyMan(name) {
+        return new _LazyMan(name)
+    }
+
+    console.log("before construct");
+    lazyMan("Agent47")
+        .eat("lunch")
+        .sleep(3000)
+        .eat("supper")
+        .sleepFirst(3000);
+    console.log("after construct");
+
+
+
+
+</script>
+</body>
+</html>

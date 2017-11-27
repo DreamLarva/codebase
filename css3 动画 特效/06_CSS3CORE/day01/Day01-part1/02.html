@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	/*1、匹配具备ID的div元素*/
+	div[id]{
+		font-size:26pt;
+		color:red;
+	}
+	/*2、获取 type属性值为text的input元素*/
+	input[type="text"]{
+		border:1px solid #f00;
+		font-style:italic;
+		color:#999;
+	}
+	input[type='text']:focus{
+		color:#333;
+		font-style:normal;
+	}
+	/*3、class值列表中，包含warning完整单词的 p元素*/
+	p[class~=warning]{
+		background:#f00;
+	}
+	
+	ul[class^=topic]{
+		background:#f00;
+	}
+	/*匹配class属性值以Content作为结尾的ul元素(区分大小写)*/
+	ul[class$=Content]{
+		list-style:none;
+		overflow:hidden;
+	}
+
+	ul[class*=on] li{
+		float:left;
+	}
+
+
+  </style>
+ </head>
+
+ <body>
+	<div id="d1">
+		我是一个普通的div元素
+	</div>
+	<input type="text" value="请输入名称" />
+	<p class="important warning">
+		我是一个重要的警告
+	</p>
+	<div>我是一个没有id属性的div元素</div>
+	<ul class="topicContent">
+		<li>大众</li>
+		<li>丰田</li>
+		<li>本田</li>
+		<li>宝马</li>
+		<li>奔驰</li>
+	</ul>
+ </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+      // 需要在 显示dom元素前 设置
+      (function () {
+        var docEl = document.documentElement;
+        var resize = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var setRem = function () {
+
+          var screenWidth = docEl.clientWidth || window.screen.width || 360;
+          // 1080 PSD宽度(可变的)
+          docEl.style.fontSize = (100 * screenWidth / 750) + 'px';
+        };
+
+        window.addEventListener('resize', setRem, false);
+        setRem();
+      })()
+    </script>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 50.58rem;
+        }
+
+        body {
+            font-size: 0.21rem;
+            background-image: url(images/3/bg.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            color: #fff;
+        }
+        .container{
+            padding-top:5rem;
+        }
+
+
+        .font{
+            position: absolute;
+            color: red;
+            top: 3.14rem;
+            left: 1.76rem;
+            font-size: 0.65rem;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>
+        要点是这里所有的 单位都必须用rem (宽度的百分比)<br>
+        也可以使用 百分比作为单位 但是绝不能出现高度的百分比(height:20%) 这样<br>
+        在padding margin box-shadow text-indent等 中使用 rem 完全没有问题
+
+    </p>
+</div>
+
+<div class="font">
+    银
+</div>
+</body>
+</html>

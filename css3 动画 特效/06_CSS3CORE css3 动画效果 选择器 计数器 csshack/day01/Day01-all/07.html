@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	div:before{
+		content:"小明:";
+		margin-right:10px;
+	}
+	p::before{
+		content:"隔壁老王:";
+		margin-right:10px;
+	}
+
+	p:after{
+		content:url(images/star.jpg);
+	}
+	div:after{
+		content:url(images/phone.jpg);
+		position:relative;
+		top:5px;
+	}
+
+	a{
+		padding:5px 10px;
+		color:#000;
+		font-size:32px;
+		text-decoration:none;
+		position:relative;
+		left:20px;
+	}
+	a:hover:before{
+		position:absolute;
+		content:"[";
+		left:-20px;
+	}
+	a:hover:after{
+		position:absolute;
+		content:"]";
+		right:-20px;
+	}
+  </style>
+ </head>
+
+ <body>
+	<a href="#">小明和老王的一天</a>
+	<div>今天下午有时间吗?</div>
+	<p>你要干什么?</p>
+	<div>今天下午我妹要来，你有时间吗，接我妹去</div>
+	<p>你妹？接你妹？</p>
+	<div>你大爷</div>
+ </body>
+</html>

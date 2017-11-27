@@ -1,0 +1,57 @@
+1、选择器
+   1、兄弟选择器
+      1、相邻兄弟选择器
+         匹配指定元素的相邻【下一个】兄弟
+	 语法：由 + 充当结合符
+	       选择器1+选择器2
+      2、通用兄弟选择器
+         匹配某元素 【后面的】【所有指定】兄弟元素
+	 语法：由 ~ 充当结合符
+   2、属性选择器
+      通过元素的【属性以及值】去匹配不同的元素
+      语法：[]
+      1、[attribute]:匹配具有 atrribute属性的元素 
+         [id] : 匹配所有有id属性的元素
+	 div[id] : 匹配所有具备id属性的div元素
+      2、element[attr1][attr2]
+         匹配 所有 具备 attr1属性以及attr2属性的element元素
+	 div[id][class]
+      3、element[attr=value]
+         匹配attr属性值为value的element元素
+	 input[type=text]
+	 input[type='text']
+	 input[type="text"]
+      4、element[attr~=value]
+	 匹配 attr属性值为一个值列表，并在在此列表中包含独立单词value的element元素
+         div[class~=warning]
+
+	 <div class="content warning important lf"></div>
+	 div[class~=content] : 能匹配
+	 div[class~=lf] : 能匹配
+	 div[class~=on] : 不能匹配
+      5、element[attr^=value]         
+	 匹配attr属性值，以value开始的element元素
+	 ^= : 匹配开始
+	 div[class^=my] : 匹配class属性值以my开始的div元素
+      6、element[attr$=value]
+         匹配attr属性值，以value作为结束的element元素
+	 $= : 匹配结束
+	 div[class$="over"] : 匹配class属性值以over作为结束的div元素
+      7、element[attr*=value]:匹配 attr属性值中【包含】value的element元素
+         注意：与 element[attr~=value] 的对比
+	     ~= : 匹配值列表中，包含完整单词的
+	     *= : 匹配值中，包含指定字符的
+
+
+
+
+
+
+
+
+
+
+
+
+
+

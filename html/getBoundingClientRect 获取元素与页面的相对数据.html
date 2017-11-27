@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .pad100 {
+            padding: 100px;
+        }
+
+        .red {
+            background-color: red
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .h2000 {
+            height: 2000px
+        }
+        #d1{
+            margin:100px;
+            border:5px solid black
+        }
+    </style>
+</head>
+<div class="h2000"></div>
+<div class="pad100 red"></div>
+<div class="pad100 yellow" id="d1"></div>
+<div class="h2000"></div>
+
+<body>
+<script>
+    var d1 = document.getElementById("d1");
+    console.log(d1.getBoundingClientRect());
+
+    /**
+     * getBoundingClientRect的返回值
+     * top      从元素的上border如果有 开始到 浏览器显示区域显示上边的距离
+     * bottom   从元素的下border如果有 开始到 浏览器显示区域显示上边的距离
+     * left     从元素的左border如果有 开始到 浏览器显示区域显示左边的距离
+     * right    从元素的右border如果有 开始到 浏览器显示区域显示左边的距离
+     * width    包含border和padding的元素的width(相当于bottom-top)
+     * height   包含border和padding的元素的height(相当于right-left)
+     *
+     * */
+
+
+
+</script>
+</body>
+</html>

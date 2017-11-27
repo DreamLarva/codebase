@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<input type="tel" id="input" maxlength="23">
+<script>
+document.getElementById("input").addEventListener("keyup",function (e) {
+    console.log(e.keyCode)
+    this.value = this.value.replace(/\s$/,"")
+    if(e.keyCode !== 8){
+        var result = [] ;
+        this.value.replace("/\s/g","").split("").filter(function (v,i,a) {
+            return v.trim()
+        }).forEach(function (v,i,a) {
+            result.push(v);
+            if((i+1)%4 === 0){
+                result.push(" ");
+            }
+        });
+        this.value = result.join("")
+    }
+
+})
+
+</script>
+</body>
+</html>

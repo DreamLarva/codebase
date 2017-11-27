@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="text"> <button id="btn">button</button>
+<div id="container"></div>
+<script>
+
+
+    var total = 30;
+    console.log(`The total is ${total} (${total*1.05} with tax)`)
+
+
+
+   /* 函数名'模板内容1${变量}模板内容2${变量2}模板内容3'
+    * 第一个参数是所有模板内容的数组 [模板内容1,模板内容2,模板内容3]
+    * 后面的参数依次是变量的内容  ,变量1,变量2
+    * */
+    //该函数可以和正常``字符串输出一样的 内容
+    var msg = passthru`The total is ${total} (${total*1.05} with tax)`
+    function passthru(literals,...values){
+        let result = ";" ;
+        let i = 0;
+        while(i<literals.length){
+            result += literals[i++];
+            if(i < arguments.length){
+                result += arguments[i]
+            }
+        }
+        return result
+    }
+
+    /* 标签模板
+     * 用户过滤html字符串,防止用户恶意输入 */
+    function SafeHTML(templateData){
+        var s = templateData[0];
+        for (var i=1;i<arguments.length;i++){
+            var arg = String(arguments[i])
+
+            s += arg.replace(/&/g,"&amp;")
+                    .replace(/</g,"&lt;")
+                    .replace(/>/g,"&gt;")
+            s += templateData[i]
+        }
+        return s
+    }
+
+
+window.onload = function() {
+    document.getElementById("btn").onclick = function () {
+        var sender = document.getElementById("text").value
+        var message = SafeHTML`<p>${sender} has sent you a message.</p>`
+        console.log(message)
+        document.getElementById("container").innerHTML = message
+    }
+}
+
+
+</script>
+</body>
+</html>

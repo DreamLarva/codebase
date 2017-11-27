@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+  <style>
+    #d1{
+      position: relative;
+      width:500px;
+      height: 500px;
+      border:1px solid black;
+    }
+    #d3{
+      width:100%;
+      height:100%;
+    }
+    #d2{
+      position: absolute;
+      top:100px;right:100px;
+      width: 100px;
+      height:100px;
+      border:1px solid black
+    }
+    #animate{
+      margin:500px auto;
+      position: relative;
+      width:100px;height:100px;
+      background-color:red;
+    }
+    #child{
+      /*display:none;*/
+      pointer-events:visible;
+      opacity: 0;
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: yellow;
+      left: 0;
+      /*-webkit-transition: all 500ms;*/
+      /*-moz-transition: all 500ms;*/
+      /*-ms-transition: all 500ms;*/
+      /*-o-transition: all 500ms;*/
+      /*transition: all 500ms;*/
+      -webkit-transition: all  500ms;
+      -moz-transition: all  500ms;
+      -ms-transition: all  500ms;
+      -o-transition: all  500ms;
+      transition: all  500ms;
+    }
+    #animate:hover #child{
+      /*display:block;*/
+      opacity:1;
+      left:100px;
+
+    }
+
+
+
+    #container{
+      position: relative;
+    }
+    #animate1{
+      margin:500px 500px;
+      position: relative;
+      width:100px;height:100px;
+      background-color:red;
+    }
+    #child1{
+      /*display:none;*/
+      opacity: 0;
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: yellow;
+      left: 500px;top:0;
+      /*-webkit-transition: all 500ms;*/
+      /*-moz-transition: all 500ms;*/
+      /*-ms-transition: all 500ms;*/
+      /*-o-transition: all 500ms;*/
+      /*transition: all 500ms;*/
+      -webkit-transition: all  5000ms;
+      -moz-transition: all  5000ms;
+      -ms-transition: all  5000ms;
+      -o-transition: all  5000ms;
+      transition: all  5000ms;
+    }
+    #animate1:hover~#child1{
+      /*display:block;*/
+      opacity:1;
+      left:600px;
+    }
+
+
+  </style>
+</head>
+<body>
+<!--<div id="btd">-->
+  <!--<button id="btn">button</button>-->
+<!--</div>-->
+
+<!--<div id="d1"><a href="https://www.baidu.com"><div id="d3"></div></a>-->
+  <!--<div id="d2"></div>-->
+  <!--</div>-->
+
+
+<div id="animate">
+  <div id="child"></div>
+</div>
+<!--<div id="container">-->
+  <!--<div id="animate1"></div>-->
+  <!--<div id="child1"></div>-->
+<!--</div>-->
+
+
+
+
+<script>
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .container{
+      width: 500px;
+      height:300px;
+
+      display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+      display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+      display: -ms-flexbox;      /* TWEENER - IE 10 */
+      display: -webkit-flex;     /* NEW - Chrome */
+      display: flex;
+    }
+    .container>div{
+      height:100%;
+      border:1px solid black;
+      margin:0 5px;
+    }
+    .container>div:first-child{
+      width:100px;
+    }
+    .container>div:nth-child(2){
+      width:50%
+    }
+    .container>div:last-child{
+      width:50%;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <div >1</div>
+  <div >2</div>
+  <div >3</div>
+</div>
+</body>
+</html>

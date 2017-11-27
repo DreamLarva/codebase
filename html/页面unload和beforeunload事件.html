@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<script>
+  $(window).bind("unload",function(){ //不可以弹窗
+    localStorage.setItem("a",123123)
+  })
+  $(window).bind("beforeunload",function(){ //可以弹窗
+    localStorage.setItem("b",22222222222);
+    return true//必须有返回值
+  })
+
+</script>
+
+</body>
+</html>

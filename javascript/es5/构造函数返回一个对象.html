@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div id="d1"></div>
+<body>
+<script>
+    // 如果构造函数 最后返回一个对象就优先使用这个对象做为 新建的实例
+    function A(str){
+      this.a = str;
+      return {
+        a:"hehe"
+      }
+    }
+
+    const instance1 = new A("this is a string");
+    console.log(instance1.a);
+
+    // 如果返回的不是对象那么返回正常构造的实例
+    function B(str) {
+      this.b = str;
+      // return 的内容会被忽略
+      return 'hehe'
+    }
+    const instance2 = new B('this is a anoter string');
+    console.log(instance2)
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<script>
+    /**
+     * Promise的特点
+     * 1.对象的状态不受外界影响.Promise对象代表一个异步操作,有三种状态:pending (进行中)Resolved(已完成,又称fulfilled)和Rejected(已失败)
+     * 2.状态一单发生改变就不会再改变,任何时候都可能得到这个结果:1.Pending => Resolved 2.Pending => Rejected.只要发生其中之一 状态就会凝固,不在改变.
+     * */
+    var sleep = function(n){
+        var now = new Date().getTime();
+        while(new Date().getTime()<now + n){}
+        console.log("过了",n,"毫秒")
+    };
+    function timeOut(ms){
+      return new Promise(function(resolve,reject){
+        setTimeout(resolve,ms,'done')
+      })
+    }
+
+    /*{
+        let promise = new Promise(function (resolve,reject) {
+            var value = 1;
+            sleep(3000);
+            if(true){
+                resolve(value) // resolve 方法使用状态从 Pending 变成 fulfilled
+            }else{
+                reject(error) // reject 使状态从 Pending 变成 Rejected
+            }
+        });
+
+        promise.then(function(value){
+            console.log("success",value)
+        },function (error) {
+            console.log("error",error)
+        })
+
+    }*/
+
+
+    /*{
+        function timeout(ms) {
+            return new Promise((resolve,reject)=>{
+                setTimeout(resolve,ms,'done')
+            })
+        }
+        timeout(100).then(value=>{
+            console.log(value)
+        })
+    }*/
+
+    // 异步加载图片
+    /*{
+      function loadImageAsyns(url){
+        return new Promise(function (resolve,reject) {
+          var image = new Image();
+          image.onload = function(){
+            resolve(image)
+          };
+          image.onerror = function(){
+            reject(new Error('Could not load at '+ url))
+          };
+          image.src= url
+
+        })
+      }
+      loadImageAsyns('image.jpg').then((data)=>console.log(data))
+
+    }*/
+
+    // 用Promise 实现ajax操作
+    /*{
+      var getJSON = function (url) {
+        var promise = new Promise(function (resolve, reject) {
+          var client = new XMLHttpRequest();
+          client.open("GET", url)
+          client.onreadystatechange = handler;
+          client.setRequestHeader("Accept", "application/json");
+          client.send()
+
+          function handler() {
+            if (this.readyState !== 4) {
+              return
+            }
+            if (this.status === 200) {
+              resolve(this.response)
+            } else {
+              reject(new Error(this.statusText))
+            }
+          }
+        });
+        return promise
+      };
+      getJSON("http://jsonplaceholder.typicode.com/posts/1").then((data) => console.log(data));
+      fetch("http://jsonplaceholder.typicode.com/posts/1")
+        .then(response => response.json())
+        .then(console.log)
+
+    }*/
+
+    /**
+     * Promise.prototype.then 方法 作为Promise状态改变时的 回调,then 的第一个参数是 Resolved 状态的回调函数 ,第二个参数可选的 Rejected 状态的回调函数
+     * then 方法返回的是一个新的Promise实例(注意不是原来的状态实例,原来的状态已经凝固),因此可采用链式调用
+     */
+    /*{
+      fetch("http://jsonplaceholder.typicode.com/posts/1")
+        .then(response => response.json())
+        .then(function(data){
+          console.log(1,data);
+          throw  new Error("this is a Error"); // 抛出错误
+          return fetch("http://jsonplaceholder.typicode.com/posts/2")
+        },function(error){
+          console.log(1,error); // 如果上一个then 中有error 那么只在这当前的then 抛出错误
+        })
+        .then(response => response.json(),function(error){
+          console.log(2,error); // 接受错误
+          return fetch("http://jsonplaceholder.typicode.com/posts/3") // 继续向下执行
+        })
+        .then(console.log,function(error){
+          console.log(error)
+        })
+    }*/
+
+
+
+    /**
+     * 一个Promise实例 在另一个Promise中使用
+     * */
+   /* {
+        let p1 = new Promise(function (resolve,reject) {
+            setTimeout(()=>resolve(3000),3000)
+        });
+        let p2 = new Promise(function (resolve,reject) {
+          // 由p1 的状态决定 p2 的状态 如果 p1是pending,p2就继续等待直至p1改变状态
+          // p1 状态是Resolved那么 p2 立即 resolve
+          // p1 状态是Rejected那么 p2 立即 reject
+            setTimeout(()=>resolve(p1),500)
+        });
+
+        p2.then(result=>console.log(result));
+        p2.catch(error=>console.log(error))
+    }*/
+
+
+   /**
+    * Promise.prototype.catch 方法
+    * 是 .then(null,rejection) 的一个别名 用于指定发生错误的时候的回调函数
+    * */
+    /*{
+        //未捕捉错误直接报错不执行之后的操作
+        let someAsyncThing0 = function(){
+            return new Promise(function (resolve,reject) {
+                resolve(x+2) // 直接报错不向下执行
+            })
+        };
+        // someAsyncThing0().then(function () {
+        //    console.log('everything is great!') // 不会执行到
+        // });
+
+        let someAsyncThing = function(){
+            return new Promise(function (resolve,reject) {
+                resolve(x+2)
+            })
+        };
+        someAsyncThing()
+          .then(function () {
+            console.log('everything is great!')
+          },function(error){ // 如果有 then 中的Rejected 的回调那么 就有优先使用 这里的;如果这里没有捕获就会在最后的catch 方法中被捕获
+            console.log("inRejectedCallback");
+            console.log(error)
+          })
+          .then(function(){
+            console.log("do something right")
+          })
+          .catch(function (error) { // 如果 之前流程中有 没有被 then 的Rejected回调捕获的 才会被最后catch捕获
+            console.log("inCatch");
+            console.log(error)
+        })
+    }*/
+    /**
+     * 如果先resolve 再抛出错误 错误就不会被捕获 相当于错误并没有被抛出
+     * */
+    /*{
+      var promise = new Promise(function(resolve,reject){
+        resolve("ok");
+        throw new Error("this is an Error")
+      })
+        .then(console.log)
+        .catch(console.log)
+      // ok
+    }*/
+    /**
+     * Promise对象的错误 有类似"冒泡"的性质 会一直想后传递知道被捕获
+     * 也就是说总是会被下一个catch捕获
+     * 1. 如果有错误没有被捕获 那么直到被捕获前 所有的then 的函数都不会被执行
+     * 2. 如果错误已经被then 或者catch 捕获 那么 只有then 如果没有错误 有能够正常执行
+     * 3. 如果错误一直不被捕获那么 就会被最后一个catch 捕获
+     * */
+    /*{
+      var a = new Promise(function(resolve,reject){
+        resolve("right")
+        // reject("reject in Promise 1");
+        // throw new Error('this is an Error')
+      })
+        .then(function(){
+          console.log(console.log("do something right1"))
+        })
+        .then(function(){
+          console.log(console.log("do something right2"))
+        })
+        .then(function(){
+          console.log(console.log("do something right3"));
+          return  new Promise(function(resolve,reject){
+            reject("reject in Promise 2")
+          })
+        })
+        .catch(console.log)
+
+    }*/
+    /**
+     * 更加推荐使用.catch的方法 而不是使用then 的第二个参数
+     * */
+    /*{
+      var a = new Promise(function(resolve){
+        resolve()
+      })
+        .then(function(){
+          // do something
+        })
+        .catch(function(error){ // 更加推荐
+          // 捕获错误
+        })
+    }*/
+
+    /**
+     * Promise中抛出的错误是不能被外部捕获的 所以最后推荐一定要有一个catch 方法
+     * */
+    /*{
+      var someAsyncThing = function () {
+        return new Promise(function(resolve,reject){
+          resolve(x+2) // 浏览器直接在此处报错
+        })
+      };
+      try{
+        someAsyncThing().then(function(){
+          console.log("eveything is great")
+        })
+          // .catch(function(error){
+          //   console.log(error) // 这里可以捕获
+          // })
+      }catch(e){
+        console.log(e) // 外部并不能捕获
+      }
+    }*/
+    /**
+     * 在Promise中设置设置了定时器 相当于让 Promise 指定下一个事件循环再抛出错误,结果由于没有指定使用try...catch,就冒泡到最外层
+     * 成了为了未捕获的错误.因此此时Promise的函数体已经运行结束,所以这个错误是Promise函数 体外抛出的
+     * */
+    /*{
+      try {
+        var promise = new Promise(function (resolve, reject) {
+          resolve("ok");
+          try {
+            setTimeout(function () {
+              throw new Error("this is an Error")
+            }, 1000)
+          } catch (error) {
+            console.log("in Promise", error) // 未能捕获
+          }
+        });
+        promise.then(console.log).catch(console)
+      } catch (error) {
+        console.log("out of Promise", error) // 未能捕获
+      }
+
+    }*/
+   /* {
+      var someAsyncThing = function(){
+        return new Promise(function(resolve,reject){
+          resolve(x+2)
+        })
+      }
+      someAsyncThing()
+        .then(function(){
+        return new Promise(function(resolve,reject){
+          setTimeout(function(){resolve("another")},2000)
+        })
+      })
+        .catch(function(error){
+          console.log('oh no',error); // 捕获 x 未声明
+          y+2
+        })
+        .then(function(){
+          console.log('carry on')
+        })
+        .catch(console.log) // 捕获 y 未声明
+
+    }*/
+
+    /**
+     * Promise.all
+     * Promise.all 方法用于将多个Promise包装成一个新的Promise实例
+     * 参数:
+     *      1. Promise方法接受的参数 如果都是一个具有Iterator接口的对象(如数组,Map,Set,字符串,Generator) 且返回的每个都是Promise实例 就包装成新的Promise实例
+     *      2. 如果不是 就调用Promise.resolve方法 将参数转为Promise实例
+     * 状态
+     *      1.只有 p1,p2,p3 的状态都变成Fulfilled,p的状态才会变成Fulfilled  ,此时p1 p2 p3 返回一个数组  传递给回调函数p
+     *      2.只要 p1,p2,p3 中有一个被Rejected p的状态就变成Rejected 此时第一个被Rejected的实例的返回值 会被被传递给p的回调函数
+     * */
+
+
+    // 两个异步都完成 才执行某法方法
+    /*{
+      console.time("t");
+      let p1 = function(){
+        return fetch("http://jsonplaceholder.typicode.com/posts/1")
+          .then(response => response.json())
+      };
+      let p2 = function(){
+        return fetch("http://jsonplaceholder.typicode.com/posts/2")
+          .then(response => response.json())
+      };
+
+
+      let mixIn = Promise.all([p1(),p2(),1]);
+      console.log(mixIn);
+      let a = new Promise(function (re,r) {
+        re(mixIn);
+      }).then(function ([a,b,c]) {
+        console.log(a,b,c);
+        console.timeEnd("t");
+        console.log(mixIn);
+      });
+
+      let b = new Promise(function(resolve,reject){
+        resolve(Promise.all("abc"))
+      }).then(function(data){
+        console.log(data)
+      }).catch(function(error){
+        console.log(error)
+      });
+
+
+      let c = new Promise(function(resolve,reject){
+        resolve(Promise.all(new Map([["a",1],["b",2]])))
+      }).then(function(data){
+        console.log(data)
+      }).catch(function(error){
+        console.log(error)
+      })
+
+    }*/
+
+    /**
+     * Promise.race
+     * Promise.race 同样是将多个Promise 包装成一个新的:Promise实例
+     * 参数:
+     *      1. Promise方法接受的参数 如果都是一个具有Iterator接口的对象(如数组,Map,Set,字符串,Generator) 且返回的每个都是Promise实例 就包装成新的Promise实例
+     *      2. 如果不是 就调用Promise.resolve方法 将参数转为Promise实例
+     * 状态
+     *      1.只有 p1,p2,p3 的状态中有一个率先变成改变状态(无论是Fulfilled 还是 Rejected),p的状态才会变成那个率先改变转边的状态  ,此时那个率先改变的Promise实例的返回值 传递给回调函数p
+     * */
+    /*{
+      let p1 = function(){
+        return fetch("http://jsonplaceholder.typicode.com/posts/1")
+          .then(response => response.json())
+      };
+      let p2 = function(){
+        return fetch("http://jsonplaceholder.typicode.com/posts/2")
+          .then(response => response.json())
+      };
+      let mixIn = Promise.race([p1(),p2()]); // 非Promise实例会立即被 Promise.resolve包装 认为是率先被改变状态的实例
+      console.log(mixIn);
+      let a = new Promise(function (re,r) {
+        re(mixIn);
+      }).then(function (p) {
+        console.log(p);
+        console.timeEnd("t");
+        console.log(mixIn);
+      });
+    }*/
+    /**
+     * 使用 Promise.race处理 fetch 没有 timeout 的问题
+     * */
+   /* {
+      var _fetch = (function (fetch) {
+        return function (url, options) {
+          var abort = null,
+            timeout = 0;
+          var abort_promise = new Promise((resolve, reject) => {
+            abort = () => { // 将 abort的 promise 传到外层
+              reject('timeout.');
+              console.info('abort done.');
+            };
+          });
+          var promise = Promise.race([
+            fetch(url, options),
+            abort_promise
+          ]);
+          promise.abort = abort;
+          Object.defineProperty(promise, 'timeout', {
+            set: function (ts) {
+              if ((ts = +ts)) {
+                timeout = ts;
+                setTimeout(abort, ts);
+              }
+            },
+            get: function () {
+              return timeout;
+            }
+          });
+          return promise;
+        };
+      })(fetch);
+
+
+      var p = _fetch("http://jsonplaceholder.typicode.com/posts/");
+      p.timeout = 1; // 如果没有设置时timeout 就会直到 fetch自己reject 或者 resolve 才执行then发的方法
+      p.then(data=>data.json())
+        .then(console.log)
+    }*/
+
+
+    /**
+     * Promise.resolve()
+     * 如果Promise.resolve 方法的参数不是具有then 方法的对象(又称thenable对象) 就返回一个新的Promise实例并且 状态是Fulfilled(Resolved)
+     * 当然可以没有参数 直接获取一个Fulfilled状态的 Promise实例
+     *
+     * 如果Promise.resolve的参数是一个 Promise实例 就原封不动的返回这个传入的实例
+     * */
+    /*{
+      var p1 = Promise.resolve('foo')
+      // 等价于
+      var p2 = new Promise(resolve=>resolve('foo'))
+
+
+      p1.then(console.log)
+    }*/
+    /**
+     * Promise.reject()
+     * 如果Promise.reject 方法的参数不是具有then 方法的对象(又称thenable对象) 就返回一个新的Promise实例并且 状态是Rejected
+     * 当然可以没有参数 直接获取一个Rejected状态的 Promise实例
+     *
+     * 如果Promise.reject Promise实例 就原封不动的返回这个传入的实例
+     * */
+    /*{
+      let p = Promise.reject("reject");
+      p.then(null,console.log)
+    }*/
+
+    /**
+     * 给Promise 添加附件的方法
+     * Promise.prototype.done()
+     * */
+    /*{
+      // 在Promise 调用链的最后使用 并且保证最后有个catch 的调用捕获错误 并且或将错误抛出到全局
+      // 当然这个错误是异步抛出的 所以是没法用try catch 捕获的
+      Promise.prototype.done = function(onFulfilled,onRejected){
+        this.then(onFulfilled,onRejected)
+          .catch(function(reason){
+            setTimeout(()=>{throw reason},0) // 抛出错误到全局
+          })
+      };
+      var p = new Promise(function(resolve,reject){
+        setTimeout(()=>resolve("foo"),2500)
+      });
+
+
+        p.then(function (data) {
+          console.log(data);
+          throw new Error("this is an error");
+        })
+          .done(function (data) {
+            console.log(data)
+          })
+    }*/
+    /**
+     * 给Promise 添加附件的方法
+     * Promise.prototype.finally()
+     * 无论Promise最后的状态(Fulfilled or Rejected)是什么 都执行的操作 之前接受的value 或者报错 依然向下传递
+     * */
+    /*{
+      Promise.prototype.finally = function(callback){
+        let P = this.constructor;
+        return this.then(
+          value  => P.resolve(callback()).then(()=>value),
+          reason => P.resolve(callback()).then(()=>{throw reason})
+        )
+      };
+
+      let p = new Promise(function(resolve,reject){
+        setTimeout(()=>reject('reject in Promise'),2000)
+      });
+      p.finally(()=>console.log("always execute")) // 总是执行这个函数
+        .catch(console.log)
+
+    }*/
+
+
+    /**
+     * 使用Promise 加载图片
+     * */
+    /*{
+      const preloadImage = function (path) {
+        return new Promise(function (resolve, reject) {
+          var image = new Image();
+          image.onload = resolve; // image 加载成功救活调用 image.onload 的 方法
+          image.onerror = reject;
+          image.src = path;
+        })
+      };
+      preloadImage('image.jpg').then(function (event) { // onload 返回的第一个参数 是一个event对象
+        // event.path[0]  就是这个站图片的实例
+        console.log(event)
+        $(event.path[0]).appendTo($(document.body))
+      });
+    }*/
+
+    /**
+     * Generator函数于 与 Promise 结合
+     * */
+    /*{
+      function getFoo(){
+        return new Promise(function(resolve,reject){
+          setTimeout(()=>resolve('第一步'),1500)
+        })
+      }
+      function getbar(str){
+        return new Promise(function(resolve,reject){
+          setTimeout(()=>resolve('第二步'+ str),1500)
+        })
+      }
+      function p1(str){
+        return new Promise(function(resolve,reject){
+          setTimeout(()=>resolve('p1'+ str),100)
+        })
+      }
+      function p2(str){
+        return new Promise(function(resolve,reject){
+          setTimeout(()=>resolve('p2'+ str),1500)
+        })
+      }
+
+
+      var g = function* (){
+        try{
+          var foo = yield getFoo();
+          console.log(foo);
+
+          var bar = yield getbar(foo);
+          console.log(bar);
+
+          var p = yield Promise.all([p1(bar),p2(bar)]); // 多个任务都完成
+          console.log(p);
+          return p
+        }catch(e){
+          console.log(e)
+        }
+      };
+      function run(generator,finalCB){
+        var it = generator();
+        function go(result){
+          if(result.done)return finalCB(result.value);
+          return result.value.then(function(value){ // value 是Promise return的值
+            // 使传进来的Promise状态改变后 then 是执行 generator.next() 或者是 generator.throw()_ 抛出错误
+            return go(it.next(value)) // 传出当前Promise的返回值 作为yield 代码块的返回值; 也就是就是 foo 就bar 的值
+          },function(error){
+            return go(it.throw(error))
+          })
+        }
+        go(it.next())
+      }
+
+      run(g,function(data){
+        console.log("finally",data)
+      })
+
+
+
+    }*/
+
+
+
+
+
+
+    /**
+     * 注意个函数的输出顺序
+     * 1,2,3,5,4
+     * 当前task运行，执行代码。首先 setTimeout 的callback被添加到tasks queue中；
+     * 实例化promise，输出 1 ; promise resolved；输出 2 ;
+     * promise.then 的callback被添加到microtasks queue中 输出 3 ;
+     * 已到当前task的end，执行microtasks，输出 5 ;
+     * 执行下一个task，输出 4 。
+     * */
+    /*{
+      (function test() {
+        setTimeout(function() {console.log(4)}, 0);
+        new Promise(function executor(resolve) {
+          console.log(1);
+          for( var i=0 ; i<10000 ; i++ ) {
+            i == 9999 && resolve();
+          }
+          console.log(2);
+        }).then(function() {
+          console.log(5);
+        });
+        console.log(3);
+      })()
+    }*/
+
+
+
+
+    /**
+     * 可以利用js 对象引用类型的特性 将Promise 中的 resolve和reject 回调引用到外部再使用
+     * */
+    {
+      let res, rej;
+      const p = new Promise(function (resolve, reject) {
+        res = resolve;
+        rej = reject;
+      })
+        .then(function (data) {
+          console.log("Resolved", data)
+        })
+        .catch(function (err) {
+          console.log(err)
+        });
+      console.log(p)
+      res("fulfilled")
+    }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var json1 = {
+        "a": 1,
+        b: 2,
+        c: 3
+    };
+    var json2 = [ 1, 2, 3 ];
+    // 第二个参数为 数组 只获取数组中的那些字段
+    console.log(JSON.stringify(json1,["a","b"]))
+
+    // 第二个参数对 需要序列化的对象是数组时是 不起作用
+    console.log(JSON.stringify(json2,["1"]));
+    console.log(JSON.stringify(json2,[1]))
+
+    console.log("--------")
+    // 第二个参数是 函数
+    console.log(JSON.stringify(json1,function(key,value){
+        // 第一次 进入时的 key = "" value = json1
+        //  之后的 key 和value 正常
+
+        return value
+    }))
+
+</script>
+</body>
+</html>

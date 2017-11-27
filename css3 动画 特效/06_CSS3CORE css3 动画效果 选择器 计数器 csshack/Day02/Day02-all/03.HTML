@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	#stage{
+		width:200px;
+		height:200px;
+		border:1px solid #ddd;
+		margin-top:200px;
+		margin-left:300px;
+		/*定义  视觉点 到 幕布的距离*/
+		perspective:500px;
+		-webkit-perspective:500px;
+	}
+	#d1{
+		width:100px;
+		height:100px;
+		background:red;
+		margin:0 auto;
+		margin-top:50px;
+		/*3d旋转*/
+		transform:rotatey(0deg) translatez(-200px);
+	}
+  </style>
+ </head>
+
+ <body>
+	<div id="stage">
+	    <!-- 真正实现3d转换的元素 -->
+		<div id="d1">3d转换</div>
+	</div>
+ </body>
+</html>

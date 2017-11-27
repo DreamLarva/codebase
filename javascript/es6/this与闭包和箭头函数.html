@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+  var th = {
+    a() {
+      console.log(this)
+    },
+    b() {
+      return function () {
+        console.log(this) // 闭包this 为window
+      }
+    },
+    c: () => console.log(this), // 使用外层函数的 this 没有 到了window 使用window
+    d() {
+      return () => console.log(this) // 使用外层函数的this
+    },
+    e: {
+      f: () => console.log(this) // 使用外层函数的 this 没有 到了window 使用window
+    }
+  };
+  th.a(); // th
+  th.b()(); // window
+  th.c(); // window
+  th.d()(); // th
+  th.e.f(); // window
+
+  var that = { g: 1, th };
+
+  that.th.d()(); // th
+  that.th.e.f(); // window
+</script>
+
+</body>
+</html>

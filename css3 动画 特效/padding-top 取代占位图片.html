@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width:50%;
+        }
+        .album__cover{
+            width:100%;
+            position: relative;
+            overflow:hidden;
+            padding-top:96.8%; /*图片的宽除以高*/
+            background-color: yellow;
+        }
+        .album__cover img{
+            position: absolute;
+            left:0;
+            top:0;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p class="album__cover">
+        <img id="img" alt="">
+    </p>
+</div>
+
+<script>
+     var img = document.createElement("img");
+    img.src = "square.jpg";
+    img.onload = function(){
+       setTimeout(()=>{
+         document.getElementById("img").src = "square.jpg";
+       },2500)
+    }
+</script>
+</body>
+</html>

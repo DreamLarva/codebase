@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/crypto-js/3.1.9/core.js"></script>
+    <script src="//cdn.bootcss.com/crypto-js/3.1.9/crypto-js.js"></script>
+    <script src="//cdn.bootcss.com/crypto-js/3.1.9/hmac-md5.js"></script>
+</head>
+
+<body>
+
+<button onclick="foo()" >button</button>
+<script>
+    function foo(e){
+      console.log(123121)
+    }
+
+
+  var url = "https://release05.houbank.net/floatingLayer/depository";
+  var data = {
+    "userId": 1799976,
+    "amount": 100,
+    //        "payType": "WEB", // 网银支付 手机不支持
+    "payType": "SWIFT", // 快捷支付
+    //        rechargeChannel:"MOBILE"
+    "userRole": "1",
+    "bankCode": "ICBK", // 上面如果是快捷支付就是必填
+    "urlReturn": "https://www.houbank.com",
+    "callbackURL": "https://localhost/rechargeCredit/webLLQuickPayUrlReturn",
+    "requestUrl":"/trade/xmcgPay/doRecharge"
+
+  };
+  url += "?";
+  for (var key in data) {
+    url += key + "=" + encodeURIComponent(data[key]) + "&"
+  }
+  console.log(url.slice(0, -1))
+
+
+  console.log(CryptoJS["MD5"])
+//    window.open(url.slice(0, -1))
+</script>
+</body>
+</html>

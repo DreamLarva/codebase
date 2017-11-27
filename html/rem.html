@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      font-size:0.22rem;
+      width:1rem;
+      height: 1rem;
+      border: 1px solid black;
+    }
+    p{
+      font-size:0.22rem;
+    }
+    p span{
+      font-size:0.22rem;
+    }
+  </style>
+</head>
+<body>
+<div>新手包自动转让线程时间更改</div>
+<p>新手包自动转让线程时间更改<span>新手包自动转让线程时间更改</span>新手包自动转让线程时间更改</p>
+<script>
+  (function (doc, win) {
+    var docEl = doc.querySelector('html'),
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        docEl.style.fontSize =  (clientWidth / 750)*100 + 'px';
+      };
+
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+    win.addEventListener('load',function(){alert(123),false});
+  })(document, window);
+</script>
+</body>
+</html>

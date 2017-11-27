@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*    function A( name ) {
+     this.name = name
+     }
+     A.prototype.b = function(){};
+     A.prototype.c = 1;
+
+     var objA = new A("Agent47")
+     for(let key in objA){
+     console.log(key) // b会被遍历到
+     }
+     */
+    class A {
+        constructor( name ) {
+            this.name = name;
+        }
+        b(){}
+
+    }
+    var objA = new A("Agent47");
+    for(var key in objA){
+        console.log(key); // b不会被遍历到
+    }
+
+
+    // es6 get set
+    var pile = {
+        elements:["eggshell","orange peel","worm"],
+        get height(){
+            return this.elements.length;
+        },
+        set height(value){
+            console.log("You can not set this value")
+        }
+    };
+    console.log(pile.height);
+    pile.height = 1
+
+
+</script>
+</body>
+</html>

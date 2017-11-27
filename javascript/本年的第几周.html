@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 规范为在上述描述中，需要重点关注两个方面：
+     * 1、每个日历星期从星期一开始，星期日为第七天。
+     * 2、以1月4日所在的那个星期为当年的第一个星期。
+     *
+     * 如果1月4日为周一，则，1,2,3号是去年的最后一周。
+     * 如果1月4日为周二，则，1,2号是去年的最后一周。
+     * 如果1月4日为周三，则，1号为去年的最后一周。
+     * 如果1月4日为周四，则，周一即为开始。
+     * 如果1月4日为周五，则，侵占去年的最后一天。
+     * 如果1月4号为周六，则，侵占去年的最后两天。
+     * 如果1月4日为周日，则，侵占去年的最后三天。
+     *
+     * */
+
+
+    // 代码取自jquery UI
+    function iso8601Week( date ) {
+        var time, checkDate = new Date(date.getTime());
+
+        // Find Thursday of this week starting on Monday
+        checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
+
+        time = checkDate.getTime();
+        checkDate.setMonth(0); // Compare with Jan 1
+        checkDate.setDate(1);
+        return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
+    }
+
+    console.log(iso8601Week(new Date()))
+</script>
+</body>
+</html>

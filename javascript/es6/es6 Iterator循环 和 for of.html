@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+
+<script>
+  /**
+   * es6 有4个数据结构 Array Object Set Map
+   * 需要一种统一的接口机制来处理所有不通的数据结构
+   * 遍历器(Iterator),为不通的数据结构提供统一访问的机制.任何数据结构只要部署了Iterator接口,就可以完成遍历操作(依次处理该数据结构的所有成员)
+   * Iterator有3个作用:1.为各种数据结构提供一个统一的,简便的访问接口
+   *                   2.使数据结构的成员能够按某种你次序排列
+   *                   3.es6创造力一种新的遍历命令 for...of 循环,Iterator接口主要供for...of消费
+   *
+   * Iterator的遍历过程
+   * 1.创建一个指针对象,指向当前数据结构的初始位置.也就是说遍历器对象的本质就是一个指针对象
+   * 2.第一次调用指针对象的next方法,可以将指针指向数据结构的第一个对象
+   * 3.第二次调用指针对象的next方法,指针指向数据结构的第二个成员
+   * 4.不断的调用指针对象的next方法,知道它指向数据结构的结束位置
+   * 每次调动next方法,都会返回数据结构的当前成员的信息(包含value但前成员的值 和 done是否遍历结束 属性的对象)
+   *
+   * */
+
+  /*{
+    let it = makeIterator(["a", "b"]);
+    // console.log(it.next()); // { value:"a", done:false }
+    // console.log(it.next()); // { value:"b", done:false }
+    // console.log(it.next()); // { value:undefined, done:true }
+
+
+    function makeIterator(arr) {
+      let nextIndex = 0;
+      return {
+        next(){
+          return nextIndex < arr.length ?
+            {value: arr[nextIndex++], done: false} :
+            {value: undefined, done: true}
+        }
+      }
+    }
+  }*/
+
+  /*{
+    let arr = ["a","b","c"];
+    let iter = arr[Symbol.iterator]();
+    console.log(iter);
+
+    console.log(iter.next()); // {value:"a",done:false}
+    console.log(iter.next()); // {value:"b",done:false}
+    console.log(iter.next()); // {value:"c",done:false}
+    console.log(iter.next()); // {value:undefined,done:true}
+  }*/
+
+  /**
+   * 默认的Iterator接口部署在数据结构的Symbol.iterator属性 或者说只要部署了正确的iterator方法 就可以认为是可遍历的
+   * 调用Symbol.iterator方法就会得到当前数据结构默认的遍历器生成函数.
+   * es6 有三类结构原生具备 iterator 接口:数组 类数组对象, Set结构 ,Map结构
+   *
+   * 对象之之所以没有默认部署Iterator,是因为对象的那个属性先遍历,那个属性后遍历是不确定的,需要开发者手动指定.
+   * */
+  // 一个对象如果可以被for...of循环调用Iterator接口,就必须在Symbol.iterator舒心上部署遍历器生成方法(原型链上的对象具有该方法也可)
+  /*{
+    // 通过类 部署遍历器接口
+    class RangeIterator{
+        constructor(start,stop){
+          this.value = start;
+          this.stop = stop;
+        }
+
+        [Symbol.iterator](){return this;}
+
+        next(){
+          var value = this.value;
+          if(value<this.stop){
+            this.value++;
+            return {done:false,value:value}
+          }else{
+            return {done:true,value:undefined}
+          }
+        }
+    }
+
+    function range(start,stop){
+      return new RangeIterator(start,stop);
+    }
+
+    for(let value of range(0,3)){
+      console.log(value)
+    }
+
+  }*/
+
+  // 通过遍历器实现指针的结构(书上)
+  /*{
+    function Obj(value){
+      this.value = value;
+      this.next = null;
+    }
+    Obj.prototype[Symbol.iterator] = function(){
+      var iterator = {
+        next : next
+      };
+
+      var current = this;
+
+      function next(){
+        if(current){
+          var value = current.value;
+          var done = current === null;
+          current = current.next;
+          return {
+            done:done,
+            value:value
+          }
+        }
+      }
+
+      return iterator
+    };
+
+    var one = new Obj(1);
+    var two = new Obj(2);
+    var three = new Obj(3);
+
+    one.next = two;
+    two.next = three;
+    for(var i of one){
+      console.log(i)
+    }
+
+  }*/
+  /*{
+    function Obj() {
+      this.a = 1;
+      this.c = 3;
+      this.e = 4;
+      this.b = 2;
+    }
+
+    Obj.prototype[Symbol.iterator] = function () {
+      var current = this;
+      let keys = Object.keys(current).sort(); // 可以在这里进行 sort 和 filter 只会执行一次
+      let length = keys.length;
+      let index = 0;
+      var iterator = {
+        next: next
+      };
+
+      return iterator;
+
+      function next() {
+
+
+        return {
+          done: index > length - 1,
+          value: [keys[index], current[keys[index++]]]
+        }
+
+      }
+    };
+
+
+    var a = new Obj();
+    for (let value of a) {
+      console.log(value)
+    }
+    var b = new Obj();
+    for (let value of b) {
+      console.log(value)
+    }
+
+
+  }*/
+
+  // 对象直接量
+  /*{
+    let obj = {
+      data: ['hello', 'world'],
+      [Symbol.iterator](){
+        const self = this;
+        let index = 0;
+        return {
+          next(){
+            if(index < self.data.length){
+              return {
+                value:self.data[index++],
+                done:false,
+              }
+            }else{
+              return {value:undefined,done:true}
+            }
+          }
+        }
+      }
+    }
+
+    for(let value of obj){
+      console.log(value)
+    }
+  }*/
+
+  // 对于类数组对象(存在数值键名和length属性)可以直接将引用Array的 Symbol.iterator 接口
+  /*{
+    var lis = document.getElementsByTagName("li");
+     lis[Symbol.iterator] = Array.prototype[Symbol.iterator]; // 直接作用于 实例
+    // NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]; // 作用于所有的 dom节点
+    for(let value of lis){
+      console.log(value)
+    }
+  }*/
+  /*{
+    let iter = {
+      0:"a",
+      1:"b",
+      2:"c",
+      length:3,
+      [Symbol.iterator]:Array.prototype[Symbol.iterator]
+    };
+    for(let value of iter){
+      console.log(value)
+    }
+  }*/
+
+
+  // 调用Iterator接口的场合
+  // 解构赋值
+ /* {
+    // 对数组 和 set结构赋值时,会默认调用 Symbol.iterator 接口
+    let set = new Set().add("a").add('b').add('c');
+    let [x, y] = set;
+
+    let [first,...rest] = set
+  }*/
+  // 拓展运算符
+  /*{
+    var str = 'hello';
+    console.log([...str]);
+
+    let arr = ['b','c']
+    console.log(['a',...arr,'d'])
+  }*/
+  // yield* 后边是一个可遍历结构 他会调用该结构的遍历器接口
+  /*{
+    let generator = function* (){
+      yield 1;
+      yield* [2,3,4];
+      yield 5;
+    };
+
+    var iter = generator();
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+  }*/
+  /**
+   * 其他场合 由于其他场合会调用遍历器,所以任何接受数组作为参数的场合其实都调用了遍历器接口
+   * for...of
+   * Array.from()  类似于[...类数组对象]
+   * Map() Set() WeakMap() WeakMap() (比如new Map([["a",1],["b",2]]))
+   * Promise.all()
+   * Promise.race()
+   */
+
+  // Iterator接口 与 Generator函数
+  /*{
+    var myIterable = {};
+    myIterable[Symbol.iterator] = function*(){
+      yield 1;
+      yield 2;
+      yield 3
+    };
+    console.log([...myIterable]);
+
+    let obj = {
+      *[Symbol.iterator](){
+        yield 'hello';
+        yield 'world'
+      }
+    }
+
+    for(let value of obj){
+      console.log(value)
+    }
+  }*/
+  /**
+   * for of 当然有 break continue 用于终止循环 跳过本次循环
+   * 遍历器上 还可以布置 return 方法(在使用 break continue 和 报错时 调用) 一般用于在完成遍历前需要清理或释放资源
+   *
+   * throw 方法仅用于Generator函数
+   * */
+  /*{
+    let arr = [0,1,2];
+    arr.foo = "foo";
+    for(let key in arr ){
+      console.log(key) // 0 1 2 foo
+    }
+    for(let key of arr ){
+      console.log(key) // 0 1 2
+    }
+  }*/
+
+  // for of 方法可以识别 32位utf-16字符
+  /*{
+    for(let x of 'a\uD83D\uDC0A'){
+      console.log(x) // 正确显示 两个字符
+    }
+  }*/
+
+  //  使用Generator 代理
+  {
+    var obj = {
+      a:1,
+      b:2,
+      c:3,
+      d:4
+    };
+    function* entries(obj){
+      for(let key of Object.keys(obj)){
+        yield [key,obj[key]]
+      }
+    }
+    for(let [key,value] of entries(obj)){
+      console.log(key,value)
+    }
+
+  }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  var url = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=%E5%A4%A7%E5%AE%B6%E5%A5%BD%2F12%40&oq=javascript%20encodeuricomponent&rsv_pq=b0d8b2f200028fee&rsv_t=2fbaJm2o90J8hDOp0g8LpJB%2BbZesFxHJFWmmUClg0PTN%2B%2BXvCaUgNa3UzyQ&rqlang=cn&rsv_enter=1&inputT=6930&rsv_sug3=27&rsv_sug1=18&rsv_sug7=100&rsv_sug2=0&rsv_sug4=8142#addd";
+
+
+  // 将所有的参数集成为一个数组
+  // locationSearch 的最好是 location.search 否则会带着 #xxx 的loaction.hash的值
+  function getParamsFromUrl(loctaionSearch, filter) {
+    var name, value, data = {}, num;
+    if ((num = loctaionSearch.indexOf("?")) !== -1) {
+      loctaionSearch = loctaionSearch.substr(num + 1); //截取? 之后的所有参数
+    }
+    var arr = loctaionSearch.split("&"); //各个参数切数组里
+
+    // 获取全部的内容 并且生产一个对象
+    for (var i = 0; i < arr.length; i++) {
+      num = arr[i].indexOf("=");
+      if (num > 0) {
+        name = arr[i].substring(0, num);
+        value = decodeURIComponent(arr[i].substr(num + 1)); //解码
+        data[name] = value;
+      }
+    }
+    return filter ? filter(data) : data
+  }
+
+  console.log(getParamsFromUrl(url));
+
+
+  // 直接获取单个数据的内容
+  function getParamFromUrl(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r !== null) return decodeURIComponent(r[2]);
+    return null;
+  }
+
+
+  // 删除url中的某个属性
+  function delParamFromUrl(url, str) {
+    getParamsFromUrl(url, function (data) {
+      var reg;
+      if (str in data) {
+        reg = new RegExp(str + "=[^&#]*");
+        url = url.replace(reg, "")
+      }
+    });
+
+    // 如果有多余的 ? 就删除 就删掉左起第一个?
+    return url.match(/\?$|\?#/).length !== 0 ? url.replace(/\?/,"") : url
+  }
+
+
+
+  function addSuccessMsgInRedirectUrl(obj,url){
+    return location.origin + "/xmcgBack/urlBack?" +
+      "urlType=" + encodeURIComponent(delParamFromUrl( url || location.href, "DepositorySuccess" )) +
+      "&body="    + encodeURIComponent(JSON.stringify(obj))
+  }
+
+  var url = "http://release05.houbank.net/extract/initExtractPage?DepositorySuccess=????";
+  console.log(addSuccessMsgInRedirectUrl("asdasdas",url))
+</script>
+</body>
+</html>

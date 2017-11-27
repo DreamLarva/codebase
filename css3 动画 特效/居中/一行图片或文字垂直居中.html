@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .container {
+      display:table-cell;
+      width:500px;height:500px;
+      border:1px solid black;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .container > *{
+      display:inline;
+      border:1px solid black;
+
+    }
+    img{
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<h3>仅限一行文字或者 图片</h3>
+  <div class="container">
+      <img src="img/1.jpg" /><span>文字</span>
+  </div>
+
+</body>
+</html>

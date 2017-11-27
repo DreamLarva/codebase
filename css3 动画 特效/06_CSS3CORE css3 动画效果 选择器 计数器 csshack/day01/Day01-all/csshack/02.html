@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	div{
+		width:100px;
+		height:100px;
+		background-color:pink;
+		/*ie8*/
+		background-color:yellow\0;
+		/*ie9 ie10*/
+		background-color:green\9\0;
+		/*ie7 样式*/
+		+background-color:red; /*ie6 ie7 中都是红色*/
+		/*ie6 样式*/
+		-background-color:blue;/*只有ie6 中是蓝色*/
+		
+	}
+  </style>
+ </head>
+
+ <body>
+	<!--[if IE]>
+		<h1>IE浏览器中能够显示1级标题</h1>
+	<![endif]-->
+
+	<!--[if gte IE 7]>
+		<h2>只有在IE7以及以上的浏览器版本中才能显示2级标题</h2>
+	<![endif]-->
+	<div>
+	
+	</div>
+ </body>
+</html>

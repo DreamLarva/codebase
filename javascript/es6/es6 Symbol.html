@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*{
+        /!*Symbol()产生一个唯一的用于标识的字符串
+         * 只有用一个变量赋值成一个Symbol才能使用*!/
+        console.log(Symbol() === Symbol()); // false
+        let Sy = Symbol("abc");
+        let b = {[Sy]:123};
+        console.log(b[Sy]);
+    }*/
+   /* {
+        /!*消除魔术字符
+         *类似下文中 Trangle*!/
+        /!* let getArea = function(shape,options){
+            let area = 0;
+            switch(shape){
+                case "Trangle" : // 魔术字符
+                    area = 0.5*options.width*options.height;
+                    break
+            }
+        }*!/
+        /!*正确做法
+         *生成一个对象解释 魔术字符 只要保证魔术字符的value 都不相同 *!/
+        var shapeType = {
+            "Trangle" :Symbol(),
+            "Square" : Symbol()
+        };
+
+        let getArea = function(shape, options){
+            let area = 0;
+            switch(shape){
+                case shape.Trangle : // 魔术字符
+                    area = 0.5*options.width*options.height;
+                    break
+            }
+        };
+        getArea(shapeType.Trangle,{height:1000,width:1000})
+    }*/
+   /* {
+        /!*
+         * Symbol作为key的对象
+         * 无法用for in, Object.getOwnPropertyNames遍历到
+         * 能用Object.getOwnPropertySymbols方法 , Reflect.ownKeys方法 得到*!/
+        let obj = {[Symbol()]:123};
+        for (let key in obj){
+            console.log(key); // 无输出
+        }
+        console.log( Object.getOwnPropertyNames(obj) ); // 输出[]
+        console.log( Object.getOwnPropertySymbols(obj) ); // [Symbol()]
+        console.log( Reflect.ownKeys(obj) ); // [Symbol()]
+
+    }*/
+
+ /*   {
+      // 除了定义自己使用的Symbol值外,ES6还提供了11个内置的Symbol值,指向语言内容使用
+      // a instanceof b 相当于 b[Symbol.hasInstance](a)
+      class Myclass{
+        // 这边 [Symbol.hasInstance] 好像不能修改
+        [Symbol.hasInstance](foo){
+          return "笑哈哈 "
+        }
+        constructor(){
+          this.a = 1
+        }
+        a(){}
+      }
+      let o = new Myclass();
+      console.log(o instanceof Myclass);
+      console.log(Myclass[Symbol.hasInstance]);
+      console.log(Myclass[Symbol.hasInstance](o))
+    }
+*/
+
+    /*{
+      // Symbol.isConcatSpreadable 属性表示一个布尔值, 表该对象使用Array.prototype.concat()时 是否可以展开
+      let arr1 = ['c','d'];
+      arr1[Symbol.isConcatSpreadable] = false; // false 就不会展开
+      console.log(['a','b'].concat(arr1,'e'))
+
+    }*/
+
+
+   /* {
+      // Symbol.species
+      // 对象的species 属性指向一个方法,对象作为构造函数创造实例时 会地哦啊用这个办法.
+      // 即如果this.constructor[Symbol.species]存在,就会使用这个构造函数来穿件新的实例对象
+      // 似乎这边没卵用
+      class Myclass{
+        constructor(){
+          this.a = 123
+        }
+        static get [Symbol.species](){
+          return this
+        }
+      }
+      let a = new Myclass()
+    }*/
+
+    /*{
+      // 对象的Symbol.match 属性指向一个函数,当执行str.match(myObject),如果该属性存在,他会调用返回该方法的值
+      // Symbol.replace Symbol.search Symbol.split Symbol 用法类似
+      class MyMatcher {
+        [Symbol.match](string){
+          return 'hello world'.indexOf(string)
+        }
+      }
+      console.log('e'.match(new MyMatcher())) // 1
+
+    }*/
+
+    /*{
+      // Symbol.iterator
+      // 属性指向默认遍历器的方法 即对象的咋进行for of 循环时会调用 这个方法返回 对象的默认遍历器
+        class Collection{
+          *[Symbol.iterator](){
+            let i = 0;
+            while(this[i] !== undefined){
+              yield this[i];
+              i++
+            }
+          }
+        }
+        let myCollection = new Collection();
+        myCollection[0] = 1;
+        myCollection[1] = 2;
+        myCollection["a"] = "a";
+      for(let value of myCollection){
+          console.log(value)
+      }
+      // 1
+      //2
+    }*/
+
+   /* {
+      // Symbol.toPrimitive
+      // 对象的Symbol.toPrimitive,对象被转为原始类型的值的时候,会调用这个方法
+      let obj = {
+        [Symbol.toPrimitive](hint){
+          switch (hint) {
+            case 'number':
+              return 2;
+            case 'string':
+              return "1str";
+            case 'default':
+              return 'default';
+            default:
+              throw new Error()
+          }
+        }
+      };
+      console.log(1 + obj); // '1default' 加法运算默认使用 default
+      console.log(2 * obj); // 4
+      console.log(3 / obj); // 1.5
+      console.log(4 % obj); // 0
+      console.log("" + obj); // default
+      console.log(String(obj)); // 1str
+      console.log(parseInt(obj)); // 1 用的是1str
+      console.log(Number(obj)) // 2
+    }*/
+
+    {
+
+    }
+
+</script>
+</body>
+</html>

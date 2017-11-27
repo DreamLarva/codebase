@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #logo{
+            width:100px;
+            height:100px;
+            background-color:yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="logo"></div>
+    <button id="btn">删除节点</button>
+<script>
+    /**
+     * map结构 提供 值-值的对应的数据结构
+     * 作为识别的值 如果是引用对象 那么就判断他在 内存中的地址 如果相容那么就是同一个字段
+     * */
+    /*{
+        let m = new Map();
+        let o = {p:"hello world"};
+
+        m.set(o,"content")
+        console.log(m.has(o))
+        console.log(m.delete(o))
+        console.log(m.has(o))
+
+    }*/
+
+    // 批量初始化 Map
+   /* {
+        let a = 1;
+        let m = new Map([[1,2],[1,3],["1",4],[a,5],[[],6],[{},7],[{a:1},8]])
+        m.get(1)
+    }*/
+
+   // 支持链式调用 只有set方法
+   /* {
+      let map = new Map([["1",1],[{},2]])
+      map.set({},123)
+        .set({},456)
+    }*/
+
+    // Map实例的舒心和操作方法
+    /*{
+      // set方法设置key所对饮的健值,然后返回整个Map结构.如果key已经有值,该键的健值就会更新
+      // 多个 NaN 是做一个键 , +0 -0 视作一个键
+      // size 返回 Map结构的成员总数
+      let map = new Map();
+      map.set('foo',true)
+        .set('bar',false);
+
+      console.log(map.size); // 2
+
+      // has 判断该键是否在 实例中 返回一个布尔值
+      map.has(1)
+      // delete 删除某个键的值 如果删除失败返回的是 false
+      map.delete("a")
+      // clear 清除在所有的成员没有返回值
+      map.clear()
+    }*/
+
+    // 遍历方法
+    // keys() 返回键名的遍历器
+    // values() 返回健值的遍历器
+    // entries() 返回所有成员的遍历器
+    // forEach() 遍历所有的map 成员
+    /*{
+      let map = new Map([["F","no"],["T","yes"]]);
+      for(let key of map.keys()){
+        // console.log(key) // F T
+      }
+      for(let value of map.values()){
+        // console.log(value) // no yes
+      }
+      for(let item of map.entries()){
+        // console.log(item[0],item[1]) // F,no  T,yes
+      }
+      for(let [key,value] of map){
+        // console.log(key,value) // F,no T,yes
+      }
+
+      // 所以Map 默认的iterator 接口就是 map.entries()
+      console.log(map[Symbol.iterator] === map.entries()); // true
+      console.log(Map.prototype[Symbol.iterator] === Map.prototype.entries); // true
+
+      // 同样因为有 Symbol.iterator接口 所以可以使用 [...map] 展开为数组
+      console.log([...map]); // [["F","no"],["T","yes"]]
+      console.log([...map.entries()]);
+      console.log([...map.values()])
+      console.log([...map.keys()])
+
+    }*/
+
+    // Map 本身没有 map 和 filter方法 但是 可有通过展开成数组 使用map 和 filter 方法
+    // Map 也有forEach 方法 用于遍历 , 当然第二个参数也可以用来绑定 第一个方法的上下文this
+    /*{
+      let map0 = new Map()
+        .set(1, "a")
+        .set(2, "b")
+        .set(3, "c");
+      let map1 = new Map(
+        [...map0].filter(([k,v])=>k<3)
+      );
+      // console.log(map1)
+      let map2 = new Map(
+        [...map0].map(([k,v])=>[k*2,"_"+v])
+      );
+      // console.log(map2)
+      let reporter = {
+        report(key,value){
+          console.log(key,value)
+        }
+      };
+      map0.forEach(function(value,key,map){
+        this.report(key,value)
+      },reporter)
+
+    }*/
+
+    // Map 实例 和其他数据结构的相互转换
+   /* {
+      let myMap = new Map().set(true,7).set({foo:3},['abc']);
+
+      // 转为数据 直接用拓展运算符
+      console.log([...myMap]);
+
+      // 数组转Map 直接传入构造函数的参数
+      console.log(new Map([[1,"a"],[2,"b"]]));
+
+      // Map 转对象 必须所有的key 都是字符串
+      let strMap = new Map([[1,"a"],[2,"b"]]);
+      console.log(strMapToObj(strMap));
+      function strMapToObj(strMap){
+       let obj = Object.create(null);
+       for(let [k,v] of strMap){
+         obj[k] = v;
+       }
+       return obj
+      }
+
+      // 对象转Map
+      console.log(objToStrMap({a:1,b:2}));
+      function objToStrMap(obj){
+        let strMap = new Map();
+        for(let k of Object.keys(obj)){
+          strMap.set(k,obj[k])
+        }
+        return strMap;
+      }
+
+      // Map 转json
+      // Map 的键名都是字符串 相当于对象转json
+      console.log(strMapToJson(strMap));
+      function strMapToJson(strMap){
+        return JSON.stringify(strMapToObj(strMap))
+      }
+
+      // Map 的键名中有非字符串
+      console.log(mapToArrayJson(myMap));
+      function mapToArrayJson(map){
+        return JSON.stringify([...map])
+      }
+
+      // JSON 转 Map
+      // 所有键名都是字符串  原来转换希望的结果是一个对象
+      let json = JSON.stringify({a:1,b:2});
+      console.log(JsonToStrMap(json));
+      function JsonToStrMap(jsonStr){
+        return objToStrMap(JSON.parse(jsonStr))
+      }
+
+      //  转换希望的结果是一个数组
+      let jsonArr = JSON.stringify([["a","1"],["b",2]]);
+      console.log(jsonToMap(jsonArr));
+      function jsonToMap(json){
+        return new Map(JSON.parse(json))
+      }
+
+    }*/
+
+
+
+
+    // weakMap 使用与储存节点 对应数据
+    // 只接受对象作为键名(null除外) 而且键名所指向的对象不计入垃圾回收机制
+    {
+      let myElement = document.getElementById("logo");
+      let myWeakMap = new WeakMap();
+      myWeakMap.set(myElement, {timesClick: 0});
+      myElement.addEventListener('click', function (e) {
+        let logoDate = myWeakMap.get(myElement);
+        logoDate.timesClick++;
+        myWeakMap.set(myElement, logoDate);
+        console.log(myWeakMap)
+      }, false);
+      let btn = document.getElementById("btn");
+      btn.addEventListener('click', function (e) {
+        this.parentNode.removeChild(myElement);
+        myElement = null;
+        // console.log(myWeakMap); // 好像没用的样子
+        setTimeout(()=>console.log(myWeakMap),5000) // 依然没有卵用
+      })
+    }
+
+    // 部署私有属性
+    {
+      let _counter = new WeakMap();
+      let _action = new WeakMap();
+
+      class Countdown{
+        constructor(counter,action){
+          _counter.set(this,counter);
+          _action.set(this,action);
+        }
+        dec(){
+          let counter = _counter.get(this);
+          if(counter <1 )return;
+          counter--;
+          _counter.set(this,counter);
+          if(counter === 0){
+            _action.get(this)();
+          }
+        }
+      }
+
+      let c = new Countdown(2,()=>console.log("DONE"));
+      c.dec();
+      c.dec();
+
+      c = null;
+      console.log(_counter); // 依然有属性
+      setTimeout(()=>console.log(_counter),1000) // 属性已经删除
+    }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿
+4、CSSHack
+   1、padding 与 margin 问题
+      不同的浏览器，对默认的margin和padding解析方式不同
+      解决方案:
+      body{
+	margin:0px;
+	padding:0px;
+      }
+   2、居中布局
+      ff,chrome....通过 margin:auto方式完成块级元素居中显示
+      ie6及以下，主要通过 text-align:center;方式完成所有元素的居中(包含块级)
+      body{
+	margin:auto;
+	text-align:center;
+      }
+   3、元素高度与内容
+      内容高度超出定义高度后，ie6，自适应，其他浏览器，溢出。
+      解决方案:
+         overflow属性;
+   4、子元素设置上外边距时对父元素的影响
+      解决方案：
+         1、父元素 加 border
+	 2、设置父元素的padding-top取代子元素的margin-top
+
+条件注释：
+  gt : 选择大于条件版本以上的浏览器版本
+      gt ie 6 :条件是 大于 ie6 以上的浏览器版本才会识别
+  lt : 选择条件版本以下的浏览器版本，不包含条件版本
+      lt ie 6
+  gte : greater than or equal
+  lte : less than or equal
+  ! :选择条件版本以外的所有版本
+     ! ie 6
+语法：
+  <!--[if 【判断】 浏览器版本]>
+     执行内容 
+  <![endif]-->
+  eg:
+  <!--[if IE]>
+    只有在IE浏览器下，才能执行该段内容
+  <![endif]-->
+
+  <!--[if IE 6]>
+    只有在IE6浏览器下，才能执行该段内容
+  <![endif]-->
+  
+  只有在 IE7 以上的版本才能执行的内容，条件注释?
+  <!--[if gt IE 7]>
+    执行的内容
+  <![endif]-->
+
+

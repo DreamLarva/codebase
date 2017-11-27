@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="filter">
+<p>filter: <span id="output"></span></p>
+<script>
+    function filteremoji(str){
+        var ranges = [
+            '\ud83c[\udf00-\udfff]',
+            '\ud83d[\udc00-\ude4f]',
+            '\ud83d[\ude80-\udeff]'
+        ];
+       return str.replace(new RegExp(ranges.join('|'), 'g'), '');
+    }
+    var str = "1💔😀💔1";
+    console.log(filteremoji(str))
+    document.getElementById("filter").addEventListener("change",function () {
+        this.value = filteremoji(this.value)
+    })
+</script>
+</body>
+</html>

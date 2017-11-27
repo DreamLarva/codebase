@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    #i1 {
+      /*-webkit-clip-path: polygon(50% 0, 50% 50%, 100% 50%, 100% 0);*/
+      position:absolute;
+      display: none;
+      z-index:2
+    }
+
+    #stage {
+      position: relative;
+      display: inline-block;
+
+    }
+  </style>
+</head>
+<body>
+<div id="stage">
+  <img id="i1" src="activity_bg_frame.png" alt="">
+</div>
+<script>
+  //切成100份
+  //一行切10份
+  var last = false;
+  for (var i = 1; i <= 10; i++) {
+//    一列十分
+    for (var j = 1; j <= 10; j++) {
+      var img = $("<img>");
+      img.attr("src", "activity_bg_frame.png");
+      var top_left = (i - 1) * 10 + "%" + " " + (j - 1) * 10 + "%";
+      var top_right = i * 10 + "%" + " " + (j - 1) * 10 + "%";
+      var bottom_left = i * 10 + "%" + " " + j * 10 + "%";
+      var bottom_right = (i - 1) * 10 + "%" + " " + j * 10 + "%";
+      var parameter = "polygon(" + top_left + "," + top_right + "," + bottom_left + "," + bottom_right + ")";
+      i*j==10 && (last = true)
+//      console.log(parameter);
+      img.css("-webkit-clip-path", parameter).css({
+        position: "absolute",
+        left: 0,
+        top: 0,
+        opacity:0
+      }).appendTo("#stage").animate({opacity:1},i*j*50,i*j==100&&function(){
+
+          $("#i1").show()
+
+      })
+    }
+  }
+
+</script>
+</body>
+</html>

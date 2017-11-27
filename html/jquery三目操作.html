@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+  <style>
+    .current {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aut doloribus eligendi eos, exercitationem harum illo
+  incidunt inventore ipsa iste labore mollitia necessitatibus, praesentium qui unde ut veritatis. Illum, vel?</p>
+<button id="btn">btn</button>
+<script>
+  $(function(){
+    var a = true;
+    $("#btn").click(function () {
+//      alert(123)
+      $("p")[!a ? "removeClass" : "addClass"]("current");
+      a =!a;
+    })
+  })
+
+</script>
+</body>
+</html>

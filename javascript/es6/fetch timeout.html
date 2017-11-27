@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  var _fetch = (function (fetch) {
+    return function (url, options) {
+      var abort = null,
+        timeout = 0;
+      var abort_promise = new Promise((resolve, reject) => {
+        abort = () => {
+          reject('timeout.');
+          console.info('abort done.');
+        };
+      });
+      var promise = Promise.race([
+        fetch(url, options),
+        abort_promise
+      ]);
+      promise.abort = abort;
+      Object.defineProperty(promise, 'timeout', {
+        set: function (ts) {
+          if ((ts = +ts)) {
+            timeout = ts;
+            setTimeout(abort, ts);
+          }
+        },
+        get: function () {
+          return timeout;
+        }
+      });
+      return promise;
+    };
+  })(fetch);
+
+  var request = _fetch("http://jsonplaceholder.typicode.com/posts/1");
+  request.timeout = 100;
+  request.then(response=>response.json())
+    .then(console.log)
+    .catch(console.log);
+
+
+
+
+  var _fetch2 = (function (fetch) {
+    return function (url, options) {
+      const timeout = options.timeout || 0;
+      const abort_promise = new Promise((resolve, reject) => {
+          setTimeout(function(){
+            reject('timeout.');
+          },timeout)
+      });
+      return timeout ? Promise.race([
+        fetch(url, options),
+        abort_promise
+      ]): fetch(url, options);
+
+    };
+  })(fetch);
+
+  _fetch2("http://jsonplaceholder.typicode.com/posts/1",{timeout:10})
+    .then((response)=>response.json())
+    .then(console.log)
+    .catch(console.log)
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+1、转换
+   1、转换属性
+      transform:
+      浏览器前缀:
+      -webkit-transform:
+      -o-transform:
+      -moz-transform:
+      -ms-transform:
+      取值：
+          none : 默认值，没有转换操作
+	  transform-function:一组转换函数
+	  transform:函数1() 函数2() ......;
+   2、转换的原点
+      在不指定原点前提前，默认原点为元素的中心处
+      属性：transform-origin
+      取值：数值/百分比/关键字
+          一个值：所有轴位置
+	  两个值：表示x轴和y轴
+	  三个值：表示x轴，y轴，z轴
+2、2D转换
+   1、2D位移
+      函数:translate()
+      取值：
+           translate(x) : 只做x轴(横向)移动
+	   translate(x,y) : 做x轴和y轴的移动
+	   方向：看符号 + 向右、向下
+	                - 向左、向上
+
+	   注意：取值可以为数值或百分比、负数
+      单向位移函数:
+          translateX(x) : 只做x轴移动
+	  translateY(y) : 只做y轴移动
+   2、缩放
+      改变元素的尺寸
+      函数:scale()
+      取值：
+          1个值：表示第一个值和第二个值是相等的
+	  2个值：第一个 x  第二个 y
+      单向缩放函数：
+          scaleX(x),scaleY(y)
+      取值:
+            默认值 为1
+	    缩小：0-1之间的小数
+	    放大：大于1的数值
+   3、旋转
+      函数：rotate()
+      取值：rotate(ndeg)
+            n : 具体角度值
+	    n为正， 则顺时针旋转
+	    n为负， 则逆时针旋转
+
+   4、倾斜
+      函数：
+           skew()
+	   skewx() x轴倾斜
+	   skewy() y轴倾斜
+
+
+
+2、过渡 
+   1、过渡子属性
+      1、过渡属性
+         作用：指定元素在哪些css属性上的变化会产生过渡的效果（必须的）
+	 属性：transition-property
+	 取值：none | all | property
+	 eg:transition-property:background;
+
+	 eg:transition-property:background,width,height;
+      2、过渡时间
+         作用：指定过渡效果在多长时间内完成。
+	 注意：可以以 s | ms 为单位.该属性不能省略，一旦省略则没有过渡效果
+	 属性：transition-duration
+	 取值：s|ms
+	 eg:transition-duration:5s;
+	 eg:transition-duration:5s,1s,1s;
+      3、过渡时间速度曲线函数
+         作用：定义整个过渡效果的速率。比如 先快后慢，还是 先慢后快，或者还是匀速
+	 属性:transition-timing-function
+	 取值：预定义值或贝塞尔曲线
+	       ease : 默认值，慢速开始，快速变快，以慢速结束
+	       linear:匀速
+	       ease-in：慢速开始，加速效果
+	       ease-out:慢速结束(快速开始),减速效果
+	       ease-in-out:慢速开始和结束，中间先加后减
+	 eg:transition-timing-function:linear;
+      4、过渡延迟
+         作用：激发过渡操作后，等待多长时间后才开始执行过渡效果
+	 属性:transition-delay
+	 取值：以 s | ms为单位的时间
+	 eg:transition-delay:5s; 
+      5、简写过渡属性  transition
+         属性：transition
+	 取值：以空格分开的值列表
+	       property duration timing-function delay;
+	 eg:transition:background 1s linear 0s;
+	    transition:background 1s;
+	  多个过渡效果:
+	    transition : background 1s linear 0s,
+	                 color 2s linear 0s,
+			 border-radius 3s linear 1s;
+	      
+*{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+p,h1,dl,dd,ul,li{
+	
+}
+
+<span>
+

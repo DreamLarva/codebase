@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<canvas id="mycanvas" width='90' height='40'>
+    您的浏览器不支持canvas，请换个浏览器试试~
+</canvas>
+
+<script>
+
+    // 干扰线的随机x坐标值
+    function lineX(str){
+      var ranLineX=Math.floor(Math.random()*90);
+      return ranLineX;
+    }
+    // 干扰线的随机y坐标值
+    function lineY(){
+      var ranLineY=Math.floor(Math.random()*40);
+      return ranLineY;
+    }
+    // 随机颜色
+    function randomColor(){
+        return  "rgb(" + random(0,255) + "," + random(0,255) + "," + random(0,255) + ")"
+    }
+    //生成一个 0-255 的数字
+    function random(min,max){
+      return Math.floor(Math.random()*(max -min) + min)
+    }
+    // 随机字号
+    function randomFontSize(){
+
+    }
+    // 随机fontWeight
+    function randomFontWeight(){
+
+      return  random(1,9)*100
+    }
+
+    function clickChange(){
+      var mycanvas=document.getElementById('mycanvas');
+      var cxt=mycanvas.getContext('2d');
+      var height = mycanvas.height;
+      var width = mycanvas.width;
+      console.log(width,height)
+      cxt.fillStyle=randomColor();
+      cxt.fillRect(0,0,90,40);
+
+      // 生成干扰线
+      for(var j=0;j<10;j++){
+        cxt.strokeStyle=randomColor();
+        cxt.beginPath(); //若省略beginPath，则每点击一次验证码会累积干扰线的条数
+        cxt.moveTo(lineX(),lineY());
+        cxt.lineTo(lineX(),lineY());
+        cxt.lineWidth=0.5;
+        cxt.closePath();
+        cxt.stroke();
+      }
+
+
+      // 生成验证码
+      cxt.fillStyle = randomColor();
+      cxt.font = randomFontWeight() + ' ' + '20px Arial';
+      cxt.fillText("1234",25,25); //把rand()生成的随机数文本填充到canvas中
+    }
+    clickChange();
+    /*点击验证码更换*/
+    mycanvas.onclick=function(e){
+      e.preventDefault(); //阻止鼠标点击发生默认的行为
+      clickChange();
+    };
+</script>
+
+</body>
+</html>

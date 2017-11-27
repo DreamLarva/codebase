@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+</head>
+<body>
+
+<script>
+  function inheritObject(o) {
+    function F() {
+    }
+
+    F.prototype = o;
+    return new F();
+  }
+
+  function inheritPrototype(subClass, superClass) {
+    var p = inheritObject(superClass.prototype);
+    p.constructor = subClass;
+    subClass.prototype = p;
+  }
+
+  //父类
+  function SuperClass(name) {
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+    this.a = function () {
+      console.log("a")
+    }
+  }
+  //父类原型方法
+  SuperClass.prototype.getName = function () {
+    console.log("getName" + this.name)
+  };
+
+  //子类
+  function SubClass(name, time) {
+    SuperClass.call(this, name);
+    this.time = time;
+    this.b = function () {
+      console.log("b")
+    }
+  }
+  //子类原型方法(这个位置没鸟用)
+  //  SubClass.prototype.getTime = function(){
+  //    console.log("getTime"+this.time)
+  //  };
+
+  inheritPrototype(SubClass, SuperClass);
+  //子类新增方法
+  SubClass.prototype.getTimeandName = function () {
+    console.log("getTime&name" + this.time + "," + this.name)
+  };
+
+
+  //子类的子类
+  function ssClass(name, time, type) {
+    SubClass.call(this, name, time)
+    this.type = type;
+    this.c = function () {
+      console.log("c")
+    }
+  }
+  inheritPrototype(ssClass, SubClass);
+  ssClass.prototype = {
+    getAll: function () {
+      console.log("getAll" + this.time + "," + this.name + "," + this.type)
+    },
+    hehe: function () {
+      alert("hehe")
+    }
+  }
+
+
+    var instance1 = new SubClass("abc 123", "2000");
+  var instance2 = new SubClass("efg 456", "3000");
+  var instance3 = new ssClass("hij 789", "4000", "java")
+
+
+</script>
+</body>
+</html>

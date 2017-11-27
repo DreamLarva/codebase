@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 中间件的实现类似redux中的applyMiddleware
+     * 核心思想就是先保存最原始的方法
+     * 然后将中间件弄成 中间件1(中间件2(中间件3(原始方法)))
+     * */
+
+
+    function compose(...funcs){
+        return arg => funcs.reduceRight((composed,f)=>f(composed),arg)
+    }
+
+
+    function applyMiddleware(...middlewares){
+        return (next) =>(str)=>{
+            let store = next(str);
+            let con = store.con;
+            let chain = [];
+
+            let middlewareAPI = {  // 这里要写成闭包来保证每次取到的值都是最新的,因为js的参数是值传递一次就定型了,所以一定要用方法
+                con:(str) =>con(str)
+            };
+
+            chain = middlewares.map(middleware => middleware(middlewareAPI));
+            con = compose(...chain)(store.con);
+            return con
+        };
+    }
+
+    function co(str) {
+        return {
+            text:str,
+            con:console.log
+        }
+    }
+
+    let mid1 = store => next =>str =>{
+        console.log("mid1-start");
+        next(str);
+        console.log("mid1-end");
+    };
+
+    let mid2 = store => next =>str =>{
+        console.log("mid2-start");
+        next(str);
+        console.log("mid2-end");
+    };
+
+    let a = applyMiddleware(mid1,mid2)(co)(111);
+
+    a("我要输出的内容")
+
+
+</script>
+</body>
+</html>

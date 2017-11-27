@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+      (function () {
+        var docEl = document.documentElement;
+        var resize = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var setRem = function () {
+
+          var screenWidth = docEl.clientWidth || window.screen.width ;
+          // 1080 PSD宽度(可变的)
+          docEl.style.fontSize = (100 * screenWidth / 750) + 'px';
+        };
+        window.addEventListener(resize, setRem, false);
+        setRem();
+      })();
+    </script>
+    <style>
+        .img{background:url(images/img.png)  no-repeat;background-size:1rem 4rem}
+        .iconfont-youhuiquan{height:1rem;width:1rem;background-position:0 0;}
+        .iconfont-mingpian{height:1rem;width:1rem;background-position:0 -2rem;}
+        li{
+            list-style: none;
+        }
+    </style>
+
+</head>
+<body>
+<li class="img iconfont-youhuiquan"></li>
+<li class="img iconfont-mingpian"></li>
+</html>

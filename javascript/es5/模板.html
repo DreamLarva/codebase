@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red {
+            color: red
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/html" id="template">
+    <ul>
+        <% for(var i=0;i<data.supplies.length;i++){%>
+            <li class=<%=data.class%>><%= data.supplies[i]%></li>
+        <%}%>
+    </ul>
+</script>
+<script type=""></script>
+<script>
+    function compile(template) {
+        var evalExpr = /<%=(.+?)%>/g;
+        var expr = /<%([\s\S]+?)%>/g;
+
+        template = template
+                .replace(evalExpr, '"); \n echo( $1 ); \n echo("')
+                .replace(expr, '"); \n $1 \n echo("');
+
+        template = 'echo("' + template + '");';
+        var script = "(function parse(data){" +
+                "var output = \"\";" +
+                "function echo(html){" +
+                "output +=html" +
+                "};" +
+                template +
+                "return output;" +
+                "})";
+
+        return script
+    }
+    var template = document.getElementById("template").text
+    var afterCompile = compile(template).replace(/\n/g,"")
+
+    console.log(afterCompile)
+
+
+    var parse = eval(afterCompile);
+    console.log(afterCompile)
+    var div = document.getElementById("container");
+    div.innerHTML = parse({supplies: ["broom", "mop", "cleaner"], class: "red"})
+
+
+</script>
+</body>
+</html>

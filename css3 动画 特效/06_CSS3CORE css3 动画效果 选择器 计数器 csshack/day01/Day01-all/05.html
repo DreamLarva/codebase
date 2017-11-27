@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> 结构伪类 </title>
+  <meta charset="utf-8" />
+  <style>
+	div:first-child{
+		background:#f00;
+	}
+	#parent div:last-child{
+		background:#ff0;
+	}
+
+	#parent div:nth-child(3){
+		background:#0ff;
+	}
+
+	div:empty{
+		width:100px;
+		height:100px;
+		background:#e4393c;
+	}
+	span:only-child{
+		color:blue;
+		font-weight:bold;
+	}
+
+  </style>
+ </head>
+
+ <body>
+	<div id="parent">
+		<div>子元素1</div>
+		<div>子元素2</div>
+		<div>子元素3</div>
+		<div>子元素4</div>
+		<div>子元素5</div>
+		<div>子元素6</div>
+		<div>子元素7</div>
+	</div>
+	<div id="d2"></div>
+	<div id="d3">
+		七个小矮人
+		<span>白雪公主</span>
+		<span>七个白雪公主</span>
+	</div>
+ </body>
+</html>

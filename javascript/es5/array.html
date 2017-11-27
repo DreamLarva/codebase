@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //forEach 遍历
+  var array = [5,2,6,1,45,7,3]
+  array.forEach(function(value, index, array) { //值,索引,数组本身
+    array[index] +=1
+  });
+  console.log(array)
+
+  var database = {
+    users: ["张含韵", "江一燕", "李小璐"],
+    sendEmail: function (user) {
+      if (this.isValidUser(user)) {
+        console.log("你好，" + user);
+      } else {
+        console.log("抱歉，"+ user +"，你不是本家人");
+      }
+    },
+    isValidUser: function (user) {
+      return /^张/.test(user);
+    }
+  };
+
+  // 给每个人法邮件
+  database.users.forEach(  // database.users中人遍历
+    database.sendEmail,    // 发送邮件
+    database               // 使用database代替上面的this
+  );
+
+ //  兼容 ie6-ie8
+  if (typeof Array.prototype.forEach !== "function") {
+    Array.prototype.forEach = function (fn, context) {
+      for (var k = 0, length = this.length; k < length; k++) {
+        if (typeof fn === "function" && Object.prototype.hasOwnProperty.call(this, k)) {
+          fn.call(context, this[k], k, this);
+        }
+      }
+    };
+  }
+
+
+  //map 映射 原数组被“映射”成对应新数组
+  var data = [1, 2, 3, 4];
+
+  var arrayOfSquares = data.map(function (item) {
+    return item * item; //必须有return
+  });
+  alert(arrayOfSquares); // 1, 4, 9, 16
+
+  //兼容 i6-ie8
+  if (typeof Array.prototype.map !== "function") {
+    Array.prototype.map = function (fn, context) {
+      var arr = [];
+      if (typeof fn === "function") {
+        for (var k = 0, length = this.length; k < length; k++) {
+          arr.push(fn.call(context, this[k], k, this));
+        }
+      }
+      return arr;
+    };
+  }
+
+  //filter 过滤出新数组 return false 对应的值会被过滤
+  //兼容 i6-ie8
+  if (typeof Array.prototype.filter !== "function") {
+    Array.prototype.filter = function (fn, context) {
+      var arr = [];
+      if (typeof fn === "function") {
+        for (var k = 0, length = this.length; k < length; k++) {
+          fn.call(context, this[k], k, this) && arr.push(this[k]);
+        }
+      }
+      return arr;
+    };
+  }
+
+  //some 意指“某些”，指是否“某些项”合乎条件。与下面的every算是好基友，every表示是否“每一项”都要靠谱。
+  var scores = [5, 8, 3, 10];
+  var current = 7;
+
+  function higherThanCurrent(score) {
+    return score > current;
+  }
+
+  if (scores.some(higherThanCurrent)) {
+    console.log("通过some");
+  }
+
+  //兼容
+  if (typeof Array.prototype.some !== "function") {
+    Array.prototype.some = function (fn, context) {
+      var passed = false;
+      if (typeof fn === "function") {
+        for (var k = 0, length = this.length; k < length; k++) {
+          if (passed === true) break;
+          passed = !!fn.call(context, this[k], k, this);
+        }
+      }
+      return passed;
+    };
+  }
+
+
+  //every 所有都要符合条件才能返回true
+  //兼容
+  if (typeof Array.prototype.every !== "function") {
+    Array.prototype.every = function (fn, context) {
+      var passed = true;
+      if (typeof fn === "function") {
+        for (var k = 0, length = this.length; k < length; k++) {
+          if (passed === false) break;
+          passed = !!fn.call(context, this[k], k, this);
+        }
+      }
+      return passed;
+    };
+  }
+
+  console.log( "every: "+
+    [1,2,3,4,5].every(function(value,index,array){
+      if(value>2){
+        return true
+      }
+    })
+  )
+
+
+
+</script>
+</body>
+</html>

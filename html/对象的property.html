@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function value_update(property,value,_self) {
+
+
+    Object.defineProperty(_self, property, {
+      get: function () {
+        return value;
+      },
+      set: function (new_value) {
+        console.log(property);
+        value = new_value
+      }
+    })
+  }
+
+
+  function Person(property,value) {
+    var _self = this;
+    var age = new Date().getFullYear() - 18;
+//    Object.defineProperty(this, "age", {
+//      get: function () {
+//        return age;
+//      },
+//      set: function (value) {
+//        console.log(update)
+//        age = value;
+//      }
+//    });
+    value_update(property,value,this)
+  }
+
+
+</script>
+</body>
+</html>

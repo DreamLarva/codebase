@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+</head>
+<body>
+<input type="button" value="alert">
+<div>1</div>
+<div>2</div>
+<p>3</p>
+<div id="d1">4</div>
+<script>
+  /****detach 保留原节点的事件  ramove不保留
+   * 节点从原来的位置取下后任然可以绑定事件
+   *直接append 剪切节点 保留原来的事件
+   * 克隆的节点 有参数true 才保留原来的事件
+   * ****/
+  $(function(){
+    $("input").click(function(){
+      alert(123)
+    })
+//    var a = $("input").detach().click(function(){alert(456)})
+    var  a = $("input").clone(true)
+
+    $("#d1").append(a)
+  })
+</script>
+</body>
+</html>

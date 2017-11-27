@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 普通的阶乘运算
+  const factorial = function (num) {
+    let result = 1;
+    while (num >= 1) {
+      result *= num--
+    }
+    return result;
+  };
+
+
+  const mult1 = (function () {
+    const cache = {};
+    return function (num) {
+
+
+      if (String(num) in cache) {
+        return cache[num]
+      }
+      const sign = String(num);
+      return cache[sign] = factorial.call(null,num);
+    }
+  }());
+
+  const testArr = new Array(999999).fill(0).map(v => random100());
+
+
+  console.time("无缓存");
+  testArr.map(v => factorial(v));
+  console.timeEnd("无缓存");
+
+  console.time("有缓存");
+  testArr.map(v => mult1(v));
+  console.timeEnd("有缓存");
+
+
+  function random100() {
+    return Math.floor(Math.random() * 99) + 1
+  }
+
+
+</script>
+</body>
+</html>

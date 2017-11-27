@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        @media screen and (min-width: 751px) {
+            html, body {
+                min-height: 3840px;
+                min-width: 1200px;
+                height: 100%;
+                width: 100%;
+            }
+
+            body {
+                background: url("images/1/厚待生活每一部分pc.jpg") no-repeat center;
+            }
+
+            .content {
+                width: 100%;
+                height: 100%;
+                padding-top: 1962px;
+
+            }
+
+            .pc .btn1, .pc .btn2, .pc .btn3 {
+                margin: 0 auto 0;
+                width: 588px;
+                height: 70px;
+                background: #000;
+                opacity: 0.5;
+            }
+
+            .pc .btn1 {
+                margin-bottom: 412px;
+            }
+
+            .pc .btn2 {
+                margin-bottom: 425px;
+            }
+
+            .app {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 750px) {
+            .content {
+                position: relative;
+            }
+
+            .content > img {
+                display: block;
+                width: 100%;
+            }
+
+            .app .btn1, .app .btn2, .app .btn3 {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                -o-transform: translateX(-50%);
+                transform: translateX(-50%);
+
+                width: 78%;
+                padding-top: 10%;
+                background: #000;
+                opacity: 0.5;
+            }
+
+            .app .btn1 {
+                margin-top: 222%;
+            }
+            .app .btn2 {
+                margin-top: 286%;
+            }
+            .app .btn3 {
+                margin-top: 352%;
+            }
+
+            .pc {
+                display: none;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="content app">
+    <img src="images/1/厚待生活每一部分移动.jpg" alt="">
+    <div class="btn1"></div>
+    <div class="btn2"></div>
+    <div class="btn3"></div>
+</div>
+<div class="content pc">
+    <div class="btn1"></div>
+    <div class="btn2"></div>
+    <div class="btn3"></div>
+</div>
+<script>
+  /**
+   * pc图整张做背景 设置min-height   设置min-width 能正常显示 主要内容
+   * app 使用图片 宽度=可视区域的宽度
+   * */
+
+
+
+
+</script>
+</body>
+</html>

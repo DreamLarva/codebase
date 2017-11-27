@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <style>
+        #b_clip{
+            border:50px dashed black;
+            width: 500px;height:500px;
+            padding:50px;
+            background-image: url(img/1.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            /*从什么位置开始绘制背景
+            可选的位置 有padding-box context-box border-box(默认) 背景图片默认是从border开始绘制的
+            */
+            background-origin:padding-box;
+            /*裁剪背景图片*/
+            /*可选的有padding-box context-box border-box*/
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<div id="b_clip">
+ 进度条的上线层变化用的就是 background-clip
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //es5 寄生组合继承
+    /*function object(o) {
+     function F() { // 借用一个函数的prototype
+     }
+
+     F.prototype = o;
+     return new F();
+     }
+     function inheritPrototype(subType, superType) {
+     var prototype = object(superType.prototype);  //创建对象
+     prototype.constructor = subType;              //增强对象
+     subType.prototype = prototype;                //指定对象
+     }
+
+
+     function Father(a, b) {
+     this.a = a;
+     this.b = b;
+     }
+     Father.prototype.c = function () {
+     console.log(this.a, this.b)
+     };
+
+     inheritPrototype(Child, Father);
+
+     function Child(a, b, d) {
+     Father.call(this, a, b);
+     this.d = d
+     }
+     Child.prototype.e = function () {
+     console.log(this.a, this.b, this.d)
+     };*/
+
+    //es6
+    class Father {
+        constructor(a, b) {
+            this.a = a;
+            this.b = b;
+        }
+
+        c() {
+            console.log(this.a, this.b)
+        };
+
+    }
+
+    class Child extends Father {
+        constructor(a, b, d) {
+            super(a, b);
+            this.d = d
+        }
+
+        e() {
+            console.log(this.a, this.b, this.d)
+        }
+    }
+
+    var obj = new Child(1, 2, 3);
+    console.log(obj)
+
+
+    for (let key in obj) {  // 包含原型链的循环
+        console.log(key, obj[key])
+    }
+
+    for (let key in obj) {  // 不包含原型链的循环
+        if (obj.hasOwnProperty(key)) {
+            console.log(key, obj[key])
+        }
+    }
+
+</script>
+</body>
+</html>

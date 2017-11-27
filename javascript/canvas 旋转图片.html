@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+</head>
+<body>
+
+<img src="新手包15_07.jpg" alt="" id="img" >
+<canvas id="canvas"></canvas>
+<canvas id="canvas1"></canvas>
+
+<script>
+  $(function(){
+//    $("#img").load(function(){
+//      var img = document.getElementById("img")
+//      var imgCanvas = document.getElementById("canvas") //document.createElement("canvas")
+//      imgContext = imgCanvas.getContext("2d")
+//      imgCanvas.width = img.height;
+//      imgCanvas.height = img.width;
+//      imgContext.translate(imgCanvas.width/2,imgCanvas.height/2);
+//      imgContext.rotate(90 * Math.PI / 180);//旋转90度
+//      imgContext.drawImage(img,-img.width/2,-img.height/2,img.width ,img.height);
+//      var storage = imgCanvas.toDataURL("image/png")
+//      $("#img").attr("src",storage)
+//    })
+    $("#img").click(function(){
+      var img = document.getElementById("img")
+
+//      var imgCanvas = document.getElementById("canvas") //document.createElement("canvas")
+      var imgCanvas = document.createElement("canvas")
+      imgContext = imgCanvas.getContext("2d")
+      imgCanvas.width = img.height;
+      imgCanvas.height = img.width;
+      imgContext.translate(imgCanvas.width/2,imgCanvas.height/2);
+      imgContext.rotate(90 * Math.PI / 180);//旋转90度
+      imgContext.drawImage(img,-img.width/2,-img.height/2,img.width ,img.height);
+//      console.log(storage)
+      var storage = imgCanvas.toDataURL("image/png")
+     $("#img").attr("src",storage)
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

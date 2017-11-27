@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+	/**
+	 * @param {Date}    date    需要格式化的日期 需要是Date对象
+	 * @param {String}  format  希望的目标的格式
+	 * @example (new Date(),'yyyy月M月d日') ->  2017年9月6日
+	 * @return {String}
+	 * */
+	function formatDate(date, format) {
+		function paddNum(num, digit) { //需要补0的数 补完0后的位数
+			num += "";
+			var difference = digit - num.length;
+			for (var i = 0; i < difference; i++) {
+				num = "0" + num
+			}
+			return num
+		}
+		/**
+         * 代码取自jquery UI
+		 * 规范为在上述描述中，需要重点关注两个方面：
+		 * 1、每个日历星期从星期一开始，星期日为第七天。
+		 * 2、以1月4日所在的那个星期为当年的第一个星期。
+		 *
+		 * 如果1月4日为周一，则，1,2,3号是去年的最后一周。
+		 * 如果1月4日为周二，则，1,2号是去年的最后一周。
+		 * 如果1月4日为周三，则，1号为去年的最后一周。
+		 * 如果1月4日为周四，则，周一即为开始。
+		 * 如果1月4日为周五，则，侵占去年的最后一天。
+		 * 如果1月4号为周六，则，侵占去年的最后两天。
+		 * 如果1月4日为周日，则，侵占去年的最后三天。
+		 * @param {Date} date    需要格式化的日期 需要是Date对象
+		 * */
+		function iso8601Week(date) {
+			var time, checkDate = new Date(date.getTime());
+
+			// Find Thursday of this week starting on Monday
+			checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
+
+			time = checkDate.getTime();
+			checkDate.setMonth(0); // Compare with Jan 1
+			checkDate.setDate(1);
+			return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
+		}
+
+		//指定格式字符
+		var cfg = {
+			yyyy: date.getFullYear() //年 : 4位
+			, yy: date.getFullYear().toString().substring(2)//年 : 2位
+			, M : date.getMonth() + 1 //月 : 如果1位的时候不补0
+			, MM: paddNum(date.getMonth() + 1, 2) //月 : 如果1位的时候补0
+			, d : date.getDate() //日 : 如果1位的时候不补0
+			, dd: paddNum(date.getDate(), 2)//日 : 如果1位的时候补0
+			, w : iso8601Week(date) // 周 几年的第几周
+			, hh: paddNum(date.getHours(), 2) //时
+			, mm: paddNum(date.getMinutes(), 2) //分
+			, ss: paddNum(date.getSeconds(), 2) //秒
+			, qqq: paddNum(date.getMilliseconds(), 3) //毫秒 补0
+			, q: date.getMilliseconds() //毫秒不补0
+		};
+		format || (format = "yyyy-MM-dd hh:mm:ss qqq");
+		return format.replace(/([a-z])(\1)*/ig, function (m) {
+			return cfg[m];
+		});
+	}
+
+	console.time("moment")
+    formatDate(new Date())
+    console.timeEnd("moment")
+</script>
+</body>
+</html>

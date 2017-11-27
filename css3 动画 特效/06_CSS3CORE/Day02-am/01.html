@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	div{
+		width:200px;
+		height:200px;
+		border:1px solid #ddd;
+		margin:0 auto;
+		position:absolute;
+		top:200px;
+		left:350px;
+	}
+	#d1{
+		border:1px dotted #333;
+	}
+	#d2{
+		border:none;
+		background:rgba(255,0,0,0.5);
+		/*实现2d位移*/
+		/*transform:translatex(100px);
+		-webkit-transform:translate(100px);*/
+
+		/*实现2d缩放*/
+		/*transform:scale(0.2);*/
+
+
+		/*更新转换原点*/
+		/*transform-origin:0% 0%;
+		/*2d旋转*/
+		/*transform:rotate(45deg);*/
+
+		/*2d倾斜*/
+		transform:skew(45deg,30deg);
+	}
+
+  </style>
+ </head>
+
+ <body>
+	<div id="d1"></div>
+	<div id="d2">div中的元素</div>
+ </body>
+</html>

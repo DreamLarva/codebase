@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    var name, value, data = {};
+    var str = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=%E5%A4%A7%E5%AE%B6%E5%A5%BD%2F12%40&oq=javascript%20encodeuricomponent&rsv_pq=b0d8b2f200028fee&rsv_t=2fbaJm2o90J8hDOp0g8LpJB%2BbZesFxHJFWmmUClg0PTN%2B%2BXvCaUgNa3UzyQ&rqlang=cn&rsv_enter=1&inputT=6930&rsv_sug3=27&rsv_sug1=18&rsv_sug7=100&rsv_sug2=0&rsv_sug4=8142";
+    //var str=location.href; //取得整个地址栏
+    var num = str.indexOf("?");
+    str = str.substr(num + 1); //截取地址栏 之后的所有参数
+    var arr = str.split("&"); //各个参数切数组里
+
+    // 获取全部的内容 并且生产一个对象
+
+    for ( var i = 0; i < arr.length; i++ ) {
+        num = arr[ i ].indexOf("=");
+        if ( num > 0 ) {
+            name = arr[ i ].substring(0, num);
+            value = decodeURIComponent(arr[ i ].substr(num + 1)); //解码
+            data[ name ] = value;
+        }
+    }
+    console.log(data);
+
+
+    // 获取特定的内容
+    function getUrlParam( name ) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if ( r !== null ) return decodeURIComponent(r[ 2 ]);
+        return null;
+    }
+
+
+    //    ECMAScript v3 已从标准中删除了 unescape() 函数，并反对使用它，
+    //    因此应该用 decodeURI() 和 decodeURIComponent() 取而代之。
+
+</script>
+</body>
+</html>

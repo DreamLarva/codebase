@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+
+<script>
+    // 1.Array.from
+    let arrLike = {
+        "0": "a",
+        "1": "b",
+        "2": "c",
+        length:3
+    }
+
+    // es5
+    console.log([].slice.call(arrLike))
+    // es6
+    console.log(Array.from(arrLike))
+
+    var li = document.querySelectorAll("li")
+    console.log(Array.from(li))
+
+    // ... 也能将内容转换成数组
+/*    (function foo(){
+        var arr = [...arguments]
+        console.log(arr)
+        console.log(Array.isArray(arr) )
+    }(1,2,3,4,5,6,7,8))*/
+
+    console.log(Array.from(document.getElementsByTagName("li")).map(function(v,i,a){return v.innerHTML}))
+</script>
+</body>
+</html>

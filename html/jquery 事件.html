@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+  <style>
+    .over{
+      background:yellow;
+    }
+  </style>
+</head>
+<body>
+<div id="d1" style="width:100px;height: 100px;border:1px solid black;"></div>
+<input type="text">
+<button value="btn" id="btn"></button>
+<p onclick="$(this).toggleClass('over')">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem blanditiis dolores eius itaque labore odit quo voluptatibus. Aliquam animi facere ipsam labore magnam quos tenetur. At consequuntur cupiditate earum inventore?</p>
+<script>
+  $(function(){
+    $("body").mousedown(function(e){
+     console.log(e.which)
+    })
+    $("input").keyup(function(e){
+      console.log(e.which)
+    })
+    $("#btn").click(function(){
+      alert(123)
+    })
+    $("#d1")
+      .bind("mouseover mouseout",function(){$(this).toggleClass("over")})
+      .bind("mouseover",function(){
+        console.log(  $(this).is(":animated"))
+        $(this).is(":animated") ? $(this).stop(true).hide(1000) :$(this).hide(1000)})
+      .bind("mouseout",function(){
+        console.log(  $(this).is(":animated"))
+        $(this).is(":animated") ? $(this).stop(true).show(1000) :$(this).show(1000)})
+      .bind("click",function(){alert("none")})
+      .bind("click.b1",function(){alert(111)})
+      .bind("click.b2",function(){alert(222)})
+  })
+
+</script>
+</body>
+</html>

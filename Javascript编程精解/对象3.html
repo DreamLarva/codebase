@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<pre id="content"></pre>
+<script>
+    var plan = [ "############################",
+        "#      #    #      o      ##",
+        "#                          #",
+        "#          #####           #",
+        "##         #   #    ##     #",
+        "###           ##     #     #",
+        "#           ###      #     #",
+        "#   ####                   #",
+        "#   ##       o             #",
+        "# o  #         o       ### #",
+        "#    #                     #",
+        "############################" ];
+
+    // 随机世界
+    function createPlan( width, height, rateOfCreature,rateOfWallFollower ,rateOfWall ) {
+        return new Array(height).fill([]).map(( v, i, a ) => {
+            if ( i === 0 || i === a.length - 1 ) {
+                return new Array(width).fill("#")
+            } else {
+                let line = new Array(width).fill(" ");
+                line = line.map(( v, i, a ) => {
+                    if ( Math.random() <= rateOfCreature ) {
+                        return "o"
+                    } else if ( Math.random() <= rateOfWall ) {
+                        return "#"
+                    }else if(Math.random()<= rateOfWallFollower){
+                        return "s"
+                    } else {
+                        return v
+                    }
+                });
+                line[ 0 ] = line[ line.length - 1 ] = "#";
+                return line
+            }
+        });
+    }
+
+
+    // 坐标类
+    function Vector( x, y ) {
+        this.x = x;
+        this.y = y;
+    }
+    Vector.prototype.plus = function ( other ) {
+        return new Vector(this.x + other.x, this.y + other.y)
+    };
+
+    // 储存所有内容的矩阵
+    function Grid( width, height ) {
+        this.space = new Array(width * height);
+        this.width = width;
+        this.height = height;
+    }
+
+    // 传入一个坐标向量 判断是不是在局矩阵中
+    Grid.prototype.isInside = function ( vector ) {
+        return vector.x >= 0 && vector.x < this.width &&
+            vector.y >= 0 && vector.y < this.height
+    };
+
+    // 查找目标位置的内容
+    Grid.prototype.get = function ( vector ) {
+        return this.space[ vector.x + this.width * vector.y ]
+    };
+    // 设置目标位置的内容
+    Grid.prototype.set = function ( vector, value ) {
+        this.space[ vector.x + this.width * vector.y ] = value
+
+    };
+    // context 为上文 , f 为循环调用的函数
+    Grid.prototype.forEach = function ( f, context ) {
+        for ( var y = 0; y < this.height; y++ ) {
+            for ( var x = 0; x < this.width; x++ ) {
+                var value = this.space[ x + y * this.width ];
+                if ( value !== null ) {
+                    f.call(context, value, new Vector(x, y))
+                }
+            }
+        }
+    };
+
+    //    var grid = new Grid(5,5);
+    //    console.log(grid.get(new Vector(1,1)));
+    //    grid.set(new Vector(1,1),"X");
+    //    console.log(grid.get(new Vector(1,1)))
+    // 移动的方向 移动的偏移量
+    var directions = {
+        "n": new Vector(0, -1),
+        "ne": new Vector(1, -1),
+        "e": new Vector(1, 0),
+        "se": new Vector(1, 1),
+        "s": new Vector(0, 1),
+        "sw": new Vector(-1, 1),
+        "w": new Vector(-1, 0),
+        "nw": new Vector(-1, -1),
+    };
+
+    // 随机返回一个数组的元素
+    function randomElement( array ) {
+        return array[ Math.floor(Math.random() * array.length) ]
+    }
+    // 制作一个储存了所有方向的数组
+    var directionNames = "n ne e se s sw w nw".split(" ");
+
+    // 生物类
+    function BouncingCritter() {
+        // 初始的时候随机面朝一个方向
+        this.direction = randomElement(directionNames)
+    }
+    BouncingCritter.prototype.act = function ( view ) {
+        if ( view.look(this.direction) !== " " ) {
+            // 查看有哪些位置可以移动
+            this.direction = view.find(" ") || "s"
+        }
+        return { type: "move", direction: this.direction };
+    };
+
+    // 返回 方向dir 顺时针旋转45%*n 度后的方向
+    function dirPlus(dir,n){
+        var index = directionNames.indexOf(dir);
+        return directionNames[(index + n + 8) %8]
+    }
+
+    // 贴墙走的生物类
+    function WallFollower(){
+        this.dir = "s"
+    }
+    WallFollower.prototype.act = function ( view ) {
+        var start = this.dir;
+        if(view.look(dirPlus(this.dir,-3)) !== " "){
+            start = this.dir = dirPlus(this.dir,-2);
+        }
+        while(view.look(this.dir) !== " "){
+            this.dir = dirPlus(this.dir,1);
+            if(this.dir === start){
+                break
+            }
+        }
+        return {type:"move",direction:this.dir}
+    };
+
+
+
+    /**
+     * @param legend    图例(也就是 一个对象包含了各个构造函数的对象)
+     * @param ch        待解析成内容的字符串
+     */
+    function elementFromChar( legend, ch ) {
+        if ( ch === " " ) {
+            return null
+        }
+        var element = new legend[ ch ]();
+        // 保存字符串
+        element.originChar = ch;
+        return element
+    }
+    /**
+     * @param legend    字符串组成的数组表示世界中的内容
+     * @param map        世界的内容 由世界高度为 这个数组的length 元素的字符串的length为世界的宽
+     */
+    function World( map, legend ) {
+        var grid = new Grid(map[ 0 ].length, map.length);
+        this.grid = grid;
+        this.legend = legend;
+
+        map.forEach(function ( line, y ) {
+            for ( var x = 0; x < line.length; x++ ) {
+                grid.set(new Vector(x, y), elementFromChar(legend, line[ x ]))
+            }
+        })
+    }
+    // 与elementFromChar相反  返回该位置的内容 代表的 字符
+    function charFromElement( element ) {
+        if ( element === null ) {
+            return " "
+        } else {
+            return element.originChar
+        }
+    }
+
+    // 显示内容
+    World.prototype.toString = function () {
+        var output = "";
+        for ( var y = 0; y < this.grid.height; y++ ) {
+            for ( var x = 0; x < this.grid.width; x++ ) {
+                var element = this.grid.get(new Vector(x, y));
+                output += charFromElement(element)
+            }
+            output += "\n";
+        }
+        return output
+    };
+
+    // 让所有world中有act方法的单位进行一次动作
+    // act数组 维护已经行动过的单位 (避免移动到一个还未被遍历的位置 等到遍历到的时候又 再次行动)
+    World.prototype.turn = function () {
+        var acted = [];
+
+        this.grid.forEach(function ( critter, vector ) {
+            if ( critter.act && acted.indexOf(critter) === -1 ) {
+                acted.push(critter);
+                this.letAct(critter, vector)
+            }
+        }, this)
+
+    };
+
+    // 进行行动
+    World.prototype.letAct = function ( critter, vector ) {
+        var action = critter.act(new View(this, vector));
+        if ( action && action.type === "move" ) {
+            var dest = this.checkDestination(action, vector);
+            if ( dest && this.grid.get(dest) === null ) {
+                this.grid.set(vector, null);
+                this.grid.set(dest, critter)
+            }
+        }
+    };
+    World.prototype.checkDestination = function ( action, vector ) {
+        if ( directions.hasOwnProperty(action.direction) ) {
+            var dest = vector.plus(directions[ action.direction ]);
+            if ( this.grid.isInside(dest) ) {
+                return dest
+            }
+        }
+    };
+
+    function View( world, vector ) {
+        this.world = world;
+        this.vector = vector;
+    }
+    View.prototype.look = function ( dir ) {
+        var target = this.vector.plus(directions[ dir ]);
+        if ( this.world.grid.isInside(target) ) {
+            return charFromElement(this.world.grid.get(target))
+        } else {
+            return "#" //todo
+        }
+    };
+    View.prototype.findAll = function ( ch ) {
+        var found = [];
+        for ( var dir in directions ) {
+            if ( this.look(dir) === ch ) {
+                found.push(dir)
+            }
+        }
+        return found
+    };
+    View.prototype.find = function ( ch ) {
+        var found = this.findAll(ch);
+        if ( found.length === 0 ) {
+            return null
+        } else {
+            return randomElement(found)
+        }
+    };
+
+
+    function Wall() {
+
+    }
+
+
+    var randomPlan = createPlan(150, 50, 0.01, 0.01,0.1);
+
+    var world = new World(randomPlan, {
+        "#": Wall,
+        "o": BouncingCritter,
+        "s": WallFollower,
+    });
+
+
+    function start() {
+        world.turn()
+        $("#content").text(world.toString())
+
+    }
+    setInterval(start, 1000 / 15)
+
+</script>
+</body>
+</html>

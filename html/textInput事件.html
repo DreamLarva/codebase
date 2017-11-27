@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+<input type="text" id="text" pattern="[a-zA-z]">
+<input type="number" id="num">
+<input type="tel" id="tel">
+    <input type="submit">
+</form>
+<script>
+    window.onload = function () {
+        var text = document.getElementById("text")
+        var num = document.getElementById("num")
+        text.addEventListener("keypress",function (event) {
+            alert(event.key)
+            alert(event.charCode)
+            console.log(event)
+
+        })
+        num.addEventListener("textInput",function (event) {
+
+            alert(event.data);
+            console.log(event.data);
+        })
+        tel.addEventListener("textInput",function (event) {
+
+            alert(event.data);
+            console.log(event.data);
+        })
+    }
+
+
+</script>
+</body>
+</html>

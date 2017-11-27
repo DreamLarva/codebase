@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	#nav a{
+		padding:3px 10px;
+		background:#666;
+		color:#fff;
+		font-weight:bold;
+	}
+	#showImg{
+		overflow:hidden;
+		width:400px;
+		height:350px;
+		border:1px solid #333;
+		text-align:center;
+		margin-top:20px;
+		position:relative;
+	
+	} 
+	#showImg img{
+		display:none;
+	}
+	#showImg img:nth-child(1):target{
+		position:absolute;
+		display:block;
+		-webkit-animation:from_left 2s linear;
+	}
+	#showImg img:nth-child(2):target{
+		position:absolute;
+		display:block;
+		-webkit-animation:from_bottom 2s linear;
+	}
+	#showImg img:nth-child(3):target{
+		position:absolute;
+		display:block;
+		
+		-webkit-animation:from_z 2s linear;
+	}
+	#showImg img:nth-child(4):target{
+		position:absolute;
+		display:block;
+		
+		-webkit-animation:from_z_r 2s linear;
+	}
+	
+
+
+	@-webkit-keyframes from_z_r{
+		from{
+			transform:scale(0,0) rotateZ(0deg);
+		}
+		to{
+			transform:scale(1,1) rotateZ(360deg);
+		}
+	}
+
+	
+	@-webkit-keyframes from_z{
+		from{
+			transform:scale(0,0)	;
+		}
+		to{
+			transform:scale(1,1);
+		}
+	}
+
+
+
+
+	/* @-webkit-keyframes from_bottom{
+		from{
+			top:700px;
+		}
+		to{
+			top:0px;
+		} 
+	}*/
+	@-webkit-keyframes from_bottom{
+		from{
+			transform:translate(0px,750px)	;
+		}
+		to{
+			transform:translate(0px,350px)	;
+		}
+	}
+
+
+	@-webkit-keyframes from_left{
+	from{
+		
+		transform:translate(-350px,0px)	;
+		}
+	to{
+		
+		transform:translate(0px,0px)	;
+		}
+	}
+  </style>
+ </head>
+
+ <body>
+	<div id="nav">
+		<a href="#img1">img1</a>
+		<a href="#img2">img2</a>
+		<a href="#img3">img3</a>
+		<a href="#img4">img4</a>
+	</div>
+	<div id="showImg">
+		<img id="img1" src="images/p001.jpg" />
+		<img id="img2" src="images/p002.jpg" />
+		<img id="img3" src="images/p003.jpg" />
+		<img id="img4" src="images/p004.jpg" />
+	</div>
+ </body>
+</html>

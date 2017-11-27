@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <style>
+        header, footer {
+            height: 50px;
+            width: 100%;
+            position: fixed;
+            background: dodgerblue;
+            text-align: center;
+        }
+
+        header {
+            top: 0;
+            left: 0;
+        }
+
+        footer {
+            bottom: 0;
+            left: 0;
+        }
+        .d1{
+            height: 5000px;
+        }
+
+
+    </style>
+</head>
+<body>
+<header>header</header>
+<div class="d1"></div>
+<footer>footer</footer>
+<script>
+  positionFixed();
+  function positionFixed(a) {
+    $(window).scroll(function () {
+      console.log($("footer").scrollTop())
+      var scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      var window_height = $(window).height() + $(window).scrollTop();
+
+      if (scrollHeight <= window_height+1) {
+        $("footer").css({'position': 'static'})
+      } else {
+        $("footer").css({'position': 'fixed'})
+      }
+    })
+  }
+</script>
+</body>
+</html>

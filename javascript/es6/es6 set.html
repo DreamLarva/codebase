@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<script>
+    // Set 类似于数组,但是成员的值是唯一的,没有重复的值 且 最多只有1个NaN*/
+    /*{
+        // 内部执行的是 === 操作 严格相等
+        let s = new Set();
+        let arr = [1,2,3,4,"a","1",[],{},NaN,NaN];
+        arr.map(x=>s.add(x));
+        for(i of s){
+            console.log(i)
+        }
+    }*/
+
+   /* {
+        let set = new Set([1,2,3,4]);
+        console.log([...set]);
+        console.log(set.size)
+
+        let items = new Set([...document.querySelectorAll("li")]);
+        // 类似于
+        // [...document.querySelectorAll("li")].forEach(li=> items.add(li))
+
+        console.log(items)
+    }*/
+
+    // Set的属性 和 方法
+    /*{
+        let s = new Set();
+        // 原型方法constructor : 构建set
+        // 原型方法size : 返回set的长度
+        // add 方法不会添加重复的值
+        s.add(1);
+        s.add(1);
+        s.add(2);
+        // delete 返回布尔值 表示是否删除成功
+        s.delete(1);
+        // has 返回一个布尔值 set中是否包含这个值
+        s.has(2);
+        // clear 清空整个set
+
+        let s1 = new Set([1,2,3,4,5,6,6]);
+        console.log(s1);
+        console.log([...s1]);
+        console.log(Array.from(s1))
+    }*/
+
+    // 支持链式调用 只有add 方法
+    /*{
+      let set = new Set([1,2,3]);
+      set.add(4)
+        .add(2)
+
+      console.log(set)
+    }*/
+
+
+    // 数组的map 和 filter 方法可以用于set
+    /*{
+        let a = new Set([1,2,3]);
+        let b = new Set([4,3,2]);
+        // 交集 intersection
+        let intersection = new Set([...a,...b]);
+        console.log("交集",intersection);
+        // 并集 union
+        let union = new Set([...a].filter(x=>b.has(x)));
+        console.log("并集",union);
+        // 差集 Difference
+        let  difference = new Set([...a].filter(x=>!b.has(x)));
+        console.log("差集",difference)
+    }*/
+
+    // 遍历操作
+    /*{
+      // key()     : 返回键名的遍历器
+      // values()  : 返回键值遍历器
+      // entries() : 返回健值对的遍历器
+      // forEach() : 使用回调函数遍历每个成员
+      // 以上方法 都用for of 遍历
+      let set =  new Set(["red","green","blue"])
+      for(let key of set.keys()){
+        // console.log(key) // red green blue
+      }
+      for(let val of set.values()){
+        // console.log(val) // red green blue
+      }
+      for(let entry of set.entries()){
+        // console.log(entry) // ["red","red"] ["green","green"] ["blue","blue"]
+      }
+
+      // set 结构默认的可遍历 其默认的遍历生成器函数就是他的 values 方法
+      // console.log(Set.prototype[Symbol.iterator] === Set.prototype.values ); // true
+
+      // 设置了 [Symbol.iterator] 在 new 出来的实例 就可以调用对应的方法 可以用[...]展开 或者 for of 遍历
+      for(let item of set){
+        // console.log(item) // red green blue
+      }
+      // console.log([...set]); // ["green","red","blue"]
+
+      // set.forEach((key,value)=>console.log(key,value)) // red red    green green    blue blue
+
+    }*/
+
+    // 数组快速去重
+    /*{
+        let arr = [1,"1",1,2,"2",1,1,2,3,4,2,3,1];
+        let filterArr = [...new Set(arr)]
+      console.log(filterArr)
+    }*/
+
+
+    /**
+     * Weakset 基本与set相同
+     * 但是所有的成员都是对象,且不能遍历
+     * 作用:储存那些可能会被删除的对象(页面的dom节点)
+     * */
+   /* {
+        let weakSet = new WeakSet([...document.querySelectorAll("li")]);
+        let set = new Set([...document.querySelectorAll("li")]);
+        let d = document.querySelectorAll("li");
+        console.log(s,d);
+        console.log("删除一个节点");
+        document.querySelectorAll("ul")[0].removeChild(document.querySelectorAll("li")[0]);
+        console.log(weakSet); // 4个成员 虽然没有size
+        console.log(d,d.length); // 5个成员
+        console.log(set.size) // 5个成员
+    }*/
+
+    // WeakSet 不能遍历,是因为所有的成员都是弱引用,随时可能消失,很可能刚刚遍历结束,成员就去不到了.
+    // WeakSet 的一个用处就能试储存dom节点,而不担心这些节点从文档移除时会引发内存泄露
+    /*{
+      let a = {};
+      let b = {};
+      let w = new WeakSet([window]);
+      w.add(a);
+      console.log(w.has(a));
+      w.delete(window);
+      console.log(w.has(window))
+    }*/
+  /*  {
+      const foos = new WeakSet(); // 记录对象
+      class Foo{
+        constructor(){
+          foos.add(this) // 添加新生成的实例
+        }
+        method(){
+          if(!foos.has(this)){ // 如果记录中没有 本实例 说明是在 Class的Prototype 上 调用方法
+            throw new TypeError('Foo,prototype.method 只能在foo的实例上调用');
+          }
+         console.log("method")
+        }
+      }
+      // 这里设置WeakSet的好处就是,数组doos对视力的引用不会被计入 内存回收机制,所以删除实例的时候不用开率foos
+
+      let foo = new Foo();
+      foo.method()
+      Foo.prototype.method() // 报错
+
+    }*/
+
+
+</script>
+</body>
+</html>

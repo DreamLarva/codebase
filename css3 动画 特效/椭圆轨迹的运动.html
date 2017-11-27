@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*@keyframes bounce { 50% { transform: translateX(200px);}}*/
+
+        @keyframes bounce1 {
+            50%  {transform: translateY(-200px) translateX(100px)}
+             }
+        /*.div1{*/
+            /*animation: bounce 2.5s infinite ease-in;*/
+            /*width: 10px;*/
+            /*height:10px;*/
+            /*border:1px solid black;*/
+        /*}*/
+        .div2{
+            animation: bounce1 2.5s infinite ease-out;
+            width: 10px;
+            height:10px;
+            border:1px solid black;
+        }
+        .pos{
+            position: relative;
+            left:200px;
+            top: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="pos div1 div2"> </div>
+
+
+
+</body>
+</html>

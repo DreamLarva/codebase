@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function output(...args){
+        console.log(args)
+        return [...args]
+    }
+    setTimeout(output,1000,1,2,3,4,5)
+
+</script>
+</body>
+</html>

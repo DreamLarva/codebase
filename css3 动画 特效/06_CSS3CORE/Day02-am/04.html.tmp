@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	#stage{
+		width:800px;
+		height:600px;
+		margin:0 auto;
+		background-color:rgba(255,128,255,0.5);
+		border:1px solid #ddd;
+		position:relative;
+		-webkit-perspective:1200px;
+		/*被嵌套元素的显示模式*/
+		transform-style:preserve-3d;
+		transform:perspective(9999px) rotatex(-20deg) rotatey(0deg);
+	}
+	#stage div{
+		width:100px;
+		height:60px;
+		background:red;
+		position:absolute;
+		left:350px;
+		top:270px;
+	}
+	#stage div:nth-child(1){
+		transform:rotatey(0deg) translatez(200px);
+	}
+
+	#stage div:nth-child(2){
+		transform:rotatey(60deg) translatez(200px);
+	}
+
+	#stage div:nth-child(3){
+		transform:rotatey(120deg) translatez(200px);
+	}
+
+	#stage div:nth-child(4){
+		transform:rotatey(180deg) translatez(200px);
+	}
+
+	#stage div:nth-child(5){
+		transform:rotatey(240deg) translatez(200px);
+	}
+
+	#stage div:nth-child(6){
+		transform:rotatey(300deg) translatez(200px);
+	}
+  </style>
+ </head>
+
+ <body>
+	<div id="stage">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+	</div>
+ </body>
+</html>

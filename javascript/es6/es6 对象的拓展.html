@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+   /* {
+        // 属性的简洁表示法
+        let a = 1,b = 2;
+        let obj = {a,b,
+            cons(){
+                console.log(a,b)
+            }
+        };
+        console.log(obj);
+
+        let c = function (x,y){
+            return {x,y}
+        };
+        console.log(c(1,2))
+    }*/
+   /*{
+       var cart = {
+           _wheels: 4,
+           get wheels() {
+               return this._wheels;
+           },
+           set wheels(values) {
+               console.log("change");
+               this._wheels = values;
+           }
+       };
+       cart.wheels = 123;
+
+     /!*  var cart = {}
+       Object.defineProperty(cart,"wheels" ,{
+                   _wheels: 4,
+                   get :function() {
+                       return this._wheels;
+                   },
+                   set :function(values) {
+                       console.log("change");
+                       this._wheels = values;
+               }});
+       cart.wheels = 123;*!/
+
+   }*/
+   /*{
+       //对象中方法的name
+       let person ={
+           sayName(){
+               console.log("sayName")
+           },
+           get firstName(){
+               return "Agent47"
+           }
+       }
+       console.log(person.sayName.name)
+       console.log(person.firstName.name) // 未实现
+   }*/
+
+       // Object.assign 复制对象中所有的可以枚举的属性到新的对象中
+       let target = {a:1};
+       let source1 = {a:2,e:function(){}};
+       let source2 = {a:3,b:2,c:3};
+       let Source3 = function(){
+           this.f ="f"
+       };
+       Source3.prototype.g = function(){}
+       let source3 = new Source3()
+       Object.assign(target,source1,source2,source3);
+       console.log(target)
+       console.log(target.g) // prototype 中的内容并不是可枚举的
+
+
+       //浅克隆
+       let shadowClone =  function(origin){
+           return Object.assign({},origin)
+       }
+       //深克隆
+       let deepClone = function (origin) {
+           let originProto = Object.getPrototypeOf(origin)
+           return Object.assign(Object.create(originProto),origin)
+       }
+       console.log(shadowClone(source3).g)
+         let deep = deepClone(source3)
+       console.log(deep.g,deep.f)
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

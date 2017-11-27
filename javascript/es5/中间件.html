@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 中间件的实现类似redux中的applyMiddleware
+     * 核心思想就是先保存最原始的方法
+     * 然后将中间件弄成 中间件1(中间件2(中间件3(原始方法)))
+     * 一次确定使用的中间件
+     * */
+
+
+    function compose(...funcs){
+        return arg => funcs.reduceRight((composed,f)=>f(composed),arg)
+    }
+
+
+    function applyMiddleware(...middlewares){
+        return (next) =>(str)=>{
+            let store = next(str);
+            let con = store.con;
+            let chain = [];
+
+            let middlewareAPI = {  // 这里要写成闭包来保证每次取到的值都是最新的,因为js的参数是值传递一次就定型了,所以一定要用方法
+                con:(str) =>con(str),
+                text:()=>store.text
+            };
+
+            chain = middlewares.map(middleware => middleware(middlewareAPI));
+            con = compose(...chain)(store.con);
+            return con
+        };
+    }
+
+    function co(str) {
+        return {
+            text:str,
+            con:console.log
+        }
+    }
+
+    let mid1 = store => next =>str =>{
+        console.log(store.text());
+        console.log("mid1-start");
+        next(str);
+        console.log("mid1-end");
+    };
+
+    let mid2 = store => next =>str =>{
+        console.log(store.text());
+        console.log("mid2-start");
+        next(str);
+        console.log("mid2-end");
+    };
+
+    let a = applyMiddleware(mid1,mid2)(co)(111);
+
+    a("我要输出的内容")
+
+
+    console.log("-----------------------------");
+
+
+    /**
+     * 另一种中间件实现类似express koa
+     *
+     * 可以分次添加中间件
+     * */
+    function Middleware(){
+        this.cache = []
+    }
+    Middleware.prototype.use = function ( fn ) {
+        if(typeof fn !== 'function'){
+            throw 'middleware must be a function'
+        }
+        this.cache.push(fn);
+        return this
+    };
+
+    Middleware.prototype.next = function ( ...args ) {
+        if(this.middlewares && this.middlewares.length >0){
+            var ware = this.middlewares.shift();
+            ware.call(this,this.next.bind(this),...args)
+        }
+    };
+    Middleware.prototype.handleRequest = function (...args) {
+        this.middlewares = this.cache.map(function ( fn ) {
+            return fn
+        });
+        this.next(...args)
+    };
+
+    var middleware = new Middleware();
+    middleware.use(
+        function(next,...args){
+            console.log(args);
+            console.log("中间件1开始");
+            next();
+            console.log("中间件1结束")
+        });
+    middleware.use(
+        function(next){
+            console.log("中间件2开始");
+            next();
+            console.log("中间件2结束");
+
+        });
+    middleware.use(function(next){
+        console.log("中间件3开始");
+        console.log("中间件3结束");
+    });
+    middleware.use(
+        function(next){
+        console.log("中间件4开始");
+        next();
+        console.log("中间件4结束")
+        });
+    middleware.handleRequest({a:1,b:2});
+
+    console.log("-----------------------");
+
+
+
+
+    function validate(next,options ){
+        console.log('validate', options.data);
+        next(options);//通过验证
+    }
+    function send(next,options){
+        setTimeout(function(){//模拟异步
+            console.log('send', options.data);
+            options.url = 'www.baidu.com';//设置跳转的url
+            next(options);
+        }, 100);
+    }
+    function goTo(next,options){
+        console.log('goTo', options.url);
+    }
+
+    var submitForm = new Middleware();
+    submitForm
+        .use(validate)
+        .use(send)
+        .use(goTo);
+
+    submitForm.handleRequest({data:{name:'xiaoxiong', age: 20}});
+
+</script>
+</body>
+</html>

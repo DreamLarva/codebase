@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 将一个数组分成两份劲量相等的两份
+     * 1.其中一份最靠近数组的内容的总和的一半 那么另一份也是最靠近的
+     * 2.简化为离散背包问题
+     * 3.背包的最大负重是 总和的一半
+     * 4.每个物品的质量是 自己的值 重量也是自己的值
+     * */
+
+
+    function Knapsack( val, we, W ) {
+        var N = we.length; // 物品的数量
+        var V = [];
+        for ( let i = 0; i <= N; i++ ) {
+            V.push([]);
+            for ( let j = 0; j <= W; j++ ) {
+                V[ i ].push(0)
+            }
+        }
+
+        var preArr = new Array(W + 1).fill([ 0 ]); // 最优解列表上一行 对应 价值的数组
+        var curArr = [].concat(preArr);
+        for ( let item = 1; item <= N; item++ ) {
+
+            for ( let weight = 1; weight <= W; weight++ ) {
+                if ( we[ item - 1 ] <= weight ) {
+                    if ( val[ item - 1 ] + V[ item - 1 ][ weight - we[ item - 1 ] ] > V[ item - 1 ][ weight ] ) {
+
+                        curArr[ weight ] = [ ...new Set(preArr[ weight - we[ item - 1 ] ].concat(item)) ];
+//                        console.log(curArr.join(" "))
+
+
+                    }
+                    V[ item ][ weight ] = Math.max(val[ item - 1 ] + V[ item - 1 ][ weight - we[ item - 1 ] ], V[ item - 1 ][ weight ])
+
+                } else {
+                    V[ item ][ weight ] = V[ item - 1 ][ weight ]
+                }
+            }
+            preArr = [].concat(curArr); // 浅复制
+//            console.log(curArr.join(" "))
+
+        }
+        return {
+            maxValue: V[ V.length - 1 ][ V[ 0 ].length - 1 ],
+            item: curArr[ curArr.length - 1 ].slice(1).map(v=>--v)
+        }
+    }
+
+
+    //    var val = [ 10, 40, 30, 50 ];
+    //    var we = [ 5, 4, 6, 3 ];
+    //    var W = 10;
+
+    var val = [ 2, 4, 6, 2, 11, 323, 300, 45 ];
+    var we = [ 2, 4, 6, 2, 11, 323, 300, 45 ];
+
+    var W = parseInt(we.reduce(( pre, cur )=>pre + cur) / 2);
+    var result = Knapsack(val, we, W);
+    console.log(result.maxValue);
+    console.log(result.item);
+
+
+    const Sum = function ( arr ) {
+        return arr.reduce(( pre, cur )=>pre + cur)
+    }
+</script>
+</body>
+</html>

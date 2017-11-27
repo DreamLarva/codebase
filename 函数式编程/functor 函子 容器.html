@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/lodash-fp/0.10.4/lodash-fp.js"></script>
+</head>
+<body>
+<script>
+
+    // 将任意方法应用到 任意的函子上  pointfree 模式(不需要再估计 .方法的问题)
+    //  map :: Functor f => (a -> b) -> f a -> f b
+    var map = _.curry(function (f, functor) {
+        return functor.map(f);
+    });
+
+
+	/*{
+		function _match(reg, value) {
+			return value.match(reg)
+		}
+
+		var match = _.curry(_match);
+
+		// Maybe 函子 用于判断value的 和合法性
+		class Maybe {
+			constructor(x) {
+				this.__value = x;
+			}
+
+			static of(x) {
+				return new Maybe(x);
+			}
+
+			isNothing() {
+				return (this.__value === null || this.__value === undefined);
+			};
+
+			// 判断value的值是不是为空 如果不为空就像f函数应用到当前的函数上
+			map(f) {
+				return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));
+			}
+		}
+
+		console.log(Maybe.of("Malkovich Malkovich").map(match(/a/ig)));
+		//=> Maybe(['a', 'a'])
+
+		console.log(Maybe.of(null).map(match(/a/ig)));
+		//=> Maybe(null)
+
+		console.log(Maybe.of({name: "Boris"}).map(_.property("age")).map(_.add(10)));
+
+		console.log(Maybe.of({name: "Dinah", age: 14}).map(_.property("age")).map(_.add(10)))
+
+	}*/
+
+	/*{
+        // Maybe 函子 (相当于一个检测值得适当性)
+		class Maybe {
+			constructor(value) {
+				this.__value = value;
+			}
+
+			static of(value) {
+				return new Maybe(value)
+			}
+
+			isNothing() {
+				return (this.__value === null || this.__value === undefined);
+			}
+
+			map(f) {
+				return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value))
+			}
+		}
+
+
+
+
+		//  safeHead :: [a] -> Maybe(a)
+		var safeHead = function (xs) {
+			return Maybe.of(xs[0]);
+		};
+
+		var streetName = _.compose(map(_.property('street')), safeHead, _.property('addresses'));
+
+		console.log(streetName({addresses: []}));
+        // Maybe(null)
+
+		console.log(streetName({addresses: [{street: "Shady Ln.", number: 4201}]}));
+        // Maybe("Shady Ln.")
+
+	}*/
+
+	{
+		// IO 函子 用于包裹 又不作用的操作
+		var IO = function (f) {
+			this.__value = f;
+		};
+
+		IO.of = function (x) {
+			return new IO(function () {
+				return x;
+			});
+		};
+
+		IO.prototype.map = function (f) {
+			return new IO(_.compose(f, this.__value));
+		};
+
+
+		var io_window = new IO(function () {
+			return window;
+		});
+
+		console.log(io_window.map(function (win) {
+			return win.innerWidth
+		}).__value());
+	}
+
+
+</script>
+</body>
+</html>

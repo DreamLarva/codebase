@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    if(String.prototype.repeat === undefined){
+      String.prototype.repeat = function(times){
+        let result = this;
+        for(let i=0;i<=times;i++){
+          result += result
+        }
+        return result
+      }
+    }
+
+
+    function _toFix(num,digit = 2,isAddZero = true){
+      let str = num + "";
+      let [left = "0",right = ""] = str.split(".");
+      if(right.length < digit){
+        isAddZero && (right += "0".repeat(digit - right.length))
+      }else if(right.length > digit){
+        right = right.substr(0,digit)
+      }
+      return left + (right.length === 0?"":".") + right
+    }
+
+
+
+
+</script>
+</body>
+</html>

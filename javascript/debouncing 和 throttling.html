@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script>
+
+    //Debouncing 防抖 在间隔内一直触发某个事件 只有最后一个在间隔后触发
+    var debounce = function ( func, delay ) {
+        var inDebounce;
+        return function () {
+            var context = this,
+                args = arguments;
+            clearTimeout(inDebounce);
+            return inDebounce = setTimeout(function () {
+                return func.apply(context, args);
+            }, delay);
+        }
+    };
+
+
+    var myEfficientFn = debounce(function () {
+        // 滚动中的真正的操作
+        console.log("debounce")
+    }, 250);
+
+    // 绑定监听
+    window.addEventListener('resize', myEfficientFn);
+
+
+    //throttling 节流 一个事件一直触发事件每达到mustRun 就触发一次 如果没有达到就在waite时间后出发
+    function throttle( func, wait, mustRun ) {
+        var timeout,
+            startTime = new Date();
+
+        return function () {
+            var context = this,
+                args = arguments,
+                curTime = new Date();
+
+            clearTimeout(timeout);
+            // 如果达到了规定的触发时间间隔，触发 handler
+            if ( curTime - startTime >= mustRun ) {
+                func.apply(context, args);
+                startTime = curTime;
+
+                // 没达到触发间隔，重新设定定时器
+            } else {
+                timeout = setTimeout(func.bind(context, args), wait);
+            }
+        };
+    }
+
+
+
+
+
+
+
+
+    var n = 0;
+    // 实际想绑定在 scroll 事件上的 handler
+    function realFunc() {
+        n += 1;
+        console.log("throttle" + n);
+    }
+    // 采用了节流函数
+    window.addEventListener('scroll', throttle(realFunc, 500, 1000));
+
+
+    //浏览器自带的 rAF requestAnimationFrame
+    //rAF 被调用的频率是每秒 60 次，也就是 1000/60 ，触发频率大概是 16.7ms 。（当执行复杂操作时，当它发现无法维持 60fps 的频率时，它会把频率降低到 30fps 来保持帧数的稳定。
+    var ticking = false; // rAF 触发锁
+
+    function onScroll() {
+        if ( !ticking ) {
+            requestAnimationFrame(realFunc);
+            ticking = true;
+        }
+    }
+
+//    function realFunc() {
+//        // do something...
+//        console.log("Success");
+//        ticking = false;
+//    }
+    // 滚动事件监听
+    //    window.addEventListener('scroll', onScroll, false);
+    //    window.addEventListener('scroll', function () {
+    //        console.log(2)
+    //    }, false);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+
+    var name = "The Window";
+    var object = {
+        name : "My Object",
+        getName: function(){
+            return this.name;
+        }
+    };
+    (object.getName = object.getName)(); //相当于 window.(object.getName)
+    var a
+    (a =object.getName )() // windw.a
+
+
+</script>
+</body>
+</html>

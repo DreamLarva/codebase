@@ -1,0 +1,62 @@
+1、转换
+   1、转换属性
+      transform:
+      浏览器前缀:
+      -webkit-transform:
+      -o-transform:
+      -moz-transform:
+      -ms-transform:
+      取值：
+          none : 默认值，没有转换操作
+	  transform-function:一组转换函数
+	  transform:函数1() 函数2() ......;
+   2、转换的原点
+      在不指定原点前提前，默认原点为元素的中心处
+      属性：transform-origin
+      取值：数值/百分比/关键字
+          一个值：所有轴位置
+	  两个值：表示x轴和y轴
+	  三个值：表示x轴，y轴，z轴
+2、2D转换
+   1、2D位移
+      函数:translate()
+      取值：
+           translate(x) : 只做x轴(横向)移动
+	   translate(x,y) : 做x轴和y轴的移动
+	   方向：看符号 + 向右、向下
+	                - 向左、向上
+
+	   注意：取值可以为数值或百分比、负数
+      单向位移函数:
+          translateX(x) : 只做x轴移动
+	  translateY(y) : 只做y轴移动
+   2、缩放
+      改变元素的尺寸
+      函数:scale()
+      取值：
+          1个值：表示第一个值和第二个值是相等的
+	  2个值：第一个 x  第二个 y
+      单向缩放函数：
+          scaleX(x),scaleY(y)
+      取值:
+            默认值 为1
+	    缩小：0-1之间的小数
+	    放大：大于1的数值
+   3、旋转
+      函数：rotate()
+      取值：rotate(ndeg)
+            n : 具体角度值
+	    n为正， 则顺时针旋转
+	    n为负， 则逆时针旋转
+
+   4、倾斜
+      函数：
+           skew()
+	   skewx() x轴倾斜
+	   skewy() y轴倾斜
+
+
+
+
+
+

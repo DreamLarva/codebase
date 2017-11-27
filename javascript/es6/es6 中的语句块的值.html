@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+
+<script>
+  const text1 = `if (true) (
+                    function aa() {}
+                  )
+                  else (
+                    function bb() {}
+                  )`
+
+  console.log(eval(text1))
+  const text2 = `if(true)`
+  console.log(eval(text2))
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <style>
+	
+	img:hover{
+		transition:transform 1s linear;
+		transform:rotatez(720deg);
+	}
+
+	.clock{
+		width:200px;height:200px;
+		border:1px solid black;
+		border-radius:50%;
+		position:relative;
+		
+	}
+	.second{
+		position:absolute;
+		left:101px;
+		bottom:101px;
+		height:90px;
+		border-left:1px solid black;
+		transform-origin:center bottom;
+		/* transition:transform 2s linear ; */
+		-webkit-animation:clock 60000ms linear infinite;
+		-webkit-animation-play-state: running;
+	}
+	.minute{
+		position:absolute;
+		left:100px;
+		bottom:101px;
+		transform-origin:center bottom;
+		height:60px;
+		border-left:3px solid black;
+		-webkit-animation:clock 3600s linear infinite;
+		-webkit-animation-play-state: running;
+	}
+	
+
+	@-webkit-keyframes clock{
+		from{
+		
+		}
+		to{
+			transform:rotate(360deg);
+		}
+	}
+	
+ </style>
+ <body>
+  <div class="clock">
+	<div class="minute"></div>
+	<div class="second"></div>  
+  </div>
+   
+
+  <img src="../05_PROJECT2/资料/资料/Images/star.jpg" width="13" height="11" border="0" alt="">
+ </body>
+</html>

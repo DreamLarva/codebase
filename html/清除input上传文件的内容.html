@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<input type="file" id="file">
+<button id="clear">clear</button>
+<script>
+    window.onload = function(){
+        document.getElementById("clear").addEventListener("click",function(){
+            //方法一
+            var temp_dom = document.getElementById("file");
+            temp_dom.outerHTML =  temp_dom.outerHTML;
+
+//            方法2(没有卵用)
+//            var obj = document.getElementById('file') ;
+//            obj.select();
+//            document.selection.clear();
+        })
+    }
+
+</script>
+</body>
+</html>

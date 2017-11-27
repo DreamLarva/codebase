@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="application/javascript" src="../js/jquery-1.12.3.js"></script>
+
+</head>
+<body>
+<div id="d1">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur blanditiis et in nam, necessitatibus pariatur
+    praesentium veritatis. Amet at commodi corporis, cumque error necessitatibus nisi omnis porro, soluta ut
+    voluptate.</p>
+</div>
+<div id="d2">
+  <p>1</p>
+
+  <p>2</p>
+
+  <p>3</p>
+
+  <p>4</p>
+
+  <p>5</p>
+</div>
+<script>
+  $("#d2").find("p").click(function () {
+    var index;
+    console.log(index = $(this).add($(this).siblings()).index(this))
+    $("#d1").find("p").eq(index).css("background","yellow").siblings().css("background","none")
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var str = "function b(){" +
+            "console.log('success')" +
+            "}"
+
+    //1.直接声明(并不能改变函数的名字)
+    eval(str)
+    b()
+    var c = eval(str)
+    //c() //报错
+
+    //2
+    var str = "function d(){" +
+            "console.log('success')" +
+            "}"
+    var c =  eval("("+str+")")
+    c() //正确
+</script>
+</body>
+</html>

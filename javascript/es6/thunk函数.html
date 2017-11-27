@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    // 正常的的多参数版本
+    fs.readFile(fileName,callback)
+    //Thunk版本(单参数
+    var Thunk = function(fileName){
+        return function (callback) {
+            return fs.readFile(fileName,callback)
+        }
+    }
+    var readFileThunk = Thunk(fileNAme);
+    readFileThunk(callback)
+    */
+
+    function sleep(time){
+        var start = new Date().getTime()
+        while(new Date().getTime()<start + time){}
+        console.log("过了"+time+"毫秒")
+    }
+/*
+    //  Thunk函数转换器(只能是两个参数)
+    var Thunk = function (fn) {
+        return function(){
+            var args = Array.prototype.slice.call(arguments);
+            return function (callback) {
+                args.push(callback);
+                return fn.apply(this,args)
+
+            }
+        }
+    }
+    function a(b,c) {
+        console.log(b,c)
+    }
+    var d = Thunk(a)
+    console.log(d(1)(2))*/
+
+    function thunkify(fn){
+        return function () {
+            var args = new Array(arguments.length);
+            var ctx = this;
+            for(var i=0;i<args.length;i++){ // 复制参数的数组
+                args[i] = arguments[i]
+            }
+
+            return function (done) {
+                var called;
+                args.push(function () {
+                    if(called)return; //保证回调函数只执行一次
+                    called = true;
+                    done.apply(null,arguments)
+                });
+                try {
+                    fn.apply(ctx,args);
+                }catch (err){
+                    done(err)
+                }
+            }
+        }
+    }
+    function f(a,b,c,callback){
+        var sum = a + b + c;
+        callback(sum);
+        callback(sum);
+    }
+
+    var ft = thunkify(f);
+    var print = console.log.bind(console)
+    ft(1,2,3)(print)
+
+    
+</script>
+</body>
+</html>

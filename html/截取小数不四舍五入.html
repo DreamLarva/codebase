@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  Number.prototype.toFixedNo = function (x) {
+    var reg = new RegExp("(\\.\\d{" + x + "})\\d+$");
+//    console.log(reg)
+    return parseFloat(this.toString().replace(reg, "$1"));
+  }
+  console.log(2.335.toFixedNo(2));//2.33
+  console.log(1232.312335.toFixedNo(3));//2.33
+
+
+  Number.prototype.toFixedNo2 = function(x){ //效率更高
+    var a = Math.pow(10,x)
+    return (Math.floor(this* a))/a
+  }
+
+
+  for (var i = 1,arr=[];i<99;i++){
+    arr.push(Math.random())
+  }
+  var start = new Date().getTime();
+  for( i=0;i<arr.length;i++){
+    arr[i].toFixedNo(9)
+  }
+  var end = new Date().getTime();
+  console.log(end - start +"ms" )
+
+
+  var start = new Date().getTime();
+  for( i=0;i<arr.length;i++){
+    console.log(arr[i])
+    console.log( arr[i].toFixedNo2(9))
+  }
+  var end = new Date().getTime();
+  console.log(end - start +"ms" )
+</script>
+</body>
+</html>

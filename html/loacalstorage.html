@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+</head>
+<body>
+<form action="">
+  <input type="text" name="text">
+  <textarea name="areatext" id="" cols="30" rows="10"></textarea>
+  <select name="type" id="type">
+    <option value="">请选择</option>
+    <option value="1">一</option>
+    <option value="2">二</option>
+    <option value="3">三</option>
+    <option value="4">四</option>
+    <option value="5">五</option>
+  </select>
+  <select name="type1" id="type1">
+    <option value="">请选择</option>
+    <option value="1">一</option>
+    <option value="2">二</option>
+    <option value="3">三</option>
+    <option value="4">四</option>
+    <option value="5">五</option>
+  </select>
+  <label>男<input type="radio" value="male" name="gender"></label>
+  <label>女<input type="radio" value="female" name="gender"></label>
+
+  <label>男<input type="radio" value="male" name="gender1"></label>
+  <label>女<input type="radio" value="female" name="gender1"></label>
+  <br>
+  <label>aaaaaaa<input type="checkbox" value="a" name="checkboxa"></label>
+  <label>bbbbbbb<input type="checkbox" value="b" name="checkboxb"></label>
+  <label>ccccccc<input type="checkbox" value="c" name="checkboxc"></label>
+  <br>
+  <label>aaaaaaa<input type="checkbox" value="a" name="checkboxa1"></label>
+  <label>bbbbbbb<input type="checkbox" value="b" name="checkboxb1"></label>
+  <label>ccccccc<input type="checkbox" value="c" name="checkboxc1"></label>
+
+  <br>
+  <input type="submit" value="submit">
+</form>
+
+<script>
+  /****兼容ie 8 9 并没有作用****/
+//  if (typeof(localStorage) == 'undefined') {
+//    var box = document.body || document.getElementsByTagName("head")[0] || document.documentElement;
+//    userdataobj = document.createElement('input');
+//    userdataobj.type = "hidden";
+//    userdataobj.addBehavior ("#default#userData");
+//    box.appendChild(userdataobj);
+//    //设定对象
+//
+//    var localStorage = {
+//      setItem: function (nam, val) {
+//       // alert(userdataobj)
+//        userdataobj.load(nam);
+//        userdataobj.setAttribute(nam, val);
+//        var d = new Date();
+//        d.setDate(d.getDate() + 700);
+//        userdataobj.expires = d.toUTCString();
+//        userdataobj.save(nam);
+//        userdataobj.load("userdata_record");
+//        var dt = userdataobj.getAttribute("userdata_record");
+//        if (dt == null)dt = '';
+//        dt = dt + nam + ",";
+//        userdataobj.setAttribute("userdata_record", dt);
+//        userdataobj.save("userdata_record");
+//      },
+////模拟 setItem
+//
+//      getItem: function (nam) {
+//        userdataobj.load(nam);
+//        return userdataobj.getAttribute(nam);
+//      },
+////模拟 getItem
+//
+//      removeItem: function (nam) {
+//        userdataobj.load(nam);
+//        clear_userdata(nam)
+//        userdataobj.load("userdata_record");
+//        var dt = userdataobj.getAttribute("userdata_record");
+//        var reg = new RegExp(nam + ",", "g");
+//        dt = dt.replace(reg, '');
+//        var d = new Date();
+//        d.setDate(d.getDate() + 700);
+//        userdataobj.expires = d.toUTCString();
+//        userdataobj.setAttribute("userdata_record", dt);
+//        userdataobj.save("userdata_record");
+//      },
+////模拟 removeItem
+//
+//      clear: function () {
+//        userdataobj.load("userdata_record");
+//        var dt = userdataobj.getAttribute("userdata_record").split(",");
+//        for (var i in dt) {
+//          if (dt[i] != '')clear_userdata(dt[i])
+//        }
+//        clear_userdata("userdata_record")
+//      }
+////模拟 clear();
+//
+//    }
+//
+//    function clear_userdata(keyname)//将名字为keyname的变量消除
+//    {
+//      var keyname;
+//      var d = new Date();
+//      d.setDate(d.getDate() - 1);
+//      userdataobj.load(keyname);
+//      userdataobj.expires = d.toUTCString();
+//      userdataobj.save(keyname);
+//    }
+//  }
+
+
+  /****兼容ie 10 11****/
+  $(function () {
+//    localStorage.setItem("123", "abc");
+//    alert(localStorage.getItem("123"))
+    //字符串转布尔
+    String.prototype.bool = function () {
+
+      switch (this.toLowerCase()) {
+        case "true":
+        case "yes":
+        case "1":
+          return true;
+        case "false":
+        case "no":
+        case "0":
+        case null:
+          return false;
+        default:
+          return Boolean(this);
+      }
+    };
+
+
+    if (localStorage) {
+      //处理下拉框
+      $("select").each(function (i) {
+        if (localStorage[$(this).attr('name')]) {
+//          console.log(localStorage[$(this).attr('name')])
+          $(this).find("option[value=" + localStorage[$(this).attr('name')] + "]").attr("selected", true)
+        }
+      });
+
+      //处理type=radio
+      $("input[type=radio]").each(function (i) {
+//        console.log(localStorage[$(this).attr('name')])
+        if (localStorage[$(this).attr('name')] && ( localStorage[$(this).attr('name')] == $(this).val() )) {
+          $(this).attr('checked', true);
+
+
+        }
+      });
+
+      //处理checkbox
+      $("input[type=checkbox]").each(function (i) {
+//        console.log(localStorage[$(this).attr('name')]);
+        if (localStorage[$(this).attr('name')] && localStorage[$(this).attr('name')].bool()) {
+          $(this).attr('checked', true)
+        }
+      })
+    }
+
+
+    $("input[type=text],input[type=radio],select,textarea").change(function () {
+      localStorage[$(this).attr("name")] = $(this).val();
+    });
+    $("input[type=checkbox]").change(function () {
+//      console.log($(this).prop("checked"));
+      localStorage[$(this).attr("name")] = $(this).prop("checked");
+    });
+    $('form').submit(function () {
+      localStorage.clear();
+    })
+
+
+
+  })
+</script>
+</body>
+</html>

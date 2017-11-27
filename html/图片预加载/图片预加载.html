@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/jquery-1.12.3.js"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+<img src="" alt="" data-src="">
+<script>
+  var img_num = 0
+  //    function getWidthHeight(url) {
+  //      console.log(url + "加载完成")
+  //      console.log(this.width + "," + this.height)
+  //      img_num++;
+  //      if (img_num == 8) {
+  //        var end = new Date().getTime();
+  //        console.log(end - start + "ms")
+  //      }
+  //
+  //
+  //    }
+  //  function loadImage(url, callback) {
+  //    if (Array.isArray(url)) {
+  //      url = [url];
+  //    }
+  //    for(var i=0;i<url.length;i++){
+  //      var img = new Image();
+  //      img.src = url;
+  //
+  //    }
+  //
+  //    if (img.complete) {
+  //      callback.call(img, url);
+  //      return
+  //    }
+  //
+  //    img.onload = function () {
+  //      console.log(url);
+  //      callback.call(img, url)
+  //    }
+  //  }
+  //  var start = new Date().getTime();
+  //  loadImage("img/1.jpg",getWidthHeight);
+  //  loadImage("img/2.jpg",getWidthHeight);
+  //  loadImage("img/3.jpg",getWidthHeight);
+  //  loadImage("img/4.jpg",getWidthHeight);
+  //  loadImage("img/5.jpg",getWidthHeight);
+  //  loadImage("img/6.jpg",getWidthHeight);
+  //  loadImage("img/7.jpg",getWidthHeight);
+  //  loadImage("img/8.jpg",getWidthHeight)
+  var arr = ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg", "img/6.jpg", "img/7.jpg", "img/8.jpg", "img/9.jpg"];
+  var arr1 = ["img/1.jpg"];
+  function loadImage(url) {
+    if (!Array.isArray(url)) {
+      url = [url];
+    }
+    for (var i = 0; i < url.length; i++) {
+      var img = new Image();
+      console.log(url[i]);
+      img.src = url[i];
+      if(img.complete)//如果图片已经加载存在浏览器缓存中直接处理
+      {
+//       callback
+        return;
+      }
+      img.onload =function(){//要显示的图片加载完成后做处理
+//        callback
+      }
+    }
+
+
+   loadImage(arr)
+//  loadImage(arr1)
+
+
+  
+
+
+
+
+
+
+</script>
+</body>
+</html>

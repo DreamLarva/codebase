@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <style>
+	#d1{
+		width:100px;
+		height:100px;
+		background:#f00;
+		/*定义过渡*/
+		/*1、属性*/
+		transition-property:transform,border-radius;
+		/*2、时长*/
+		transition-duration:1s;
+		/*3、速度曲线*/
+		transition-timing-function:linear;
+		/*4、延迟*/
+		transition-delay:0s;
+	}
+	#d1:hover{
+		
+		transform:translatex(100px) rotate(720deg);
+		border-radius:50%;
+	}
+  </style>
+ </head>
+
+ <body>
+	<div id="d1"></div>
+ </body>
+</html>

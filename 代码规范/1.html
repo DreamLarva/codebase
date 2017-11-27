@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * 一般使用
+   * @param a {string} a的描述
+   * @return {string}
+   * */
+  function a1( a ) {
+    return a
+  }
+
+  a1("string")
+
+
+    /**
+     * 有默认值
+     * @param a {string} a描述
+     * @param b {number} b描述
+     * */
+
+    function b(a,b=123){
+
+    }
+    b("1");
+
+
+    /**
+     *  对象参数
+     * @param {Object}  employees            - The employees who are responsible for the project.
+     * @param {string}      employees.name       - The name of an employee.
+     * @param {string}      employees.department - The employee's department.
+     * */
+    function c({name,department}){
+
+    }
+    c({name:"123",department:"abc"})
+
+    /**
+     * 数组参数
+     * @param {Object[]}    employees               - The employees who are responsible for the project.
+     * @param {string}          employees[].name        - The name of an employee.
+     * @param {string}          employees[].department  - The employee's department.
+     * */
+    function d(employees){
+
+    }
+    d([{name:"string",department:"string"}])
+
+
+</script>
+</body>
+</html>

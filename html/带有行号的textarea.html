@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+  <style>
+    .boxbot-commander {
+      height: 741px;
+      overflow: hidden;
+    }
+
+    .commander-lines-wrapper,
+    .commander-editor {
+      float: left;
+      font-family: Menlo, Consolas, monospace;
+      line-height: 20px;
+      height: 100%;
+      color: #ecf0f1;
+    }
+
+    .commander-lines-wrapper {
+      border-radius: 4px 0 0 4px;
+      background-color: #2c3e50;
+      width: 40px;
+      font-size: 12px;
+      text-align: right;
+      padding-top: 5px;
+      box-sizing: border-box;
+      cursor: default;
+    }
+
+    .commander-lines {
+      position: relative;
+    }
+
+    .commander-lines-item {
+      padding-right: 5px;
+    }
+
+    .commander-lines-item.error {
+      background-color: #ea6153;
+    }
+
+    .commander-lines-item.success {
+      background-color: #27ae60;
+    }
+
+    .commander-lines-item.warning {
+      background-color: #f39c12;
+    }
+
+    .commander-editor {
+      font-size: 16px;
+      width: 400px;
+      box-sizing: border-box;
+      border: 0;
+      border-radius: 0 4px 4px 0;
+      outline: none;
+      padding: 5px;
+      margin: 0;
+      background-color: #34495e;
+      resize: none;
+    }
+
+
+
+  </style>
+</head>
+<body>
+<article class="boxbot-commander">
+  <div class="commander-lines-wrapper">
+    <div class="commander-lines"><div class="commander-lines-item">1</div></div>
+  </div>
+    <textarea title="命令编辑器" class="commander-editor" spellcheck="false"></textarea>
+</article>
+<script>
+/**
+ * @constructor
+ * @param {string} selector
+ */
+var BoxbotEditor = function (selector) {
+  this.element = document.querySelector(selector)
+  this.$lines = this.element.querySelector('.commander-lines')
+  this.$textarea = this.element.querySelector('.commander-editor')
+  this.$textarea.addEventListener('input', this.update.bind(this))
+  this.$textarea.addEventListener('scroll', this.scroll.bind(this))
+  this.update()
+};
+
+/**
+ * 代码行数同步滚动
+ *
+ * @param event
+ */
+BoxbotEditor.prototype.scroll = function (event) {
+  this.$lines.style.top = -event.target.scrollTop + 'px'
+};
+
+/**
+ * 滚动到制定行数
+ *
+ * @param line
+ */
+BoxbotEditor.prototype.scrollTo = function (line) {
+  this.$textarea.scrollTop = line * 20
+}
+
+/**
+ * 更新代码行数
+ */
+BoxbotEditor.prototype.update = function () {
+  var html = ''
+  var codes = this.$textarea.value
+  var lines = codes.match(/\n/g)
+  lines = lines ? lines.length + 1 : 1
+
+  for (var l = 1; l <= lines; l++) {
+    html += '<div class="commander-lines-item">' + l + '</div>'
+  }
+
+  this.$lines.innerHTML = html
+}
+
+/**
+ * @returns {NodeList}
+ */
+BoxbotEditor.prototype.getLines = function () {
+  return this.element.querySelectorAll('.commander-lines-item')
+}
+
+/**
+ * 设置标记
+ *
+ * @param {int} line
+ * @param {string} flag
+ */
+BoxbotEditor.prototype.setFlag = function (line, flag) {
+  this.getLines()[line].classList.add(flag)
+}
+
+/**
+ * 清除标记
+ *
+ * @param {int} [line] 默认清除所有标记
+ */
+BoxbotEditor.prototype.clearFlag = function (line) {
+  var lines = this.getLines()
+  if (line) {
+    lines[line].className = 'commander-lines-item'
+  } else {
+    for (var i = 0; i < lines.length; i += 1) {
+      lines[i].className = 'commander-lines-item'
+    }
+  }
+}
+
+/**
+ * 获取代码列表
+ *
+ * @returns {[string]}
+ */
+BoxbotEditor.prototype.getCodes = function () {
+  var codes = []
+  this.$textarea.value.split('\n').forEach(function (code) {
+    codes.push(code.trim())
+  })
+  return codes
+}
+
+/**
+ * 设置编辑器代码，同时触发更新
+ *
+ * @param codes
+ */
+BoxbotEditor.prototype.setCodes = function (codes) {
+  this.$textarea.value = codes
+  this.update()
+}
+
+
+new BoxbotEditor('.boxbot-commander')
+</script>
+</body>
+</html>

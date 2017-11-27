@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    {
+//        let fun = function (x=1,y=x){
+//            console.log(x,y)
+//        }
+//        fun()
+//    }
+//
+//    {
+//        let fun = function (y=x,x=1){
+//            console.log(x,y)
+//        }
+//        //  fun() //报错必须先声明才能引用
+//    }
+//    {
+//        let f = "outer";
+//        let fun = function (foo = x => f){
+//            f = "inner"
+//            console.log(foo())
+//        }
+//        fun()
+//    }
+//    {
+//        // rest 参数
+//        let add = function(...values){
+//            let sum = 0;
+//            for(let val of values){
+//                sum += val
+//            }
+//            return sum
+//        }
+//        console.log(add(1,2,3))
+//    }
+//    {
+//        // 拓展运算符 相当于逆向... 解开数组
+//        // 完全可以替代 apply的使用
+//        console.log(1,...[1,2,3,4],5)
+//        let arr = [1,2,3,4,5,6]
+//        console.log(Math.max(2,3,...arr)) // 等同于 Math.max.apply(null,arr) 拓展符还能添加新的参数
+//        // 数组合并
+//        let arr1 =[1,2,3],
+//                arr2 = [123,1,23,13]
+//        console.log([...arr1,...arr2])
+//        // 用于解构赋值
+//        let [first,...second] = [...arr1,...arr2]  // 拓展必须是数组的最后一个值
+//        console.log(first,second)
+//    }
+//      {
+//          // 箭头函数
+//          // 如果返回的是一个对象 需要加上()
+//          let  foo = (x,y) =>({x:x,y:y})
+//          console.log(foo(1,2))
+//
+//          // 如果箭头后的函数多于一句 就需要加上{return 内容}
+//          let foo1 = (x,y) =>{let c=1000;return [x,y,c]}
+//          console.log(foo1(1,2))
+//
+//          // 箭头函数的用途
+//          [1,2,3].map(v => v*2)
+//          [1,2,3].sort((a,b)=>a-b)
+//          let argToArray = (...nums) => nums // 参数转数组
+//      }
+       /* {
+            //箭头函数内的this对象就是定义时所在的对象,而不是使用时的对象
+            let foo =function(){
+                setTimeout(()=>{console.log(this.id)},100)
+            }
+            foo.call({id:100101})
+            //正常情况下 定义函数指向window
+            let foo1 =function(){
+                setTimeout(function a(){console.log(this.id)},100)
+            }
+            foo1.call({id:100101})
+        }*/
+/*{
+
+  // 运行不正确 ????
+//          var pipeline = function () {
+//            var arg = Array.prototype.slice.call(arguments);
+//            console.log(arg)
+//            return function (val) {
+//              arg.reduce(function (a, b) {
+//                return b(a)
+//              }, val)
+//            }
+//          };
+
+  // 运行正确  注意闭包
+//          var pipeline = function pipeline() {
+//            for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
+//              funcs[_key] = arguments[_key];
+//            }
+//
+//            return function (val) {
+//              return funcs.reduce(function (a, b) {
+//                return b(a);
+//              }, val);
+//            };
+//          };
+
+  // 部署管道机制(pipeline),即前一个函数的输出就是后一个函数的输入
+  let pipeline = (...funcs) =>
+    val => funcs.reduce((a, b) => b(a), val) // 注意闭包
+
+  let fun1 = a => a + 1;
+  let fun2 = a => a * 2;
+  let fun3 = a => a * 5;
+  let addThenMult = pipeline(fun1, fun2, fun3)
+  console.log(addThenMult(5))
+}*/
+{
+
+
+  // 尾递归 (不会出现栈溢出) 大部分浏览器还未实现(依然有很多的callstack)
+  let factorial = function (n, total) {
+    "use strict";
+    if (n === 1) {
+      return total
+    }
+    return factorial(n - 1, n + total)
+  };
+  console.log(factorial(999, 1));
+
+  //普通递归
+/*
+  let foo = function (n) {
+    if (n === 1) {
+      return 1
+    }
+    return n + foo(n - 1)
+  };
+  console.log(foo(99999))
+*/
+
+
+}
+
+
+
+
+</script>
+</body>
+</html>

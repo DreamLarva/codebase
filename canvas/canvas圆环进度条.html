@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<canvas id="canvas" width="50px" height="50px">60%</canvas>
+<button onclick="drawProcess()" id="btn">start</button>
+
+<script>
+  var process = 0;
+  function drawProcess() {
+    var btn = document.getElementById("btn");
+    btn.disabled = "disabled";
+    var canvas = document.getElementById("canvas");
+    process < 33 && (process += 1);
+    var text = process + "%";
+    var context = canvas.getContext("2d");
+    context.clearRect(0, 0, 50, 50);
+
+    context.beginPath();
+    context.moveTo(25, 25);
+    context.arc(25, 25, 25, -Math.PI / 2, Math.PI * 2 * process / 100 - Math.PI / 2, false);
+    context.closePath();
+    context.fillStyle = '#e4393c';
+    context.fill();
+
+    context.beginPath();
+    context.moveTo(25, 25);
+    context.arc(25, 25, 21, 0, Math.PI * 2, true);
+    context.closePath();
+    context.fillStyle = 'rgba(255,255,255,1)';
+    context.fill();
+
+    context.beginPath();
+    context.arc(25, 25, 18.5, 0, Math.PI * 2, true);
+    context.closePath();
+    context.strokeStyle = '#ddd';
+    context.stroke();
+
+    context.font = "bold 9pt Arial";
+    context.fillStyle = '#e4393c';
+    context.textAlign = 'center';
+    context.baseline = 'middle';
+    context.moveTo(25, 25);
+    context.fillText(text, 25, 28);
+
+    setTimeout('drawProcess()', 1000 / 60)
+  }
+</script>
+</body>
+</html>

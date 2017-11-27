@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="400">您的浏览器不支持</canvas>
+  <script>
+    (function(){
+      //获取canvas元素
+      var canvas = document.getElementById("myCanvas")
+      var ctx = null;//渲染上下文
+      if(canvas.getContext){
+        //获取canvas的上下文
+        ctx = canvas.getContext('2d');
+
+        var image = new Image();
+        image.onload = function(){
+          ctx.drawImage(image,100,100);
+        }
+        image.src = 'isux.png'
+
+      }
+    }())
+  </script>
+</body>
+</html>

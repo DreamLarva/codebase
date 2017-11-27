@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> 动画 </title>
+  <meta charset="utf-8" />
+  <style>
+	#d1{
+		width:200px;
+		height:200px;
+		background:yellow;
+		border:1px solid #ddd;
+	}
+
+	/*声明动画 ，让元素背景 从白色 -》红色 -》蓝色*/
+	@keyframes change{
+		0%{
+			background:#fff;
+			margin-left:10px;
+		}
+		25%{
+			background:#f00;
+			margin-left:25px;
+		}
+		50%{
+			transform:rotate(720deg);
+		}
+		100%{
+			background:#00f;
+			margin-left:100px;
+		}
+	}
+	@-webkit-keyframes change{
+		0%{
+			background:#fff;
+			margin-left:10px;
+		}
+		25%{
+			background:#f00;
+			margin-left:250px;
+		}
+		50%{
+			transform:rotate(720deg);
+		}
+		100%{
+			background:#00f;
+			margin-left:800px;
+		}
+	}
+	@-o-keyframes change{
+		0%{
+			background:#fff;
+			margin-left:10px;
+		}
+		25%{
+			background:#f00;
+			margin-left:25px;
+		}
+		50%{
+			transform:rotate(720deg);
+		}
+		100%{
+			background:#00f;
+			margin-left:100px;
+		}
+	}
+	@-moz-keyframes change{
+		0%{
+			background:#fff;
+			margin-left:10px;
+		}
+		25%{
+			background:#f00;
+			margin-left:250px;
+		}
+		50%{
+			transform:rotate(720deg);
+		}
+		100%{
+			background:#00f;
+			margin-left:800px;
+		}
+	}
+
+	#d1{
+		/*调用 change 的动画 ，播放时长为 2S*/
+		animation-name:change;
+		animation-duration:5s;
+		animation-timing-function:linear;
+		animation-delay:0s;
+		/*指定播放次数*/
+		/*animation-iteration-count:infinite;*/
+		/*指定动画播放方向*/
+		/*animation-direction:alternate;*/
+
+		/*Chrome Safari*/
+		-webkit-animation-name:change;
+		-webkit-animation-duration:5s;
+		-webkit-animation-timing-function:linear;
+		-webkit-animation-delay:0s;
+		/*指定播放次数*/
+		-webkit-animation-iteration-count:infinite;
+		/*指定动画播放方向*/
+		-webkit-animation-direction:alternate;
+		/*动画完成后，保持在最后一帧状态上*/
+		/*-webkit-animation-direction:reverse;
+		-webkit-animation-fill-mode:backwards;*/
+	}
+	#d1:hover{
+		-webkit-animation-play-state:paused;
+	}
+  </style>
+ </head>
+
+ <body>
+	 <div id="d1"></div>
+ </body>
+</html>

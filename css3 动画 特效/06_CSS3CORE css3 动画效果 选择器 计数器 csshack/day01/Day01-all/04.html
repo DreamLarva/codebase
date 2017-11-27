@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> 元素状态伪类 </title>
+  <meta charset="utf-8" />
+  <style>
+	/*已禁用元素 ，文字字体粗细， 改为粗体*/
+	input:disabled{
+		font-weight:bold;
+	}
+	/*已启用元素， 文字颜色改为 绿色*/
+	input:enabled{
+		color:green;
+	}
+	/*被选中的按钮，添加背景色为 红色*/
+	input[type=radio]:checked{
+		background-color:#f00;
+	}
+  </style>
+ </head>
+
+ <body>
+	用户名称:<input type="text" value="Please input your name!" disabled /><br />
+	用户密码:<input type="password" /><br />
+	状态：<input type="radio" checked />启用 <input type="radio" />禁用
+ </body>
+</html>

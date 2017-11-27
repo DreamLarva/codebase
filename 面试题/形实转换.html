@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<button id="btn1"> button1</button>
+<button id="btn2"> button2</button>
+<button id="btn3"> button3</button>
+<button id="btn4"> button4</button>
+<button id="btn5"> button5</button>
+<script>
+    var a = {a: 1, b: 2, c: [1]};
+    (function (obj) {
+        var {a, b, c} = obj;
+        setTimeout(function () {
+            console.log(obj, obj.a, obj.b, obj.c)
+        }, 500);
+        setTimeout(function () {
+            console.log(obj, a, b, c)
+        }, 500);
+    }(a));
+
+    (function (obj) {
+
+        $("#btn1").click(function () {
+            console.log(obj, obj.a, obj.b)
+        });
+
+        $("#btn2").click(function () {
+            var {a, b} = obj;
+            console.log(obj, a, b)
+        });
+
+        $("#btn3").click(obj, function (e) {
+
+            var a = obj.a;
+            var b = obj.b;
+            console.log(obj, a, b);
+            console.log("e.data", e.data)
+        });
+
+        $("#btn4").click({a: obj.a, b: obj.b, c: obj.c}, function (e) {
+
+            var a = obj.a;
+            var b = obj.b;
+            var c = obj.c;
+            console.log(obj, a, b, c);
+            console.log("e.data", e.data)
+        });
+
+        var {a, b, c} = obj;
+        $("#btn5").click({a, b, c}, function (e) {
+            console.log("e.data", e.data)
+        })
+    }(a));
+
+
+    a.a = 111;
+    a.c[0] = 333;
+    Object.assign(a, {b: 222})
+
+
+</script>
+
+</body>
+</html>

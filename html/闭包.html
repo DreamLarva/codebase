@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    a = "outer"
+    function test() {
+        let a = "inner";
+        b();
+        function c1() {
+            console.log(a)
+        }
+        // 这里会报错
+        // c1()
+
+        (function () {
+            console.log(a);
+            b()
+        }());
+        c1()
+
+    }
+    function b() {
+        console.log(a)
+    }
+    test()
+
+</script>
+</body>
+</html>

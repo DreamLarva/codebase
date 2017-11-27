@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #container{
+      width:100px;
+      padding:15px;
+      position: absolute;
+      border: 1px solid black;
+      background-color: transparent;
+      overflow: hidden;
+    }
+    #container::before{
+      content:attr(data-text);
+      position: absolute;top:0;left:0;
+      width:100%;height:100%;
+      background:#888;
+      -webkit-clip-path:polygon(0 0,76% 0,26% 100%,0 100%);
+      z-index:-1;
+
+      transition: all 0.5s;
+    }
+    #container::after{
+      content:attr(data-text);
+      position: absolute;top:0;left:0;
+      width:100%;height:100%;
+      background:#888;
+      -webkit-clip-path:polygon(100% 0,74% 0,24% 100%,100% 100%);
+      z-index:-1;
+
+      transition: all 0.5s;
+    }
+    #container:hover::before{
+     left:-76%
+    }
+    #container:hover::after{
+     left:76%
+    }
+
+
+  </style>
+</head>
+<body>
+  <div id="container"> 立即购买</div>
+
+</body>
+</html>

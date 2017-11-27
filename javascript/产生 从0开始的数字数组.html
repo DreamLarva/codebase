@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const a = () => function(){}
+    console.log(a() === a())
+
+
+    /**
+     * 生成从0开始 length为number 的数组
+     * */
+    function numberArray(length) {
+        return [...new Array(length).keys()]
+    }
+
+    /**
+     * 生成从1开始 length为number 的数组
+     * */
+    function numberArray1(length) {
+        return [...new Array(length + 1).keys()].slice(1)
+    }
+
+    /**
+     * 生成从n开始 length为number 的数组
+     * 这样并不好
+     * */
+     function numberArray2(start, length) {
+         return [...new Array(length + start).keys()].slice(start)
+     }
+
+    function numberArray3(start, length) {
+        return new Array(length).fill(start).map((v, index) => v + index)
+    }
+    /**
+     * 使用 array from
+     * */
+    function numberArray5(start,length){
+        return Array.from({ length: length }, (v, k) => k + start)
+
+    }
+
+    /**
+     * 最快
+     * 而且快的离谱
+     * */
+    function numberArray4(start,length){
+         const arr = [];
+         for(let i=0;i<length;i++){
+             arr[i] = start + i;
+         }
+         return arr
+    }
+
+
+    var times = 9999999;
+    var start = 9999999;
+
+    console.time("time");
+    numberArray(times);
+    console.timeEnd("time");
+
+    console.time("time");
+    numberArray1(times);
+    console.timeEnd("time");
+
+    console.time("time");
+    numberArray2(start, times);
+    console.timeEnd("time");
+
+    console.time("time");
+    numberArray3(start, times);
+    console.timeEnd("time");
+
+
+    console.time("time");
+    numberArray4(start, times);
+    console.timeEnd("time");
+
+    console.time("time");
+    numberArray5(start, times);
+    console.timeEnd("time");
+
+
+</script>
+</body>
+</html>

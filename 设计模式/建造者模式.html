@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+ var Human = function(){
+   this.skill =  "保密";
+   this.hobby =   "fff";
+  }
+  Human.prototype = {
+    getSkill : function(){
+      return this.skill;
+    },
+    getHobby : function(){
+      return this.hobby;
+    }
+  }
+
+  var Named = function(name){
+    var _self = this;
+    (function(name,_self){
+      _self.name = name
+
+    }(name,_self))
+  }
+  Named.prototype.F = function(){
+    console.log("OF")
+  }
+
+  var Person = function(name){
+    var _person = new Human();
+    _person.name = new Named(name);
+    return _person;
+  }
+
+
+</script>
+
+</body>
+</html>

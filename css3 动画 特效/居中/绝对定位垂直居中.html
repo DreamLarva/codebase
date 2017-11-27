@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .container{
+      background:red;
+      width:500px;height:500px;
+      position: relative;
+    }
+    .child{
+      width:100px;height:100px;
+      background: white;
+      position:absolute;
+      margin:auto auto;
+      /*两端都留完全居中*/
+      /*留这段垂直居中*/
+      top:0;bottom:0;
+      /*留这段水平居中*/
+      left:0;right:0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="child">
+      需要知道居中元素的宽和高
+    </div>
+  </div>
+</body>
+</html>
