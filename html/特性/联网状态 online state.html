@@ -6,11 +6,14 @@
 </head>
 <body>
 <script>
+    console.log(navigator.onLine);
     window.addEventListener('offline',networkStatus);
     window.addEventListener('online',networkStatus);
 
     function networkStatus(e){
-        console.log(e.type)
+        console.log(e.type);
+        console.log(navigator.onLine);
+
     }
 </script>
 </body>
