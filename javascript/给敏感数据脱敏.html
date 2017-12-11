@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function desensitize(...args) {
+        let [str] = args, startCount, endCount;
+        if (args[1] && !args[2]) {
+            endCount = startCount = args[1]
+        } else if (args[1] && args[2]) {
+            [, startCount, endCount] = args
+        }
+        const reg = new RegExp(`^(.{${startCount}})(.*)(.{${endCount}})$`);
+        return str.replace(reg, function (match, $1, $2, $3) {
+            return $1 + "*".repeat($2.length) + $3
+        })
+    }
+
+    console.log(desensitize("1234567890", 4))
+    console.log(desensitize("1234567890", 2, 3))
+</script>
+</body>
+</html>
