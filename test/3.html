@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //  不能将任何函数命名成  Object.prototype 中任何属性的名字(在垃圾的浏览器中会有问题 Es3 标准)
+    var constructor = function () {
+        return null
+    };
+    var f = function () {
+        return constructor()
+    };
+
+    // console.log(f())
+    // document.write(f())
+
+    var g = function h() {
+        return 1111
+    // console.log(h) // Error
+    };
+
+    var arr = [];
+    for(var a=1;a<10;a++){
+        (function(a){
+            arr[a] = function(){console.log(a)}
+        }(a))
+    }
+
+    arr[9]()
+</script>
+</body>
+</html>

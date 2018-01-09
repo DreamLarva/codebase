@@ -68,13 +68,32 @@
     }
     var testArr = [1, [  2, [ 3 ], 4, [ 5, [ 6, [ 8 ] ] ], 9, [ 10 ] ], "11", { a: 1 } ];
 
+
+    const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
+
+
+    const times = 1000000
     console.time("1");
-    console.log(ReduceDimension(testArr));
+    for(let i=0;i<=times;i++){
+        ReduceDimension(testArr)
+
+    }
     console.timeEnd("1");
 
     console.time("2");
-    console.log([ ...iterTree(testArr) ]);
+    for(let i=0;i<=times;i++) {
+        [...iterTree(testArr)]
+    }
     console.timeEnd("2")
+
+
+    console.time("3");
+    for(let i=0;i<=times;i++) {
+        deepFlatten(testArr)
+    }
+    console.timeEnd("3")
+
+
 
 </script>
 </body>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: [col1-start] 100 px [col1-end] 10 px [col2-start] 100 px [col2-end] 10 px [col3-start] 100 px [col3-end] 10 px [col4-start] 100 px [col4-end];
+            grid-template-rows: [row1-start] auto [row1-end] 10 px [row2-start] auto [row2-end] 10 px [row3-start] auto [row3-end] 10 px [row4-start] auto [row4-end] 10 px [row5-start] auto [row5-end];
+        }
+
+        .a {
+            grid-column: col1-start / col3-end;
+            grid-row: row1-start;
+        }
+
+        .b {
+            grid-column: col4-start / col4-end;
+            grid-row: row1-start / row5-end;
+            background: orange;
+        }
+
+        .c {
+            grid-column: col1-start;
+            grid-row: row2-start;
+        }
+
+        .d {
+            grid-column: col2-start;
+            grid-row: row2-start;
+        }
+
+        .e {
+            grid-column: col3-start;
+            grid-row: row2-start;
+        }
+
+        .f {
+            grid-column: col1-start / col2-end;
+            grid-row: row3-start;
+        }
+
+        .g {
+            grid-column: col3-start;
+            grid-row: row3-start;
+        }
+
+        .h {
+            grid-column: col1-start;
+            grid-row: row4-start;
+        }
+
+        .i {
+            grid-column: col2-start / col3-end;
+            grid-row: row4-start;
+        }
+
+        .j {
+            grid-column: col1-start / col3-end;
+            grid-row: row5-start;
+        }
+
+    </style>
+</head>
+<body>
+<h1>命名grid line</h1>
+<h1>firefox 和 chrome 都不行</h1>
+<div class="wrapper">
+    <div class="box a">A</div>
+    <div class="box b">B</div>
+    <div class="box c">C</div>
+    <div class="box d">D</div>
+    <div class="box e">E</div>
+    <div class="box f">F</div>
+    <div class="box g">G</div>
+    <div class="box h">H</div>
+    <div class="box i">I</div>
+    <div class="box j">J</div>
+</div>
+</body>
+</html>
