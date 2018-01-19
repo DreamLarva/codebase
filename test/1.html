@@ -1,18 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        .flex-box{
+            flex-wrap: wrap;
+            display:flex;
+            /*align-items: stretch;*/
+        }
+        .flex-box>div{
+            flex-shrink: 0;
+            position: relative;
+            width: 50%;
+            background:red;
+            border:3px solid #000;
+            box-sizing:border-box;
+            padding-bottom:20px;
+        }
+        .flex-box a{
+            position:absolute;
+            bottom:5px;
+            left:0;
+            color:blue;
+        }
+
+    </style>
 </head>
 <body>
-<script>
-    var str = "aaabbccde :dasdasdas :123asde1"
-    var result = str.replace(/:(\w)/g, function (match, property) {
-        console.log(match,property)
-        return arguments
-    });
 
-
+<div class="flex-box">
+    <div>a<br/>a<br/>a<br/><a class="more">more</a></div>
+    <div>b<br/><a class="more">more</a></div>
+    <div>c<br/>c<br/>c<br/>c<br/><a class="more">more</a></div>
+    <div>d<br/>d<a class="more">more</a></div>
+    <div>a<br/>a<br/>a<br/><a class="more">more</a></div>
+    <div>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/><a class="more">more</a></div>
+    <div>c<br/>c<br/>c<br/>c<br/><a class="more">more</a></div>
+    <div>d<br/>d<a class="more">more</a></div>
+</div>
 
 </body>
 </html>

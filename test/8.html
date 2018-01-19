@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.scss">
+</head>
+<body>
+<script>
+    function a(x){
+        b(function(){
+            console.log(x)
+        })
+    }
+
+    function b(cb){
+        x = 123
+        cb()
+    }
+
+    a(123)
+
+</script>
+
+<h1>12312</h1>
+
+</body>
+</html>

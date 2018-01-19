@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .ProgressBar {
+            overflow: auto;
+            height: 500px;
+            position: relative;
+        }
+
+        .ProgressBar > * {
+            height: 1px;
+            width: 100px;
+            background: transparent;
+            transform-origin: left;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+        }
+
+        .ProgressBar > *.active:after {
+            background: #DF3A32;
+        }
+
+        .ProgressBar > *:after {
+            content: ' ';
+            display: block;
+            margin-left: 75px;
+            width: 10px;
+            height: 1px;
+            background: #C4C4C4;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="ProgressBar">
+        <div v-for="index of 80"
+             :style="{transform:'rotate(' + (150 + index * 3)+ 'deg)'}"
+             v-bind:class="{active:isActive(index)}"
+        ></div>
+    </div>
+    <button @click="start">start</button>
+</div>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            percentage: 0,
+            targetPercentage:66
+        },
+        methods: {
+            isActive(index) {
+                return index <= this.percentage
+            },
+            start(){
+               setTimeout(()=>{
+                   ++this.percentage < this.targetPercentage &&
+                   this.start()
+               },16)
+            }
+        },
+        computed: {
+
+        }
+    })
+
+
+
+</script>
+</body>
+</html>

@@ -7,22 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <script>
-      // 需要在 显示dom元素前 设置
-      (function () {
-        var docEl = document.documentElement;
-        var resize = 'orientationchange' in window ? 'orientationchange' : 'resize';
-        var setRem = function () {
 
-          var screenWidth = docEl.clientWidth || window.screen.width || 360;
-          // 1080 PSD宽度(可变的)
-          docEl.style.fontSize = (100 * screenWidth / 750) + 'px';
-        };
-
-        window.addEventListener('resize', setRem, false);
-        setRem();
-      })()
-    </script>
     <style>
 
         * {
@@ -71,5 +56,24 @@
 <div class="font">
     银
 </div>
+
+
+
+<script>
+    // 需要在 显示dom元素前 设置
+    (function () {
+        var docEl = document.documentElement;
+        var resize = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var setRem = function () {
+
+            var screenWidth = docEl.clientWidth || window.screen.width || 360;
+            // 1080 PSD宽度(可变的)
+            docEl.style.fontSize = (100 * screenWidth / 750) + 'px';
+        };
+
+        window.addEventListener('resize', setRem, false);
+        setRem();
+    })()
+</script>
 </body>
 </html>
