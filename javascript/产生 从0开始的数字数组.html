@@ -6,7 +6,8 @@
 </head>
 <body>
 <script>
-    const a = () => function(){}
+    const a = () => function () {
+    }
     console.log(a() === a())
 
 
@@ -28,18 +29,19 @@
      * 生成从n开始 length为number 的数组
      * 这样并不好
      * */
-     function numberArray2(start, length) {
-         return [...new Array(length + start).keys()].slice(start)
-     }
+    function numberArray2(start, length) {
+        return [...new Array(length + start).keys()].slice(start)
+    }
 
     function numberArray3(start, length) {
         return new Array(length).fill(start).map((v, index) => v + index)
     }
+
     /**
      * 使用 array from
      * */
-    function numberArray5(start,length){
-        return Array.from({ length: length }, (v, k) => k + start)
+    function numberArray5(start, length) {
+        return Array.from({length: length}, (v, k) => k + start)
 
     }
 
@@ -47,12 +49,29 @@
      * 最快
      * 而且快的离谱
      * */
-    function numberArray4(start,length){
-         const arr = [];
-         for(let i=0;i<length;i++){
-             arr[i] = start + i;
-         }
-         return arr
+    function numberArray4(start, length) {
+        const arr = [];
+        for (let i = 0; i < length; i++) {
+            arr[i] = start + i;
+        }
+        return arr
+    }
+
+
+    /**
+     * 用最快的 规范后类似python 的range方法
+     * */
+    function range(start, end, step = 1) {
+        if (typeof end === "number") {
+        } else {
+            end = start;
+            start = 0;
+        }
+        const arr = [];
+        for (let i = start; i < end; i += step) {
+            arr[i] = start + i;
+        }
+        return arr
     }
 
 

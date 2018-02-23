@@ -3,23 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.scss">
+    <style>
+        .active[data-value=p]:after{
+            content:attr(text);
+            display: block;
+            background:orange;
+            height:100px;
+            width: 100px;
+
+        }
+    </style>
 </head>
 <body>
+<p data-value="p" class="active">123213123</p>
+
 <script>
-    function a(x){
-        b(function(){
-            console.log(x)
-        })
+    function quickWave(n = 5, crest = 4, trough = 4, isInteger = true) {
+        let list = [];
+        // 无法进行波动均分，直接返回完全平分
+        if(crest > (n - 1) * trough || trough > (n - 1) * crest) {
+            return new Array(n).fill(0);
+        }
+        let base = 0; // 最少需要消除的高度
+        let wave = 0; // 波动量
+        let high = crest; // 高位
+        let low = -trough; // 低位
+        let sum = 0; // 累计量
+        let count = n; // 剩余数量
+        while(--count >= 0) {
+            // 动态当前的波动量
+            if(crest > count * trough - sum) {
+                high = count * trough - sum;
+            }
+            if(trough > count * crest + sum) {
+                low = -sum - count * crest;
+            }
+            base = low;
+            wave = high - low;
+            let rnd; // 随机波动量
+            if(count > 0) {
+                rnd = base + Math.random() * (wave + 1); // 随机波动
+            } else {
+                rnd = -sum;
+            }
+            if(isInteger === true) {
+                rnd = Math.floor(rnd);
+            }
+            sum += rnd;
+            list.push(rnd);
+        }
+        return list;
     }
 
-    function b(cb){
-        x = 123
-        cb()
-    }
-
-    a(123)
-
+    console.log(quickWave(5, 4, 4)); // 组合总数: 3951
 </script>
 
 <h1>12312</h1>
