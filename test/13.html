@@ -40,26 +40,25 @@
     }*/
 
 
-        function* bar() {
-            yield 'x';
-            yield* foo();
-            yield 'y';
-        }
+    function* bar() {
+        yield 'x';
+        yield* foo();
+        yield 'y';
+    }
 
-        function* foo() {
-            yield 'a';
-            yield 'b';
-        }
+    function* foo() {
+        yield 'a';
+        yield 'b';
+    }
 
 
-
-        console.log(new Promise(function(resolve,reject){
-            console.log("start");
-            setTimeout(()=>resolve("transmit message"),1000);
-            console.log("after resolve");
-            console.log('before return');
-            return console.log("in return")
-        }))
+    console.log(new Promise(function (resolve, reject) {
+        console.log("start");
+        setTimeout(() => resolve("transmit message"), 1000);
+        console.log("after resolve");
+        console.log('before return');
+        return console.log("in return")
+    }))
 
 
 </script>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: content-box;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            padding: 0;
+            height: 50px;
+        }
+
+        body {
+            padding: 10px;
+        }
+
+        .wrapper {
+            border: 1px solid black;
+            height: 600px;
+            width: 100%;
+            background: #eee;
+        }
+
+        .scroller {
+            height: 100%;
+            overflow: scroll;
+            background: white;
+        }
+
+        header, footer {
+            height: 50px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="scroller">
+        <div class="content">
+            <header>
+                header
+            </header>
+            <ul>
+                <li>scroll1</li>
+                <li>scroll2</li>
+                <li>scroll3</li>
+                <li>scroll4</li>
+                <li>scroll5</li>
+                <li>scroll6</li>
+                <li>scroll7</li>
+                <li>scroll8</li>
+                <li>scroll9</li>
+                <li>scroll10</li>
+                <li>scroll11</li>
+                <li>scroll12</li>
+                <li>scroll13</li>
+                <li>scroll14</li>
+                <li>scroll15</li>
+                <li>scroll16</li>
+            </ul>
+            <footer>
+                footer
+            </footer>
+        </div>
+
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+<script>
+    $(".scroller").on("scroll", function (e) {
+
+    });
+
+    const pageY = null;
+    $(".scroller").on("touchmove", function (e) {
+        const
+            $current = $(e.currentTarget),
+            $wrapper = $current.parent(),
+            currentHeight = $current.height();
+
+        const height = $current.children().toArray()
+            .reduce((pre, cur) => {
+                return pre + cur.clientHeight
+            }, 0);
+
+
+        const currentScrollTop = $current.scrollTop();
+        if (height === currentScrollTop + currentHeight) {
+            let lastClentY = e.currentTarget.lastClentY,
+                newClientY = e.originalEvent.touches[0].clientY;
+            if (!lastClentY) {
+                e.currentTarget.lastClentY = newClientY;
+                e.currentTarget.moveY = 0;
+                return
+            }
+
+            $current.css({
+                "transform": `translateY(${-e.currentTarget.moveY}px)`
+            });
+
+            e.currentTarget.lastClentY = newClientY;
+            console.log(e.currentTarget.moveY);
+
+            e.currentTarget.moveY += lastClentY - newClientY;
+            e.currentTarget.moveY >= 50 && (e.currentTarget.moveY = 50);
+        }
+    })
+
+
+    $(".scroller").on("touchend", function (e) {
+        const
+            $current = $(e.currentTarget),
+            $wrapper = $current.parent(),
+            currentHeight = $current.height();
+
+        $current.css({
+            "transform": `translateY(${0}px)`
+
+        });
+        e.currentTarget.lastClentY = null;
+    })
+</script>
+</body>
+</html>
