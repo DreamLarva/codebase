@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            height: 99999px;
+        }
+        .container1{
+            width: 100px;
+            height: 100px;
+            border:1px solid black;
+            margin-bottom: 100px;
+        }
+        .container2{
+            border:1px solid black;
+            width: 100px;
+            height:16px;
+            line-height: 16px;
+            margin-bottom: 100px;
+        }
+        .container3{
+            border:1px solid black;
+            width: 200px;
+            height:100px;
+            margin-bottom: 100px;
+        }
+        .container4{
+            border:1px solid black;
+            width: 100px;
+            padding-right: 50px;
+            height:16px;
+            line-height: 16px;
+            margin-bottom: 100px;
+        }
+
+        .inline-block-container1{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .inline-block-container2{
+            line-height: 16px;
+            height: 16px;
+            display: inline-block;
+            padding-right: 50px;
+            width: 100px;
+        }
+        .container4{
+            width: 300px;
+            height: 100px;
+            padding: 100px
+        }
+
+        .inline-block-container3{
+
+            line-height: 16px;
+            height: 16px;
+            padding-right: 50px;
+            width: 100px;
+
+            display: inline-flex;
+            flex-direction: row-reverse;
+        }
+        .inline-block-container4{
+
+            line-height: 16px;
+            height: 16px;
+            padding-right: 50px;
+            width: 100px;
+
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap-reverse;
+        }
+        .break{
+            white-space:normal;
+            word-break:break-all;
+        }
+
+    </style>
+</head>
+<body>
+
+块级元多行中文
+<div class="container1">
+   溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+</div>
+
+块级元单行中文
+<div class="container2">
+     溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+</div>
+
+数字单行
+<div class="container2">
+     123456789012345678901234567890123456789012345678901234567890
+</div>
+
+块级 包裹 行内块 中文单行
+<div class="container3">
+    <div class="container2">
+        溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+    </div>
+</div>
+
+块级包裹行内 中文
+<div class="container3">
+    <span>
+        溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+    </span>
+</div>
+
+块级包裹行内 数字
+<div class="container3">
+    <span>
+        1234567890111121314151617118192021222324252627282930
+    </span>
+</div>
+
+块级包裹行内 数字 有
+white-space:normal;
+word-break:break-all;
+<div class="container3 break">
+    <span>
+        1234567890111121314151617118192021222324252627282930
+    </span>
+</div>
+
+块级padding 中文多行
+<div class="container4">
+    溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+</div>
+
+
+<div class="container4">
+   12345678901234567890123456789012345678901234567890
+</div>
+
+
+<div class="container3">
+    <div class="inline-block-container1">
+        溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+    </div>
+</div>
+
+
+<div class="container3">
+    <div class="inline-block-container2">
+        123456789123456789123456789123456789
+    </div>
+</div>
+
+<div class="container3">
+    <div class="inline-block-container2">
+        溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出溢出
+    </div>
+</div>
+
+<div class="container3">
+    <div class="inline-block-container2">
+        ~!@#$%^&*()_+~!@#$%^&*()_+~!@#$%^&*()_+~!@#$%^&*()_+~!@#$%^&*()_+
+    </div>
+</div>
+
+<div class="container3">
+    <div class="inline-block-container2">
+        1234567890~!@#$%^&*()_
+    </div>
+</div>
+
+<div class="container4">
+    <div class="inline-block-container3">
+        123456789011121314151617
+    </div>
+</div>
+
+<div class="container4">
+    <div class="inline-block-container4">
+        一二三四五六七八九十十一十二十三十四
+    </div>
+</div>
+
+
+</body>
+</html>

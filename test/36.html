@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * @param {string} s
+     * @param {string} p
+     * @return {boolean}
+     */
+    var isMatch = function (s, p) {
+        // 按照正则分割字符串
+        const reg = groupReg2(p);
+
+        let strFromIndex = 0; // 默认从头开始匹配
+
+        for (let regIndex = 0; regIndex < reg.length; regIndex++) {
+            const curReg = reg[regIndex];
+
+            // 匹配无* 的正则
+            if (curReg.indexOf("*") === -1) {
+                for (let i = 0; i < curReg.length; i++) {
+                    if (curReg[i] === "." || curReg[i] === s[strFromIndex]) {
+                        strFromIndex++;
+                    } else {
+                        return false
+                    }
+                }
+            }
+
+            // 匹配有 *的正则 但是没有 .*
+            else if (curReg.indexOf(".*") === -1) {
+                const character = curReg[0];
+                const asteriskLength = curReg.split("").filter(v => v === "*").length;
+                let characterWithOutAsteriskLength = curReg.length - asteriskLength * 2;
+
+                // 存在 有不包含* 的字符 保证至少有 n 个字符 并向后推 n 个字符
+                if (characterWithOutAsteriskLength) {
+                    for (let i = 0; i < characterWithOutAsteriskLength; i++) {
+                        if (character === s[strFromIndex]) {
+                            strFromIndex++;
+                        } else {
+                            return false
+                        }
+                    }
+                }
+
+                // 向后匹配所有 匹配的字符
+                while (s[strFromIndex] === character) {
+                    strFromIndex++
+                }
+
+            }
+            // 包含 .*
+            else {
+                const character = curReg[0];
+                const asteriskLength = curReg.split("").filter(v => v === "*").length;
+                let characterWithOutAsteriskLength = curReg.length - asteriskLength * 2;
+
+                // 存在 有不包含* 的字符 保证至少有 n 个字符 并向后推 n 个字符
+                if (characterWithOutAsteriskLength) {
+                    for (let i = 0; i < characterWithOutAsteriskLength; i++) {
+                        if (character === ".") {
+                            strFromIndex++;
+                        } else {
+                            return false
+                        }
+                    }
+                }
+
+                // 如果已经是最后一个 那么结果一定正确
+                if (regIndex === reg.length - 1) {
+                    return true
+                }
+
+                // 为下一个正则找一个 合适的起点
+                else {
+                    const nextReg = reg[regIndex + 1][0];
+                    strFromIndex = s.indexOf(nextReg, strFromIndex);
+                    if (strFromIndex === -1) {
+                        return false
+                    }
+                }
+
+
+            }
+        }
+
+        return s.length === strFromIndex;
+
+
+    };
+
+    function groupReg2(str) {
+        return str.split("").reduce((pre, cur, index, all) => {
+
+            if (!pre.length) {
+                pre.push(cur);
+                return pre
+            }
+
+            const lastType = last(pre)[0];
+            if (cur === "*" || cur === lastType) {
+                pre[pre.length - 1] += cur
+
+            } else {
+                pre.push(cur);
+            }
+
+            return pre
+        }, []);
+    }
+
+    function last(arr) {
+        return arr[arr.length - 1];
+    }
+
+
+    // 测试用例
+    const testCase = [
+        // [["a", "aa"], false],
+        // [["aa", "a"], false],
+        // [["aa", "a*"], true],
+        // [["a", "a*"], true],
+        // [["a", "ab"], false],
+        // [["ab", "ab"], true],
+        // [["ab", "a*b"], true],
+        // [["ab", "a*b*"], true],
+        // [["ab", "a*b*c"], false],
+        // [["ab", "ca*b*"], false],
+        // [["ab", ".*"], true],
+        // [["ab", ".*.*"], true],
+        // [["ab", "a*.*.*"], true],
+        // [["ab", "a*.*b*.*"], true],
+        // [["aa", "aaa*"], true],
+        // [["aab", "aaa*b"], true],
+        // [["aab", "aaa*b*"], true],
+        // [["aab", "aaa*bb*"], true],
+        // [["ab", "a*ab*.*"], true],
+        // [["abc", "a*ab*.*"], true],
+        [["aaa", "ab*a*c*a"], true],
+    ];
+
+    function test(fun, testCases) {
+        let hasError = false;
+        for (let [args, expectedResult] of testCases) {
+            const result = fun(...args);
+            if (result !== expectedResult) {
+                hasError = true;
+                console.log(`${args.join(",")} expect ${expectedResult} but ${result}`);
+                document.write(`${args.join(",")} expect ${expectedResult} but ${result}`);
+            }
+        }
+
+        if (!hasError) {
+            document.write("测试通过");
+        }
+    }
+
+    test(isMatch, testCase)
+
+
+
+
+</script>
+</body>
+</html>

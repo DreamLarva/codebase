@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.js"></script>
+</head>
+<body>
+<table border="1" id="dataTable">
+
+    <tr>
+
+        <th>Month</th>
+
+        <th>Savings</th>
+
+    </tr>
+
+    <tr>
+
+        <td>January</td>
+
+        <td>$100</td>
+
+    </tr>
+
+</table>
+<script>
+
+    var blob = new Blob(["1,32,3\n" +
+    "1,32,4\n" +
+    "2,3,2\n" +
+    "4,3,4\n" +
+    "4,4,5\n" +
+    "5,2,3\n" +
+    "6,44,\n"]);
+    saveAs(blob, "文件导出测试.csv");
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: scroll;
+        }
+
+        footer {
+            width: 100%;
+            height: 50px;
+            background: red;
+            /*align-self: flex-end;*/
+            flex-shrink: 0;
+        }
+
+        .container {
+            /*min-height: calc(100vh - 50px);*/
+            /*height: 1000px;*/
+            background: green;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        不能直接设置container 的高度 container 的子元素撑开container  的高度
+    </h1>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda eius error exercitationem harum maiores mollitia, nihil nulla numquam, praesentium, quasi qui saepe sed sint ut? Blanditiis explicabo possimus veritatis?</div>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda eius error exercitationem harum maiores mollitia, nihil nulla numquam, praesentium, quasi qui saepe sed sint ut? Blanditiis explicabo possimus veritatis?</div>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda eius error exercitationem harum maiores mollitia, nihil nulla numquam, praesentium, quasi qui saepe sed sint ut? Blanditiis explicabo possimus veritatis?</div>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda eius error exercitationem harum maiores mollitia, nihil nulla numquam, praesentium, quasi qui saepe sed sint ut? Blanditiis explicabo possimus veritatis?</div>
+
+</div>
+<footer>
+
+</footer>
+<script>
+
+    // let h = 500;
+    // setInterval(()=>{
+    //     const container = document.querySelector(".container");
+    //     console.log(container.style.height);
+    //     container.style.height = h++ + "px"
+    // },16);
+</script>
+</body>
+</html>

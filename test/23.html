@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height:500px;
+            overflow:scroll;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque facere neque quibusdam voluptate. Consectetur eos illo, laudantium minima officia quisquam sequi. Autem deleniti est illum iusto molestiae quasi rem, repellat!</div>
+<div class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque facere neque quibusdam voluptate. Consectetur eos illo, laudantium minima officia quisquam sequi. Autem deleniti est illum iusto molestiae quasi rem, repellat!</div>
+
+<script>
+    var l=document.querySelector('.left');
+    var r=document.querySelector('.right');
+
+    let times = true;
+    l.addEventListener('scroll', _.throttle( function (e) {
+        console.log("left", l.scrollTop,r.scrollTop);
+        r.scrollTop = l.scrollTop;
+    },1000/60,{leading:true,trailing:false}));
+
+    r.addEventListener('scroll',  _.throttle(function (e) {
+        console.log("right", l.scrollTop,r.scrollTop);
+
+        l.scrollTop = r.scrollTop;
+
+    },1000/60),{leading:true,trailing:false})
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    Function.prototype.after = function (fun) {
+        const self = this;
+
+        return function (payload) {
+            fun.call(self, payload);
+            self(payload)
+        }
+    };
+
+    Function.prototype.before = function (fun) {
+        const self = this;
+        return function (payload) {
+            self(payload);
+            fun.call(self, payload);
+        }
+    };
+
+
+    class a {
+        constructor() {
+            this.a = 1;
+            this.init()
+        }
+
+        b = function(arg) {
+            console.log(1,this.a,arg)
+        }
+
+        init() {
+            this.b = this.b.after(function(arg){
+                console.log(2,this.a,arg)
+            });
+            this.b = this.b.before(function(arg){
+                console.log(0,this.a,arg)
+            })
+        }
+    }
+
+    new a().b()
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style>
+        .container{
+            overflow:scroll;
+            height: 500px;
+            width: 500px;
+            border:1px solid black;
+        }
+        .content{
+            width: 500px;
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+<div id="bar"></div>
+
+<div class="container">
+    <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eaque libero magni quaerat recusandae tempora tenetur. Animi doloremque ea enim exercitationem harum id molestiae nisi numquam, obcaecati quaerat, quibusdam sequi!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eaque libero magni quaerat recusandae tempora tenetur. Animi doloremque ea enim exercitationem harum id molestiae nisi numquam, obcaecati quaerat, quibusdam sequi!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eaque libero magni quaerat recusandae tempora tenetur. Animi doloremque ea enim exercitationem harum id molestiae nisi numquam, obcaecati quaerat, quibusdam sequi!
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var el = document.getElementById('bar');
+        el.addEventListener('foo', function (ev) {
+            ev.preventDefault();
+        }, {passive: true});
+        var canceled = !(el.dispatchEvent(
+            new CustomEvent('foo', {cancelable: true})
+        ));
+        el.textContent = canceled ? 'FAIL' : 'PASS';
+    };
+
+
+    const  container = document.querySelector(".container")
+    container.addEventListener('scroll', function (e) {
+        e.preventDefault()
+    }, {passive: false})
+</script>
+
+</body>
+</html>

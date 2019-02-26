@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JS和CSS固定标题列与首列</title>
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //#region table滚动处理
+            var top = 0;
+            var left = 0;
+            var el = document.getElementById("myBody");
+            var ths = el.getElementsByTagName("th");
+
+            el.onscroll = function (e) {
+                var tempTop = el.scrollTop;
+                var tempLeft = el.scrollLeft;
+
+                if (top !== tempTop) {
+                    top = tempTop;
+                    for (var i = 0; i < ths.length; i++) {
+                        ths[i].style.top = tempTop + "px";
+                    }
+                }
+                if (left != tempLeft) {
+                    left = tempLeft;
+                    $(".locked").css("left", tempLeft + "px");
+                }
+            }
+            //#endregion
+        })
+    </script>
+    <style type="text/css">
+        #myRepeater td, #myRepeater th {
+            border: 0.1px solid #cccccc;
+            white-space: nowrap; /*文本不进行换行*/
+            text-align: center;
+        }
+
+        #myRepeater th {
+            position: relative;
+            z-index: 1;
+        }
+
+        #myRepeater th.locked {
+            z-index: 2;
+        }
+
+        #myRepeater td.locked {
+            position: relative;
+            left: 0px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id='myBody' style="width: 250px; height: 100px; overflow: scroll; margin: auto;" align='center'>
+    <table id='myRepeater' cellspacing="0" align='center'>
+        <tr style='background-color: rgb(50,152,120);'>
+            <th class='locked'>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>籍贯1</th>
+            <th>籍贯2</th>
+            <th>籍贯3</th>
+            <th>籍贯4</th>
+            <th>籍贯5</th>
+        </tr>
+        <tr>
+            <td class='locked'>张三</td>
+            <td>21</td>
+            <td>男</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+        </tr>
+        <tr>
+            <td class='locked'>李四</td>
+            <td>22</td>
+            <td>男</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+        </tr>
+        <tr>
+            <td class='locked'>程柳</td>
+            <td>22</td>
+            <td>女</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+        </tr>
+        <tr>
+            <td class='locked'>张三</td>
+            <td>21</td>
+            <td>男</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+        </tr>
+        <tr>
+            <td class='locked'>李四</td>
+            <td>22</td>
+            <td>男</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+            <td>彝族</td>
+        </tr>
+        <tr>
+            <td class='locked'>程柳</td>
+            <td>22</td>
+            <td>女</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+            <td>汉族</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

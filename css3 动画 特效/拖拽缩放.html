@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .box{ position: fixed; width: 200px; height: 200px; background-color: red; }
+    </style>
+</head>
+<body>
+
+<div class="box"></div>
+<script type="text/javascript">
+    class DragResize {
+        constructor(select, params = {}) {
+            this.box = document.querySelector(select);
+            if (!this.box) {
+                throw new Error('无效的选择器' + select);
+            } else {
+                this.init(params);
+            }
+        }
+        init(params) {
+            let actions = params.actions || ['m', 'l', 'r', 'b', 'lt', 'rt', 'rb', 'lb'];
+            this.minW = params.minW || 0; // 最小宽度
+            this.minH = params.minH || 0;
+            this.maxW = params.maxW || window.innerWidth;
+            this.maxH = params.maxH || window.innerHeight;
+
+            // 此处保存window原有事件
+            this.lastWindowMousemove = window.onmousemove;
+            this.lastWindowMouseup = window.onmouseup;
+
+            this.makeHtml(actions);
+            this.makeStyle();
+        }
+        addEvent(el) {
+            el.addEventListener('mousedown', this.mousedown.bind(this), false);
+        }
+        mousedown(e) {
+            let className = e.target.className;
+            // 通过classname来判断各种类型
+            let isMove = className.lastIndexOf('m') > 7;
+            let isT = className.lastIndexOf('t') > 7;
+            let isR = className.lastIndexOf('r') > 7;
+            let isL = className.lastIndexOf('l') > 7;
+            let isB = className.lastIndexOf('b') > 7;
+
+            let parent = this.box;
+            let lastX = e.pageX;
+            let lastY = e.pageY;
+            let { left, top, width, height } = parent.getBoundingClientRect();
+            // 借用 window
+            window.onmousemove = ev => {
+                ev.preventDefault();
+                let disX = ev.pageX - lastX;
+                let disY = ev.pageY - lastY;
+                // 部分用transform:translate3d(-50%,-50%,0)进行的居中定位，此处清除
+                parent.style.transform = 'none';
+                parent.style.top = top + 'px';
+                if (isMove) {
+                    let l = left + disX;
+                    let t = top + disY;
+                    let maxW = window.innerWidth - width;
+                    let maxH = window.innerHeight - height;
+                    // 通过设置等于临界点 防卡顿
+                    l = l <= 0 ? 0 : l >= maxW ? maxW : l;
+                    t = t <= 0 ? 0 : t >= maxH ? maxH : t;
+
+                    parent.style.left = l + 'px';
+                    parent.style.top = t + 'px';
+                }
+
+                if (isT) {
+                    disY = disY >= height - this.minH ? height - this.minH : disY <= height - this.maxH ? height - this.maxH : disY;
+                    let h = height - disY;
+                    let t = top + disY;
+                    parent.style.height = h + 'px';
+                    parent.style.left = left + 'px';
+                    parent.style.top = t + 'px';
+                } else if (isB) {
+                    let h = height + disY;
+                    if (h <= this.minH) {
+                        h = this.minH;
+                    } else if (h >= this.maxH) {
+                        h = this.maxH;
+                    }
+                    parent.style.height = h + 'px';
+                    parent.style.left = left + 'px';
+                }
+                if (isR) {
+                    let w = width + disX;
+                    if (w <= this.minW) {
+                        w = this.minW;
+                    } else if (w >= this.maxW) {
+                        w = this.maxW;
+                    }
+                    parent.style.width = w + 'px';
+                    parent.style.left = left + 'px';
+                } else if (isL) {
+                    if (disX >= width - this.minW) {
+                        disX = width - this.minW;
+                    } else if (disX <= width - this.maxW) {
+                        disX = width - this.maxW;
+                    }
+                    let w = width - disX;
+                    let l = left + disX;
+                    parent.style.width = w + 'px';
+                    parent.style.left = l + 'px';
+                }
+            }
+            // 归还window原有事件
+            window.onmouseup = function () {
+                window.onmousemove = this.lastWindowMousemove;
+                window.onmouseup = this.lastWindowMouseup;
+            }
+        }
+        makeHtml(actions) {
+            for (let i = 0; i < actions.length; i++) {
+                let a = document.createElement('a');
+                a.className = 'js-drag-' + actions[i];
+                this.box.appendChild(a);
+                this.addEvent(a);
+            }
+        }
+        makeStyle() {
+            let style = document.createElement('style');
+            style.innerHTML = `
+        .js-drag-lt, .js-drag-rt, .js-drag-lb, .js-drag-rb{
+            z-index: 10000;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+        }
+        .js-drag-t, .js-drag-m, .js-drag-b{
+            z-index: 10000;
+            position: absolute;
+            width: 100%;
+            height: 10px;
+        }
+        .js-drag-l, .js-drag-r{
+            z-index: 10000;
+            position: absolute;
+            width: 10px;
+            height: 100%;
+        }
+        .js-drag-t, .js-drag-m, .js-drag-l, .js-drag-r, .js-drag-lt, .js-drag-rt{
+            top: 0;
+        }
+        .js-drag-lb, .js-drag-b, .js-drag-rb{
+            bottom: 0;
+        }
+        .js-drag-t, .js-drag-m, .js-drag-l, .js-drag-b, .js-drag-lb, .js-drag-lt{
+            left: 0;
+        }
+        .js-drag-r, .js-drag-rb, .js-drag-rt{
+            right: 0;
+        }
+        .js-drag-m{
+            cursor: move;
+        }
+        .js-drag-t, .js-drag-b{
+            cursor: ns-resize;
+        }
+        .js-drag-l, .js-drag-r{
+            cursor: ew-resize;
+        }
+        .js-drag-rb, .js-drag-lt{
+            cursor: nwse-resize;
+        }
+        .js-drag-lb, .js-drag-rt{
+            cursor: nesw-resize;
+        }`;
+            document.head.appendChild(style);
+        }
+    }
+    new DragResize('.box', { minW: 100, minH: 100 });
+</script>
+</body>
+</html>
