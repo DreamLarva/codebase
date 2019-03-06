@@ -27,40 +27,58 @@
  *     this.next = null;
  * }
  */
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+
+ListNode.prototype.toArray = function () {
+    const result = [];
+    let tmp = this;
+    while (tmp !== null) {
+        result.push(tmp.val);
+        tmp = tmp.next
+    }
+    return result;
+};
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var mergeTwoLists = function(l1, l2) {
+
+var mergeTwoLists = function (l1, l2) {
+    if(l2.next == null){
+        return l1
+    } else if(l1.next == null){
+        return l2
+    }
+
     const arr = [];
-     while(l1.next !== null || l2.next !== null){
-         if(l1.next === null){
-             arr.push(l2.val);
-             l2 = l2.next;
-         }
-         if(l2.next === null){
-             arr.push(l1.val);
-             l1 = l1.next;
-         }
+    while (!(l1 == null && l2 == null)) {
+        if (l1 === null) {
+            arr.push(l2.val);
+            l2 = l2.next;
+        }else if (l2 === null) {
+            arr.push(l1.val);
+            l1 = l1.next;
+        }else if (l1.val < l2.val) {
+            arr.push(l1.val);
+            l1 = l1.next;
+        } else {
+            arr.push(l2.val);
+            l2 = l2.next;
+        }
+    }
 
-         if(l1.val < l2.val){
-             arr.push(l1.val);
-             l1 = l1.next;
-         }else{
-             arr.push(l2.val);
-             l2 = l2.next;
-         }
-     }
-
-     return create_Linked_list(arr);
+    return create_Linked_list(arr);
 };
 
-function create_Linked_list(arr){
-    const root =  new ListNode(arr.shift());
+function create_Linked_list(arr) {
+    const root = new ListNode(arr.shift());
     let cur = root;
     let temp;
-    for(const v of arr){
+    for (const v of arr) {
         temp = new ListNode(v);
         cur.next = temp;
         cur = temp;
@@ -68,12 +86,19 @@ function create_Linked_list(arr){
     return root
 }
 
+const assert = require("assert");
 
 
-function ListNode(val) {
-    this.val = val;
-    this.next = null;
-}
+assert.deepStrictEqual(
+    mergeTwoLists(create_Linked_list([1, 2, 4]), create_Linked_list([1, 3, 4])).toArray(),
+
+    [1, 1, 2, 3, 4, 4]
+);
+
+
+
+
+
 
 
 
