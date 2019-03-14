@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/ramda/0.26.1/ramda.js"></script>
+</head>
+<body>
+<script>
+    /* 异步 */
+    function asyncWork(data) {
+        return new Promise(function (resolve, reject) {
+            a
+            setTimeout(() => resolve(), 1000)
+        })
+    }
+
+    console.log(R.compose(
+        R.otherwise( e => console.log(e)),
+        R.then(() => console.log(1)),
+        asyncWork,
+        R.prop("a")
+    )({
+        a: 1
+    }))
+
+</script>
+</body>
+</html>
