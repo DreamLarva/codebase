@@ -41,3 +41,4 @@ var triState = {
     /** @type {boolean} */
     MAYBE: true
 };
+console.log(2)
