@@ -98,7 +98,7 @@ suite
         solution1(a,b)
     })
     .add('二分法', function () {
-       solution2(a,b)
+        solution2(a,b)
     })
     .on('cycle', function (event) {
         console.log(String(event.target));

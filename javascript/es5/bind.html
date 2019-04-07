@@ -38,7 +38,7 @@
 
     var obj = {a:1,b:2};
     var fun = function(a,b,c){
-        console.log(this.a,this.b,this.c,a,b,c)
+        console.log(this.a,this.bb,this.n,a,b,c)
     }.bind(obj,1,2,3);
 
     fun(4,5,6);

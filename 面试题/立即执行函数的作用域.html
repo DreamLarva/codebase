@@ -7,12 +7,12 @@
 <body>
 <script>
     var a = 1;
-    window.b = 2;
+    window.bb = 2;
 
     // 上下文的this
     (function () {
         console.log(this);
-        console.log(this.a, this.b)
+        console.log(this.a, this.bb)
     }());
 
 
@@ -23,7 +23,7 @@
         // 上下文是依然是window
         (function () {
             console.log(this);
-            console.log(this.a, this.b)
+            console.log(this.a, this.bb)
         }())
     }
     test();

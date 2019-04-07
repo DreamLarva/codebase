@@ -55,8 +55,8 @@
  * @param {number} K
  * @return {number}
  */
-const largestSumAfterKNegations = function (A, K) {
-    A.sort((a,b)=>a-b);
+const largestSumAfterKNegations  = function (A, K) {
+    A.sort((a, b) => a - b);
     // 获取负数的个数
     const negative_count = A.filter(a => a < 0).length;
     // 如果负数的个数大于等于 K
@@ -70,7 +70,7 @@ const largestSumAfterKNegations = function (A, K) {
         }, 0)
     }
     // 如果负数的个数小于 K
-    else if((K - negative_count) % 2 !== 0){
+    else if ((K - negative_count) % 2 !== 0) {
         // 找到最小绝对值
         let min_abs = null;
         const sum = A.reduce((pre, cur, index) => {
@@ -88,12 +88,12 @@ const largestSumAfterKNegations = function (A, K) {
         });
 
         return sum - min_abs * 2;
-    }else{
-        return A.reduce((a,b) => Math.abs(a) + Math.abs(b))
+    } else {
+        return A.reduce((a, b) => Math.abs(a) + Math.abs(b))
     }
 
 };
 
-console.log(largestSumAfterKNegations([5,6,9,-3,3],2));
+console.log(largestSumAfterKNegations([5, 6, 9, -3, 3], 2));
 
 

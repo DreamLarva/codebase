@@ -43,35 +43,55 @@
  *
  *
  */
+class Count {
+    constructor() {
+        this.data = [];
+    }
+
+    getLast() {
+        return this.data[this.data.length - 1];
+    }
+
+    addMany(str) {
+        str.split("").forEach((character) => this.add(character));
+        return this
+    }
+
+    add(character) {
+        if (this.data.length === 0) {
+            this.data.push({text: character, count: 1})
+        } else {
+            const last = this.getLast();
+            if (last.text === character) {
+                last.count++;
+            } else {
+                this.data.push({text: character, count: 1});
+            }
+        }
+        return this
+    }
+
+    toString() {
+        return this.data.reduce((pre, {text, count}) => pre + count + text, "");
+    }
+
+}
+
 /**
  * @param {number} n
  * @return {string}
  */
 var countAndSay = function (n) {
-    const arr = ["1"];
-    n--;
-    while (n--) {
-        arr[arr.length] = last(arr).reduce((pre, cur) => {
-            if (pre.length === 0) {
-               pre.push([cur,1]);
-            }
-            else if(last(arr)[0] === cur){
-                last(arr)[1]++;
-            }else{
-                pre.push([cur,1]);
-            }
-            return pre
-
-        }, [])
-
+    if(n-- === 1){
+        return "1";
+    }
+    let result = new Count().add("1");
+    while (--n) {
+        result = new Count().addMany(result.toString());
     }
 
-    return last(arr);
+    return result.toString();
 };
 
-function last(arr) {
-    return arr[arr.length - 1];
-}
 
 
-console.log(countAndSay(1));
