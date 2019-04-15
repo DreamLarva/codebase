@@ -22,5 +22,8 @@
   "homepage": "https://github.com/DreamLarva/codebase#readme",
   "dependencies": {
     "benchmark": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^10.14.4"
   }
 }
