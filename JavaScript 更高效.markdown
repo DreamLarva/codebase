@@ -113,3 +113,4 @@
 
 2. location.replace() 控制历史记录
 2. location.replace() 控制历史记录
+2. location.replace() 控制历史记录2
