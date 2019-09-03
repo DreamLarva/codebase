@@ -1,19 +1,10 @@
-function isPrime(num) {
-    if (num === 2 || num === 3) {
-        return true
-    }
-
-    // 与6的倍数相邻的数 不是质数
-    if (num % 6 !== 1 && num % 6 !== 5) {
-        return false
-    }
-    const tmp = Math.floor(Math.sqrt(num));
-    for (let i = 5; i <= tmp; i++) {
-        if (num % i === 0 || num % (i + 2) === 2) {
-            return false
+export default function isPrime(n) {
+    if (n <= 3) return n > 1;
+    if (n % 2 === 0 || n % 3 === 0) return false;
+    for (let i = 5; i * i <= n; i += 6) {
+        if (n % i === 0 || n % (i + 2) === 0) {
+            return false;
         }
     }
-    return true
+    return true;
 }
-
-

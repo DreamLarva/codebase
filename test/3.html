@@ -3,33 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+
+        .cube {
+            width: 100px;
+            height: 100px;
+
+            opacity: 0.5;
+        }
+
+        .relative {
+            background: red;
+            position: relative;
+            right: 0;
+        }
+
+        .absolute {
+            background: yellow;
+            position: absolute;
+        }
+    </style>
+    <!--    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>-->
+    <!--    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>-->
+    <!--    <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.js"></script>-->
+
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js" type="module"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js" type="module"></script>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.js" type="module"></script>
+    <script>
+        import react from 'lodash';
+        console.log(react)
+    </script>
+
+    <style>
+        .bg{
+            background: url("3c41df1f4134970a9406750699cad1c8a7865d30.gif");
+        }
+    </style>
 </head>
 <body>
-<script>
-    //  不能将任何函数命名成  Object.prototype 中任何属性的名字(在垃圾的浏览器中会有问题 Es3 标准)
-    var constructor = function () {
-        return null
-    };
-    var f = function () {
-        return constructor()
-    };
 
-    // console.log(f())
-    // document.write(f())
+<div class="bg">
 
-    var g = function h() {
-        return 1111
-    // console.log(h) // Error
-    };
-
-    var arr = [];
-    for(var a=1;a<10;a++){
-        (function(a){
-            arr[a] = function(){console.log(a)}
-        }(a))
-    }
-
-    arr[9]()
-</script>
+</div>
+<div class="container" style="position: relative">
+    <div class="relative cube"></div>
+    <div class="absolute cube"></div>
+</div>
 </body>
 </html>

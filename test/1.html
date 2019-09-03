@@ -1,48 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Title</title>
     <style>
-        *{padding:0;margin:0}
-        .flex-box{
-            flex-wrap: wrap;
-            display:flex;
-            /*align-items: stretch;*/
+        html,body{
+            height: 100%;
+            margin: 0;
         }
-        .flex-box>div{
-            flex-shrink: 0;
-            position: relative;
-            width: 50%;
-            background:red;
-            border:3px solid #000;
-            box-sizing:border-box;
-            padding-bottom:20px;
+        body{
+            display: flex;
+            flex-direction: column;
         }
-        .flex-box a{
-            position:absolute;
-            bottom:5px;
-            left:0;
-            color:blue;
+        .static{
+            width: 100%;
+            background: red;
+            height: 200px;
+        }
+        .scroll{
+            width: 100%;
+            overflow-y: scroll;
+            flex-grow: 1;
+        }
+        .veryHigh{
+            width: 100%;
+
+
+            background-color: yellow;
         }
 
     </style>
 </head>
 <body>
 
-<div class="flex-box">
-    <div>a<br/>a<br/>a<br/><a class="more">more</a></div>
-    <div>b<br/><a class="more">more</a></div>
-    <div>c<br/>c<br/>c<br/>c<br/><a class="more">more</a></div>
-    <div>d<br/>d<a class="more">more</a></div>
-    <div>a<br/>a<br/>a<br/><a class="more">more</a></div>
-    <div>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/>b<br/><a class="more">more</a></div>
-    <div>c<br/>c<br/>c<br/>c<br/><a class="more">more</a></div>
-    <div>d<br/>d<a class="more">more</a></div>
-    <div>d<br/>d<a class="more">more</a></div>
+
+<div class="static"></div>
+<div class="scroll">
+    <div class="veryHigh">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at cum dolorum eligendi esse, eum eveniet facere, facilis incidunt ipsam laboriosam nemo neque non officia praesentium quas quos recusandae repellendus?
+    </div>
+
 </div>
 
 </body>

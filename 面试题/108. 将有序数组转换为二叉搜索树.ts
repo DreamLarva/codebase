@@ -17,11 +17,11 @@
 */
 
 class TreeNode<T> {
-    val: T = null;
+    val: T | void;
     left: null | TreeNode<T> = null;
     right: null | TreeNode<T> = null;
 
-    constructor(val: T) {
+    constructor(val?: T) {
         this.val = val;
     }
 }
@@ -34,7 +34,7 @@ var sortedArrayToBST = function (nums: number[]) {
     return recursionSortedArrayToBS(nums)
 };
 
-function recursionSortedArrayToBS(nums, node = new TreeNode()) {
+function recursionSortedArrayToBS(nums:number[], node = new TreeNode()) {
     if (nums.length === 0) {
         return null
     }
