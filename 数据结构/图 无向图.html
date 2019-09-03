@@ -28,6 +28,7 @@
 
 
     }
+
     // 添 v 到 w 的边
     Graph.prototype.addEdge = function (v, w) {
         this.adj[v].push(w); // v 点 能到 w
@@ -57,7 +58,7 @@
             if (this.adj[v] !== undefined) {
                 console.log("访问了顶点" + v)
             }
-            this.adj[v].forEach((v, i, a)=> {
+            this.adj[v].forEach((v, i, a) => {
                 if (!marked[v] && v !== "") {
                     dfs.call(this, v)
                 }
@@ -80,7 +81,7 @@
             if (w !== undefined) {
                 console.log("访问了节点 " + w)
             }
-            this.adj[w].forEach((v, i, a)=> {
+            this.adj[w].forEach((v, i, a) => {
                 if (!marked[v] && v !== "") {
                     console.log(v, w);
                     edgeTo[v] = w;
