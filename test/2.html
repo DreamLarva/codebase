@@ -16,6 +16,7 @@
             color: red;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 <ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus expedita fugit laborum quisquam. At dolorum eos harum id molestias mollitia optio voluptates. Dolor illo maiores nisi perspiciatis qui vel voluptas.</li></ul>
@@ -27,5 +28,28 @@
     <div>
       2222
     </div>
+<div id="app">
+    <p>{{data}}</p>
+    <input class="number__input" type="number" @input="oninput" :placeholder="placeholder"/>
+</div>
+
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      placeholder: '请输入数值',
+      data:""
+    },
+    methods: {
+      oninput(e) {
+        // 通过正则过滤小数点后两位
+        e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null;
+        this.data =  e.target.value;
+        console.log('e',e.target.value)
+      }
+    }
+  })
+</script>
 </body>
 </html>
