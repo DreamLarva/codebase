@@ -1,0 +1,130 @@
+## 快捷键
+
+### 自动代码
+常用的有```fori/sout/psvm```+Tab即可生成循环、System.out、main方法等boilerplate样板代码 。
+例如要输入```for(User user : users)```只需输入```user.for + Tab ```；
+再比如，要输入```Date birthday = user.getBirthday()```只需输入```user.getBirthday().var```+Tab即可。
+代码标签输入完成后，按Tab，生成代码。
+
+1. Ctrl + Space : 代码提示
+1. Ctrl + Shift + Space : 自动补全代码(只有一个可能的提示时;webstorm中 smartType 不知道什么意思)
+1. Ctrl + Alt + O : 优化导入的类和包(自动删除多余的import 并且排序)
+1. Alt + Insert : 生成代码(如get,set方法,构造函数,copyright,模板,implement method等) 或者右键（Generate）
+1. ```fori/sout/psvm```等 + Tab
+1. Ctrl + O : 重写方法(class 中使用)
+1. Ctrl + I : 实现方法(class 中使用)
+1. Ctr + Shift + U : 大小写转化(全大写 或 全小写)
+1. Alt + Enter : 导入包,自动修正
+1. Alt + / : 代码提示(这个位置 之前的代码提示(单词长度的))
+1. Ctrl + J : 自动代码段(需要自己配置内容)
+1. Ctrl + Shift + J : 整合选中的多行为一行
+1. Ctrl + Alt + L : 格式化代码
+1. Ctrl + Shift + Alt + L : 格式化代码(有额外选项)
+1. Ctrl + Alt + I : 自动缩进(并且将光标移到下一行)
+1. Ctrl + P : 方法参数提示
+1. Ctrl + Q : 可以看到当前方法的声明
+
+
+### 查询 选择 快捷键
+1. Alt + F7 : 找到你的函数或者变量或者类的所有引用到的地方(打开find的工具栏)
+1. Ctrl + Alt + F7 : 找到你的函数或者变量或者类的所有引用到的地方(popup)
+1. Ctrl + Shift + Alt + N : 用 Symbol(任意方法 类 变量等的全部或部分) 查找整个项目
+1. Ctrl + N : 查找类
+1. Ctrl + Shift + N : 查找文件
+1. Shift + Shift : 在项目的所有目录查找文件(上面三个查找的合体)
+1. Ctrl + G : 定位行
+1. Ctrl + F 或 Alt + F3: 在当前窗口查找文本
+1. Ctrl + Shift + F : 在指定窗口查找文本
+1. Ctrl + R : 在 当前窗口替换文本
+1. Ctrl + Shift + R : 在指定窗口替换文本
+1. Alt + Shift + C : 显示最近修改的改动(recent changes)
+1. F3 : 向下查找关键字出现位置
+1. Shift + F3 : 向上一个关键字出现位置
+1. F4 或 Ctrl + 鼠标左键: 跳转到变量方法声明等的定义的位置
+1  Ctrl + Shift + I : popup 变量的定义的位置内容
+1. Ctrl + W : 选中代码块 并且向外延伸
+1. Ctrl + Shift + W :  选中代码块 并且向内收窄
+1. F2 或 Shift + F2 : 上一个错误 下一个错误
+1. Ctrl + ↑/↓ : 光标位置不变 屏幕向上或下滚动
+1. Ctrl + B : 在usage 上就会跳转 声明的地方 ; 在声明的地方就会跳转usage的地方
+1. Ctrl + Alt + B : 找所有的子类(只找一级)
+1. Ctrl + Shift + B : 类型的声明位置(似乎只有ts有用)
+1. Ctrl + Shift + ↑/↓ : 上下移动代码 有智能判断移动多少 
+1. Alt + Shift + ↑/↓ : 上下移动代码  
+1. Ctrl + Y : 删除行
+1. Ctrl + D : 复制行
+1. Ctrl + / 或 Ctrl + Shift + / :  注释（单行 // 或者 块级 /**/ ）
+1. Ctrl + Q : 显示注释文档
+1. Shift + Ctrl + F7 : 
+    1. 如果不选中选中的 就会标记当前所在的此块 但不显示界面 并且区分声明 和 使用的颜色
+    2. 如果选中 就会标记所有相同的内容 并显示 高亮的界面
+    3. 在 return 上使用就会标记所有的 return 和之后返回的内容
+
+### 代码编辑
+1. Shift + Enter : 另起一行 光标前往新起的那行
+2. Ctrl + Enter : 另起一行 光标不移动
+3. Ctrl + Z : 撤销
+4. Ctrl + Shift + Z : 反向撤销
+5. Shift + Alt + Insert :  切换竖编辑模式(拖拽选中模式改变)
+6. Ctrl + ~ : 快速切换方案（界面外观、代码风格、快捷键映射等菜单）
+1. Ctrl + Shift + Delete : 删除 surround with 的内容
+1. Ctrl + Alt + T : surround with
+
+### 重构
+1. Ctrl + Alt + Shift + T : 弹出全部可用重构菜单
+1. Ctrl + Alt + V : 提炼为变量
+1. Ctrl + Alt + N : 将变量转换为展开为内联(与提炼标量操作相反) 
+1. Shift + F6 : 重命名
+1. F6 : 移动
+1. F5 : 复制
+1. Alt + Delete : 安全删除
+
+
+### 视图导航
+1. Ctrl + F4 : 关闭当前窗口
+1. Alt+ ↑/↓ : 在方法间快速移动定位
+1. Ctrl + Shift + BackSpace : 可以跳转到上次编辑的地方(非常好用)
+1. Ctrl + Alt + ←/→ : 前后导航编辑过的地方(上面的加强版)
+1. Ctrl + F12 : 浮动显示当前文件的结构
+1. Ctrl + E : 最近更改的文件
+1. Ctrl + Shift + E : 显示最近更改的文件(会显示相同文件的不同地方,并且显示一些上下文)
+1. Alt + F1 : 显示快速导航菜单
+1. Ctrl + Tab :快速切换视图
+1. Alt+ ←/→ :  切换标签
+1. Ctrl + H : 显示类结构图
+1. Alt + 1 : 快速打开或隐藏工程面板
+1. Alt + 2 : 显示书签
+1. Shift + F11 : popup 打开书签
+1. F11 : 打上书签
+1. Ctrl + Shift + 1~9 : 快速打上 1 ~ 9 的书签
+1. Ctrl +  1~9 : 去 对应书签的 1 ~ 9 的位置
+1. Alt + 3 : 打开正Find的工具窗口
+1. Alt + 4 : 打开正在脚本执行的窗口
+1. Alt + 5 : 打开正在脚本调试的窗口
+1. Alt + 6 : 打开TODO
+1. Alt + 7 : 显示当前文件的结构
+1. Alt + 9 : 打卡 cvs 工具窗口
+1. F12 : 前往上一个前往的tool window
+1. Ctrl + Shift + V : 显示剪贴板一览 
+
+### 运行 调试
+其实常用的 就是F8 F7 F9 最值得一提的就是 Drop Frame 可以让运行过的代码从头再来。
+
+1. Alt + F11 : 打开可执行Gulp/npm/Grunt脚本一览
+1. Alt + F10 : 打开近期执行的脚本一览
+1. Alt + F8 : debug时选中查看值(直接在当前作用域中查看输入该变量的值)
+1. Alt + Shift + F9 : 可选的 Debug popup
+1. Alt + Shift + F10 : 可选的 Run popup
+1. Ctrl + Shift + F9 : 编译(webstrom 当然没有啦)
+1. Ctrl + Shift + F8 : 查看所有断点
+1. Ctrl + F8 : 打断点
+1. F7 : 步入
+1. Shift + F7 : 智能步入
+1. Alt + Shift + F7 : 强制步入
+1. F8 : 步过
+1. Shift + F8 : 步出
+1. Alt + Shift + F8 : 强制步过
+1. Alt + F9 : 运行至光标处
+1. Ctrl + Alt + F9 : 强制运行至光标处(webstorm 没有)
+1. F9 : 恢复程序
+1. Alt + F10 : 定位到断点(前往当前程序的运行到的所在位置)

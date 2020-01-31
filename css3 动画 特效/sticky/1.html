@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: 25px;
+        line-height: 2;
+      }
+      .banner {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background: url("1.jpg") fixed;
+      }
+
+      section:nth-child(2n + 1) {
+        position: relative;
+        height: auto;
+        background: #fff;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      section:nth-child(2n + 2) {
+        position: relative;
+        height: auto;
+        background: #fff;
+        display: flex;
+      }
+
+      section .imgBx {
+        position: sticky;
+        top: 0;
+        min-width: 50%;
+        height: 100vh; /* 这里很重要 图片的容器必须 和 屏幕一样高否则就会看到下面的东西 */
+      }
+
+      section .imgBx img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 600px;
+      }
+
+      section .content {
+        padding: 100px 0 100px 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+    <section>
+      <div class="imgBx">
+        <img src="2.jpg" alt="" />
+      </div>
+      <div class="content">
+        <h2>Apple Watch</h2>
+        <p>
+          实际上是图片没有滚动 文字和整个页面依然在滚动
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione? <br />
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
+          architecto assumenda atque autem blanditiis distinctio dolorem
+          doloremque est maiores nesciunt obcaecati quod, ratione reprehenderit
+          voluptas voluptatum? At magni quasi ratione?Lorem ipsum dolor sit
+          amet, consectetur adipisicing elit. Adipisci architecto assumenda
+          atque autem blanditiis distinctio dolorem doloremque est maiores
+          nesciunt obcaecati quod, ratione reprehenderit voluptas voluptatum? At
+          magni quasi ratione?Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi ratione?
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?
+          <br />
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="imgBx">
+        <img src="2.jpg" alt="" />
+      </div>
+      <div class="content">
+        <h2>Apple Watch</h2>
+        <p>
+          实际上是图片没有滚动 文字和整个页面依然在滚动
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione? <br />
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
+          architecto assumenda atque autem blanditiis distinctio dolorem
+          doloremque est maiores nesciunt obcaecati quod, ratione reprehenderit
+          voluptas voluptatum? At magni quasi ratione?Lorem ipsum dolor sit
+          amet, consectetur adipisicing elit. Adipisci architecto assumenda
+          atque autem blanditiis distinctio dolorem doloremque est maiores
+          nesciunt obcaecati quod, ratione reprehenderit voluptas voluptatum? At
+          magni quasi ratione?Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi ratione?
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?
+          <br />
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="imgBx">
+        <img src="2.jpg" alt="" />
+      </div>
+      <div class="content">
+        <h2>Apple Watch</h2>
+        <p>
+          实际上是图片没有滚动 文字和整个页面依然在滚动
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione? <br />
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
+          architecto assumenda atque autem blanditiis distinctio dolorem
+          doloremque est maiores nesciunt obcaecati quod, ratione reprehenderit
+          voluptas voluptatum? At magni quasi ratione?Lorem ipsum dolor sit
+          amet, consectetur adipisicing elit. Adipisci architecto assumenda
+          atque autem blanditiis distinctio dolorem doloremque est maiores
+          nesciunt obcaecati quod, ratione reprehenderit voluptas voluptatum? At
+          magni quasi ratione?Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi ratione?
+          <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Adipisci architecto assumenda atque
+          autem blanditiis distinctio dolorem doloremque est maiores nesciunt
+          obcaecati quod, ratione reprehenderit voluptas voluptatum? At magni
+          quasi ratione? <br />Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Adipisci architecto assumenda atque autem blanditiis
+          distinctio dolorem doloremque est maiores nesciunt obcaecati quod,
+          ratione reprehenderit voluptas voluptatum? At magni quasi
+          ratione?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Adipisci architecto assumenda atque autem blanditiis distinctio
+          dolorem doloremque est maiores nesciunt obcaecati quod, ratione
+          reprehenderit voluptas voluptatum? At magni quasi ratione?Lorem ipsum
+          dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+          assumenda atque autem blanditiis distinctio dolorem doloremque est
+          maiores nesciunt obcaecati quod, ratione reprehenderit voluptas
+          voluptatum? At magni quasi ratione?
+          <br />
+        </p>
+      </div>
+    </section>
+  </body>
+</html>
